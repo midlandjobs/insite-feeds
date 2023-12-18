@@ -1,0 +1,57 @@
+/* dark backgrounds */
+.uk-light {
+  background: $global-secondary-background;
+}
+.uk-light .uk-modal-dialog {
+  background: $global-secondary-background;
+}
+.uk-light .uk-navbar-dropdown {
+  background: $global-secondary-background;
+}
+.uk-light .uk-section-default {
+  background: $global-secondary-background;
+}
+.uk-light .uk-background-default {
+  background: $global-secondary-background;
+}
+/* dark muted backgrounds */
+.uk-light .uk-background-muted {
+  background: $global-emphasis-color;
+}
+.uk-light .uk-modal-close-full {
+  background: $global-emphasis-color;
+}
+.uk-light .uk-section-muted {
+  background: $global-emphasis-color;
+}
+.uk-light .uk-tile-muted {
+  background: $global-emphasis-color;
+}
+/* links */
+.uk-light .uk-navbar-dropdown-nav > li > a {
+  color: $inverse-global-muted-color;
+}
+/* links focus/hover */
+.uk-light .uk-navbar-dropdown-nav > li > a:focus {
+  color: $inverse-global-color;
+}
+.uk-light .uk-navbar-dropdown-nav > li > a:hover {
+  color: $inverse-global-color;
+}
+/* borders */
+.uk-light .theme-border {
+  border: 1px solid $inverse-global-border;
+}
+.uk-light .theme-border-top {
+  border-top: 1px solid $inverse-global-border;
+}
+.uk-light .theme-border-right {
+  border-right: 1px solid $inverse-global-border;
+}
+.uk-light .theme-border-bottom,
+.uk-light .the-header.uk-sticky-below {
+  border-bottom: 1px solid $inverse-global-border;
+}
+.uk-light .theme-border-left {
+  border-left: 1px solid $inverse-global-border;
+}

@@ -1,0 +1,64 @@
+/* uikit grid */
+.uk-scope .uk-grid-xsmall {
+  margin-left: -5px;
+}
+.uk-scope .uk-grid-xsmall>* {
+  padding-left: 5px;
+}
+.uk-scope .uk-grid+.uk-grid-xsmall, 
+.uk-scope .uk-grid-xsmall>.uk-grid-margin {
+  margin-top: 10px;
+}
+/* uikit padding */
+.uk-scope .uk-padding-small {
+  padding: 10px;
+}
+/* uikit form */
+.uk-scope .uk-form-label {
+  font-size: .875rem!important;
+}
+
+/* uikit modal */
+.uk-scope .uk-modal-dialog {
+  width: 700px;
+}
+@media (min-width: 640px){
+  .uk-scope .uk-modal-body {
+    padding: 20px 30px 20px 20px;
+  }
+  .uk-scope .uk-modal-header {
+    padding: 10px 15px;
+  }
+}
+
+/* mod the company logo */
+.uk-scope img.company-logo {
+  max-height: 130px;
+}
+.uk-scope img.company-logo-modal {
+  max-height: 100px;
+}
+
+/* mod the categories accordion */
+.uk-scope .cats-accordion .uk-accordion-content {
+  margin-top: 0;
+}
+
+/* scope margining */
+.uk-scope {
+  margin: 0!important;
+}
+
+/* fake posts */
+#DemoPostsGrid {
+  min-height: 600px;
+}
+.uk-scope .demo-archive-posts {
+  margin-bottom: 40px!important;
+  margin-top: 10px;
+}
+
+/* version 1.0.3: smaller logo */
+.uk-scope .job-logo.uk-width-small {
+  width: 110px;
+}

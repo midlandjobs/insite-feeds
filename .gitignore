@@ -1,0 +1,9 @@
+bin
+dev
+_bin
+_dev
+node_modules/
+.git
+.ftpconfig
+package-lock.json
+composer.lock

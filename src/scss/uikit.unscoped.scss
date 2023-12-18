@@ -1,0 +1,152 @@
+// // STANDARD UIKI BUILD; STRAIGHT FROM NODE_MODULES
+//
+// // 1. customizing uikit variables before build (variables get built in)
+// $offcanvas-bar-background: #fff;
+// $offcanvas-bar-color-mode: none;
+//
+// // 2. Import uikit variables & mixins
+// @import "node_modules/uikit/src/scss/variables-theme.scss";
+// @import "node_modules/uikit/src/scss/mixins-theme.scss";
+//
+// // 3. Import uikit theme
+// @import "node_modules/uikit/src/scss/uikit-theme.scss";
+//
+// // 4. import custom theme sass
+// @import "assets/scss/theme/_import.scss";
+
+// ------------------------------------------------------------
+
+// A CUSTOM UIKIT BUILD WITH SELECTIVE COMPONENTS (ALL SELECTED)
+
+// base colour variables
+// $theme_primary: #23259c; // solaris purple
+// $theme_dark_primary: #0d0e27;
+// $theme_very_dark_primary: #17161a;
+// $theme_grey_primary: #454556; // solaris grey_purple
+// $theme_secondary: #cebd9b; // solaris gold
+// $theme_dark_secondary: #686058;
+// $theme_green: #21897E;
+// $theme_gold: #cebd9b; // solaris gold
+// $theme_whatsapp_green: #25D366;
+// $theme_orange: #faa05a;
+// $theme_red: #ee3131;
+// $theme_pink: #E63462;
+// $theme_blue: #1a4ace;
+// $theme_muted_pink: #fdefef;
+// $theme_white: #fff;
+// $theme_lightest_grey: #f8f8f8;
+// $theme_lighter_grey: #f3f3f3;
+// $theme_light_grey: #b4b4b4;
+// $theme_grey: #afafaf;
+// $theme_dark_grey: #999;
+// $theme_darker_grey: #666;
+// $theme_very_dark_grey: #333;
+// $theme_blackest_grey: #1e1e1e;
+// $theme_black: $theme_blackest_grey;
+// $theme_true_black: #000;
+
+// font sizes
+// $theme-base-font-size: 17px;
+
+// font weights. 100, 400, 600, 700  - current weights of google fonts
+// $lighter_weight: 100;
+// $light_weight: 100;
+// $normal_weight: 400;
+// $bold_weight: 600;
+// $bolder_weight: 700;
+
+// fonts
+// $theme_font: 'DM Sans', sans-serif;
+
+// 1. set the theme variables
+
+// borders
+// $theme_border_color: #e5e5e5;
+// $theme_border_accent_color: #e5e5e5;
+// $theme_border_light_color: rgba($theme_white, .25);
+// $theme_border: 1px solid $theme_border_color;
+// $theme_border_thick: 2px solid $theme_border_color;
+// $theme_border_light: 1px solid $theme_border_light_color;
+// $theme_border_light_thick: 2px solid $theme_border_light_color;
+
+// shadows
+// $navbar_dropdown_shadow: 0 5px 12px rgba(0,0,0,.15);
+
+// overlays
+// $theme_primary_overlay: rgba($theme_primary, 0.8); // dark black strong
+// $theme_faint_black_overlay: rgba($theme_true_black, 0.25); // very faint black
+// $theme_medium_black_overlay: rgba($theme_black, 0.4); // black medium
+// $theme_grey_primary_overlay: rgba($theme_grey_primary, 0.45); // purple overlay
+
+// 1. first, do your overwrites of the uikit theme'd variables here...
+
+//
+// Uikit Font Size
+//
+// $global-font-size: $theme-base-font-size;
+
+//
+// Uikit Colors
+//
+// $global-color: $theme_darker_grey;
+// $global-emphasis-color: $theme_grey_primary;
+// $global-muted-color: $theme_light_grey;
+// $global-link-color: $theme_grey_primary;
+// $global-link-hover-color: $theme_secondary;
+// $button-link-hover-color: $theme_secondary;
+// $link-heading-hover-color: $theme_secondary;
+// $global-inverse-color: $theme_white;
+// $base-heading-color: $theme_grey_primary;
+// $text-lead-color: $theme_darker_grey;
+
+//
+// Uikit Backgrounds
+//
+// $global-background: $theme_white;
+// $global-muted-background: $theme_lightest_grey;
+// $global-primary-background: $theme_primary;
+// $global-primary-background: $theme_grey_primary;
+// $card-default-title-color: $theme_grey_primary;
+// $card-default-title-color: $theme_grey_primary;
+// $global-secondary-background: $theme_secondary;
+// $global-success-background: $theme_green;
+// $global-warning-background: $theme_orange;
+// $global-danger-background: $theme_pink;
+
+//
+// Uikit Transitions
+//
+// $transition-scale: 1.08;
+
+//
+// Uikit Overlays
+//
+// $overlay-default-background: rgba($theme_white, 0.8) !default; // white overlay
+// $overlay-primary-background: rgba($theme_primary, 0.8) !default; // purple overlay
+// $overlay-primary-color-mode: light !default;
+
+//
+// Uikit Offcanvas
+//
+// $offcanvas-bar-background: #fff;
+// $offcanvas-bar-color-mode: none;
+
+// 2. Import themed variables & mixins
+@import "src/scss/lib/uikit/variables-theme.scss";
+@import "src/scss/lib/uikit/mixins-theme.scss";
+
+// 2. Or import the default variables & mixins
+// @import "assets/scss/lib/uikit/variables.scss";
+// @import "assets/scss/lib/uikit/mixins.scss";
+
+// 3. If importing the theme, now import the themed uikit components (with custom variables) next
+@import "src/scss/lib/uikit/theme/_import.scss";
+
+// 4. next, we do any custom mixin overwrites. we can use this themed or not also
+// @import "assets/scss/theme/accordion-mixins.scss";
+
+// 5. Now we Import the main uikit components (regardless of theme)
+@import "src/scss/lib/uikit/_import.base.scss";
+
+// 6. finally, import our custom sass styles. this is our own custom stuff which can now also use uikit variables
+// @import "assets/scss/theme/_import.scss";
