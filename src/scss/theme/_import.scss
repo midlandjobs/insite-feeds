@@ -1,12 +1,5 @@
 // 2. import the theme components
-// @import "backgrounds.scss";
-// @import "borders.scss";
-// @import "gutenberg.scss";
-// @import "loaders.scss";
-// @import "position.scss";
-// @import "theme.scss";
-// @import "blocks.scss";
-// @import "dark.scss";
+@import "custom.scss";
 
 // 3. import the outside sources. this may be done as a separate file in assets/scss folder, tho woocommerce uses some uikit variables at the moment
 

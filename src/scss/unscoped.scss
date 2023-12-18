@@ -149,4 +149,4 @@
 @import "src/scss/lib/uikit/_import.base.scss";
 
 // 6. finally, import our custom sass styles. this is our own custom stuff which can now also use uikit variables
-// @import "assets/scss/theme/_import.scss";
+@import "src/scss/theme/_import.scss";

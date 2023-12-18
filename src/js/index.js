@@ -8,6 +8,12 @@ var http = require('http');
 // const parser = new xml2js.Parser();
 const parser = require('xml2js').Parser({explicitArray : false});
 
+import UIkit from 'uikit'; // import uikit
+import Icons from 'uikit/dist/js/uikit-icons'; // import uikit icons
+
+UIkit.use(Icons); // use the Icon plugin
+window.UIkit = UIkit; // Make uikit available in window for inline scripts
+
 class JsonFromXmlFeed {
 
 	constructor(url) {

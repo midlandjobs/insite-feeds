@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
 
-  <!-- metas -->
-  <title>Jobs Feeds - Midlandjobs</title>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/images/favicon.png" />
+    <!-- metas -->
+    <title>Jobs Feeds - Midlandjobs</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="public/images/favicon.png" />
 
-  <!-- UIkit JS (used for template overrides) -->
-  <script src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/uikit-icons.min.js"></script>
+    <!-- this code will be placed within the custom js section when editing a jobboard page...
+      end result will make use of cdn via github...
+      for this, use urls like https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/feeds.js 
+      ...but remember the cache on these update slowly after github push (about an hour)
+    -->
+    <script type="text/javascript" src="public/js/feeds.js"></script>
+    <link rel="stylesheet" href="public/css/scoped.min.css" />
+    <script>
+      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml', { sorting: false, scope: '.uk-scope' });
+    </script>
+    
+  </head>
 
-  <!-- new smartjobboard-specific feeds -->
-  <script src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/feeds.js" type="text/javascript"></script>
+  <body>
 
-  <!-- UIkit CSS (used for template overrides) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/css/uikit.scoped.min.css" />
+    <!-- this html will be placed using the html block onto a jobboard page -->
+    <div class="uk-scope">
+      <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
+    </div>
 
-  <!-- custom css -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/css/custom.css" />
-
-  <script>
-    const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml', { sorting: false, scope: '.uk-scope' });
-  </script>
-  
-</head>
-
-<body>
-
-  <!-- container for scoped styling css -->
-  <div class="uk-scope">
-    <div id="Feed_1" class="midlandjobs-feed">Hello</div>
-  </div>
-
-</body>
+  </body>
 
 </html>

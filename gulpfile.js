@@ -87,7 +87,7 @@ function style() {
   .src(paths.styles.src)
   .pipe(sass())
   .on("error", sass.logError)
-  .pipe(postcss([autoprefixer(), cssnano()]))
+  // .pipe(postcss([autoprefixer(), cssnano()]))
   .pipe(gulp.dest(paths.styles.dest));
 }
 
