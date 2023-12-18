@@ -50,7 +50,6 @@ class JsonFromXmlFeed {
   }
 
 }
-// window.HelloThere = HelloThere;
 
 //
 // filters for feed (requires jquery)
@@ -65,7 +64,7 @@ import checkbox_template from './static-components/checkbox.html'; // checkbox
 import option_template from './static-components/option.html'; // dropdown
 // import error_template from './static-components/error.html';
 
-export default class SmartJobBoardFilteredFeed {
+export default class JobBoardFilteredFeed {
 
 	constructor(sel, url, params = { sorting: false }) {
 
@@ -462,7 +461,7 @@ export default class SmartJobBoardFilteredFeed {
 	}
 
 }
-window.SmartJobBoardFilteredFeed = SmartJobBoardFilteredFeed;
+window.JobBoardFilteredFeed = JobBoardFilteredFeed;
 
 //
 // general functions for filtered feed
