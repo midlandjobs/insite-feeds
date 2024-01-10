@@ -20,7 +20,7 @@ class JsonFromXmlFeed {
 		this.url = url;
 	}
 
-  async getXMLfromURL() {
+  async fetchJsonFromXmlSource() {
     try {
       const response = await fetch(this.url);
       const content = await response.text();
@@ -74,286 +74,191 @@ export default class JobBoardFilteredFeed {
 
 	constructor(sel, url, params = { sorting: false }) {
 
-		this.sel = sel;
-		this.url = url;
-		this.params = params;
+		//
+		// 1. the constructor properties
+		//
+		this.sel = sel; // element id or selector
+		this.url = url; // url to xml source
+		this.params = params; // extra paramaters/settings
+		if (this.params.scope) UIkit.container = this.params.scope; // scoping for uikit
 
-		if (this.params.scope) UIkit.container = this.params.scope; // scope for uikit
+		//
+		// 2. here we are adding the jobs as a property of the object, if all is good...
+		// we check if the given url is valid/good, & spit error if not...
+		// if url IS good, we attempt to fetch the jobs using JsonFromXmlFeed object & it's fetchJsonFromXmlSource() method (using async, returning a promise etc.)
+		// if NO jobs are found in data, we spit an error....
+		// if we DO have jobs, we add them as class property...
+		// we then check the given selector to see if it equates to an actual element in the dom
+		// we check the sel WITHIN the async wrapper, coz the rest of dom SHOULD be rendered by the time the async is done..
+		// this means we can write the script to init the object, both BEFORE & AFTER the html element it is trying to select...
+		// this just means we can place the init script ABOVE the html element, i.e the html element doesnt have to exist before the script for it to work...
+		// and finally.... if the jobs are good and the select element is good, we renderTheJobs()
+		// in renderTheJobs(), we already have the jobs data, we are just setting it up with the filters functionality, and placing it into the HTML
+		//
 
-		// renderMain(this.sel); // render main before jobs come in... object must be placed below html
-
-		// dont attempt anything unless given URL is valid
-		if(this.isUrlValid(this.url)){
-
-			// const feedObj = new MidlandJobsFeed(this.url); // returns a promise
-      const feedObj = new JsonFromXmlFeed(this.url); // returns a promise
+		//
+		// 2.a. if the given url is INVALID
+		//
+		if(!this.isUrlValid(this.url)) {
+			console.log('invalid source url given.'); // console log the issue
+		}
+		
+		//
+		// 2.b. if the given url is VALID
+		//
+		else {
+			const feedObj = new JsonFromXmlFeed(this.url);
 			(async () => {
+				const json = await feedObj.fetchJsonFromXmlSource(); // xml as json, await the promise of data
 
-				//
-				// get jobs from Json Feed
-				//
-	
-				const json = await feedObj.getXMLfromURL(); // xml as json, await the promise of data
-				var jobs = json.source.job; // array of jobs now
-	
-				// only proceed to render/place stuff if we have some JOBS & the given selected Element exists in the dom
-				if(jobs && jobs.length > 0 && this.isElementValid(document.querySelector(this.sel))){
+				// no jobs found in source
+				if(!json.source.job || json.source.job.length <= 0) {
+					console.log('no jobs data available from given source, tho the url was valid'); // console log the issue
+					if(this.isElementValid(document.querySelector(this.sel))) this.renderErrorTemplate(this.sel); // render the error template. this template should say no jobs found & be placed in html, but be hidden
+				} 
+				
+				// jobs found in source, yay!
+				else {
+					this.jobs = json.source.job; // the jobs array, added as an object property now
 
-					this.renderMainTemplate(this.sel); // waiting for jobs first. object can be placed above or below html, but all html pops in together. can just use a loader animation...
-
-					// sort the jobs by key!!
-					function sortDataBy (data, byKey){
-						let sortedData;
-						if(byKey == 'title'){
-							sortedData = data.sort(function(a,b){
-
-								let x = a.title.toLowerCase();
-								let y = b.title.toLowerCase();
-
-								if(x>y){return 1;}
-								if(x<y){return -1;}
-
-								return 0;
-							});
-						}
-						else if(byKey == 'date'){
-							sortedData = data.sort(function(a,b){
-
-								let x = new Date(a.date);
-								let y = new Date(b.date);
-
-								// Compare the 2 dates
-								if (x < y) return -1;
-								if (x > y) return 1;
-
-								return 0;
-							});
-						}
-						else if(byKey == 'referencenumber'){
-							sortedData = data.sort(function(a,b){
-
-								let x = a.referencenumber;
-								let y = b.referencenumber;
-
-								// Compare the 2 referencenumbers
-								if (x < y) return -1;
-								if (x > y) return 1;
-
-								return 0;
-							});
-						}
-						return sortedData;
+					// INVALID element selector given
+					if(!this.isElementValid(document.querySelector(this.sel))) {
+						console.log('invalid element selector given. jobs could not be rendered to the page, but still exist in json, as a property of the JobBoardFilteredFeed object.');
 					}
-
-					// randomize the jobs
-					if (this.params.sorting == 'random') {
-
-						let shuffled = jobs
-						.map(value => ({ value, sort: Math.random() }))
-						.sort((a, b) => a.sort - b.sort)
-						.map(({ value }) => value);
-
-						// console.log(shuffled);
-						jobs = shuffled;
-
+					
+					// VALID element selector given, yay!
+					else {
+						this.renderTheJobs(this.jobs); // finally, render the jobs....
 					}
-
-					// if (this.params.sorting == 'title') console.log(sortDataBy(jobs, 'title'));
-					if (this.params.sorting == 'title') jobs = sortDataBy(jobs, 'title');
-					if (this.params.sorting == 'date') jobs = sortDataBy(jobs, 'date');
-					if (this.params.sorting == 'referencenumber') jobs = sortDataBy(jobs, 'referencenumber');
-
-					this.populateFilters(jobs); // setup data & populate filters
-			
-					// filters callback - updating counts
-					var filter_callbacks = {
-						afterFilter: function(result, jQ){
-							var initial_results = jobs; // initial jobs/result before any filtering done to them
-							updateCountsLogic(result, jQ, initial_results);
-							hidePagination();
-							hidePerPage(result);
-						}
-					};
-
-					var _template = false;
-					var _template_html = job_template;
-					// check if a template exists in the DOM for #job-template first & use that, else just use main.html
-					if(this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
-					if(this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
-
-					var _pagination_template = false;
-					var _perpage_template = false;
-					// check if a template exists in the DOM for #job-template first & use that, else just use main.html
-					if(this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
-					if(this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
-			
-					// activate filters & configs
-					var FJS = FilterJS(jobs, '#jobs', {
-			
-						// template: '#job-template', // define template for job
-						template: _template, // set to false so we can use pre rendered html template
-						template_html: _template_html, // define template for movie
-			
-						//search: {ele: '#searchbox', fields: ['runtime']}, // With specific fields
-						search: { ele: '#searchbox' }, // define search box
-						
-						// firing after filtering
-						// callbacks: {
-						//   afterFilter: this.afterFiltering() // afterfilter to reset the counts. clever!
-						// },
-						callbacks: filter_callbacks,
-			
-						// pagination setup
-						pagination: {
-							container: '#pagination', // define container for pagi
-							visiblePages: 5, // set init visible pages
-							perPage: {
-								values: [12, 15, 18], // per page dropdown options
-								container: '#per_page', // per page container
-								perPageView: _perpage_template,
-							},
-							paginationView: _pagination_template,
-						},
-			
-					});
-			
-					// activate filter criterias
-					FJS.addCriteria({field: 'city', ele: '#city_filter', all: 'all'});
-					FJS.addCriteria({field: 'jobtypes', ele: '#jobtype_filter', all: 'all'});
-					FJS.addCriteria({field: 'company', ele: '#company_filter', all: 'all'});
-					FJS.addCriteria({field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all'});
-	
-				} else {
-
-					this.renderErrorTemplate(this.sel); // this should say no jobs found & be placed in html, but be hidden...
-
-					if(!jobs || !jobs.length > 0) console.log('no jobs available from given source');
-					if(!this.isElementValid(document.querySelector(this.sel))) console.log('invalid element selector given');
 
 				}
-	
+
 			})();
+		}
+
+	}
+
+	// the principal renderer. 
+	// calls renderMainTemplate()...
+	// and populateFilters(), which sets up & populates the filter's data...
+	// and FilterJS(), which configs the filters scipts...
+	// and also sorts the jobs & does some additional template stuff
+	renderTheJobs(jobs){
+
+		//
+		// testing vars...
+		//
+		var active_filters = true;
+		var active_filters_2 = true;
+		var active_filters_3 = true;
+		var filters_pagination = true;
+		var filters_perpage = true;
+		var filters_search = true;
+
+
+		//
+		// render the wrapper template to start... waiting for jobs first. object can be placed above or below html, but all html pops in together. can just use a loader animation...
+		//
+		this.renderMainTemplate(this.sel);
+
+		//
+		// sort the jobs according to object params
+		//
+		if (this.params.sorting == 'title') jobs = this.sortDataBy(jobs, 'title');
+		if (this.params.sorting == 'date') jobs = this.sortDataBy(jobs, 'date');
+		if (this.params.sorting == 'referencenumber') jobs = this.sortDataBy(jobs, 'referencenumber');
+		if (this.params.sorting == 'random') jobs = this.sortDataBy(jobs, 'random');
+
+		//
+		// setup data & populate filters
+		//
+		if(active_filters) this.populateFilters(jobs);
+
+		//
+		// job template stuff
+		//
+		var _template = false;
+		var _template_html = job_template;
+		if(this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
+		if(this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
+
+		//
+		// pagination & perpage template stuff
+		//
+		var _pagination_template = false;
+		var _perpage_template = false;
+		if(this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
+		if(this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
+
+		//
+		// filters: updating the counts - a callback for later (inside FilterJS())
+		//
+		var filter_callbacks = {
+			afterFilter: function(result, jQ){
+				var initial_results = jobs; // initial jobs/result before any filtering done to them
+				if(active_filters_2){
+					updateCountsLogic(result, jQ, initial_results);
+					hidePagination();
+					hidePerPage(result);
+				}
+			}
+		};
+
+		//
+		// other stuff for the filters configs, selective
+		//
+
+		var the_pagi = {
+			container: '#pagination', // define container for pagi
+			visiblePages: 5, // set init visible pages
+			perPage: {
+				values: [12, 15, 18], // per page dropdown options
+				container: '#per_page', // per page container
+				// perPageView: _perpage_template,
+			},
+			// paginationView: _pagination_template,
+		};
+		// console.log(the_pagi);
+
+		var the_search = { ele: '#searchbox' };
+		// console.log(the_search);
+
+		//
+		// activate filters & configs
+		//
+		var FJS = FilterJS(jobs, '#jobs', {
+
+			// template: '#job-template', // define template for job
+			template: _template, // set to false so we can use pre rendered html template
+			template_html: _template_html, // define template for job
+
+			//search: {ele: '#searchbox', fields: ['runtime']}, // With specific fields
+			search: the_search, // define search box
 			
-		} else {
+			// firing after filtering
+			// callbacks: {
+			//   afterFilter: this.afterFiltering() // afterfilter to reset the counts. clever!
+			// },
+			callbacks: filter_callbacks,
 
-			if(!this.isUrlValid(this.url)) console.log('invalid source url given');
+			// pagination setup
+			pagination: the_pagi,
 
+		});
+
+		//
+		// activate filter criterias
+		//
+		if(active_filters_3){
+			FJS.addCriteria({field: 'city', ele: '#city_filter', all: 'all'});
+			FJS.addCriteria({field: 'jobtypes', ele: '#jobtype_filter', all: 'all'});
+			FJS.addCriteria({field: 'company', ele: '#company_filter', all: 'all'});
+			FJS.addCriteria({field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all'});
 		}
 
 	}
 
-	renderErrorTemplate(sel){
-
-		if(this.isElementValid(document.querySelector('#error-template'))){
-
-			var html = $('#error-template').html();
-			var templateFn = FilterJS.templateBuilder(html);
-			var container = $(sel);
-			container.empty().append(templateFn({}))
-
-		}
-
-	}
-
-	renderMainTemplate(sel){
-
-		// check if a template exists in the DOM for main.html first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#main-template'))){
-
-			// console.log('template override exists');
-
-			var html = $('#main-template').html();
-			var templateFn = FilterJS.templateBuilder(html);
-			var container = $(sel);
-			// container.append(templateFn({}))
-			container.empty().append(templateFn({}))
-
-			// var theMainEle = document.querySelector(sel);
-			// theMainEle.dispatchEvent(
-			// 	new CustomEvent("Rendered"),
-			// );
-
-		} else {
-
-			// console.log('template override does not exist');
-
-			var html = main_template;
-			var templateFn = FilterJS.templateBuilder(html);
-			var container = $(sel);
-			// container.append(templateFn({}))
-			container.empty().append(templateFn({}))
-
-			// var theMainEle = document.querySelector(sel);
-			// theMainEle.dispatchEvent(
-			// 	new CustomEvent("Rendered"),
-			// );
-
-		}
-	
-	}
-
-	renderCheckboxesTemplate(data, sel){
-
-		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#checkbox-template'))){
-
-			// console.log('template override exists');
-
-			var html = $('#checkbox-template').html();
-			var templateFn = FilterJS.templateBuilder(html);
-			var container = $(sel);
-		
-			$.each(data, function(i, c){
-				container.append(templateFn({ name: c, value: c }))
-			});
-
-		} else {
-
-			// console.log('template override does not exist');
-
-			var html = checkbox_template;
-			var templateFn = FilterJS.templateBuilder(html)
-			var container = $(sel);
-		
-			$.each(data, function(i, c){
-				container.append(templateFn({ name: c, value: c }))
-			});
-
-		}
-	
-	}
-
-	renderOptionsTemplate(data, sel){
-
-		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#option-template'))){
-
-			// console.log('template override exists');
-
-			var html = $('#option-template').html();
-			var templateFn = FilterJS.templateBuilder(html);
-			var container = $(sel);
-		
-			$.each(data, function(i, c){
-				container.append(templateFn({ name: c, value: c }));
-			});
-
-		} else {
-
-			// console.log('template override does not exist');
-
-			var html = option_template;
-			var templateFn = FilterJS.templateBuilder(html)
-			var container = $(sel);
-		
-			$.each(data, function(i, c){
-				container.append(templateFn({ name: c, value: c }));
-			});
-
-		}
-	
-	}
-
+	// getting & populating the filter's data
 	populateFilters(jobs) {
 		if(jobs){
 		
@@ -441,10 +346,181 @@ export default class JobBoardFilteredFeed {
 		return jobs;
 	}
 
+	// render method
+	renderMainTemplate(sel){
+
+		// check if a template exists in the DOM for main.html first & use that, else just use main.html
+		if(this.isElementValid(document.querySelector('#main-template'))){
+
+			// console.log('template override exists');
+
+			var html = $('#main-template').html();
+			var templateFn = FilterJS.templateBuilder(html);
+			var container = $(sel);
+			// container.append(templateFn({}))
+			container.empty().append(templateFn({}))
+
+			// var theMainEle = document.querySelector(sel);
+			// theMainEle.dispatchEvent(
+			// 	new CustomEvent("Rendered"),
+			// );
+
+		} else {
+
+			// console.log('template override does not exist');
+
+			var html = main_template;
+			var templateFn = FilterJS.templateBuilder(html);
+			var container = $(sel);
+			// container.append(templateFn({}))
+			container.empty().append(templateFn({}))
+
+			// var theMainEle = document.querySelector(sel);
+			// theMainEle.dispatchEvent(
+			// 	new CustomEvent("Rendered"),
+			// );
+
+		}
+	
+	}
+
+	// render method
+	renderCheckboxesTemplate(data, sel){
+
+		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
+		if(this.isElementValid(document.querySelector('#checkbox-template'))){
+
+			// console.log('template override exists');
+
+			var html = $('#checkbox-template').html();
+			var templateFn = FilterJS.templateBuilder(html);
+			var container = $(sel);
+		
+			$.each(data, function(i, c){
+				container.append(templateFn({ name: c, value: c }))
+			});
+
+		} else {
+
+			// console.log('template override does not exist');
+
+			var html = checkbox_template;
+			var templateFn = FilterJS.templateBuilder(html)
+			var container = $(sel);
+		
+			$.each(data, function(i, c){
+				container.append(templateFn({ name: c, value: c }))
+			});
+
+		}
+	
+	}
+
+	// render method
+	renderOptionsTemplate(data, sel){
+
+		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
+		if(this.isElementValid(document.querySelector('#option-template'))){
+
+			// console.log('template override exists');
+
+			var html = $('#option-template').html();
+			var templateFn = FilterJS.templateBuilder(html);
+			var container = $(sel);
+		
+			$.each(data, function(i, c){
+				container.append(templateFn({ name: c, value: c }));
+			});
+
+		} else {
+
+			// console.log('template override does not exist');
+
+			var html = option_template;
+			var templateFn = FilterJS.templateBuilder(html)
+			var container = $(sel);
+		
+			$.each(data, function(i, c){
+				container.append(templateFn({ name: c, value: c }));
+			});
+
+		}
+	
+	}
+
+	// render method
+	renderErrorTemplate(sel){
+
+		if(this.isElementValid(document.querySelector('#error-template'))){
+
+			var html = $('#error-template').html();
+			var templateFn = FilterJS.templateBuilder(html);
+			var container = $(sel);
+			container.empty().append(templateFn({}))
+
+		}
+
+	}
+
+	// general function for sorting the job's json data by a given key
+	sortDataBy(data, byKey){
+		let sortedData;
+		if(byKey == 'title'){
+			sortedData = data.sort(function(a,b){
+
+				let x = a.title.toLowerCase();
+				let y = b.title.toLowerCase();
+
+				if(x>y){return 1;}
+				if(x<y){return -1;}
+
+				return 0;
+			});
+		}
+		else if(byKey == 'date'){
+			sortedData = data.sort(function(a,b){
+
+				let x = new Date(a.date);
+				let y = new Date(b.date);
+
+				// Compare the 2 dates
+				if (x < y) return -1;
+				if (x > y) return 1;
+
+				return 0;
+			});
+		}
+		else if(byKey == 'referencenumber'){
+			sortedData = data.sort(function(a,b){
+
+				let x = a.referencenumber;
+				let y = b.referencenumber;
+
+				// Compare the 2 referencenumbers
+				if (x < y) return -1;
+				if (x > y) return 1;
+
+				return 0;
+			});
+		}
+		else if(byKey == 'random'){
+
+			sortedData = data
+			.map(value => ({ value, sort: Math.random() }))
+			.sort((a, b) => a.sort - b.sort)
+			.map(({ value }) => value);
+
+		}
+		return sortedData;
+	}
+
+	// general function for checking if given element is a valid one
 	isElementValid(el) {
 		if (el && typeof (el) != 'undefined' && el != null) return true;
 		return false;
 	}
+
+	// general function for checking if given url is a valid one
 	isUrlValid(url) {
 		const isValidUrl = urlString => {
 			var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
