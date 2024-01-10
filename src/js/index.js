@@ -6,7 +6,7 @@ var http = require('http');
 // getXMLfromURL()
 // import xml2js from 'xml2js';
 // const parser = new xml2js.Parser();
-const parser = require('xml2js').Parser({explicitArray : false});
+const parser = require('xml2js').Parser({ explicitArray: false });
 
 import UIkit from 'uikit'; // import uikit
 import Icons from 'uikit/dist/js/uikit-icons'; // import uikit icons
@@ -20,40 +20,40 @@ class JsonFromXmlFeed {
 		this.url = url;
 	}
 
-  async fetchJsonFromXmlSource() {
-    try {
-      const response = await fetch(this.url);
-      const content = await response.text();
-      const data = await parser.parseStringPromise(content);
-      return data;
-    } catch (e) {
-      console.log({e});
-    }
-  }
+	async fetchJsonFromXmlSource() {
+		try {
+			const response = await fetch(this.url);
+			const content = await response.text();
+			const data = await parser.parseStringPromise(content);
+			return data;
+		} catch (e) {
+			console.log({ e });
+		}
+	}
 
-  xmlToJson(callback) {
-    var req = http.get(this.url, function(res) {
-      var xml = '';
-      
-      res.on('data', function(chunk) {
-        xml += chunk;
-      });
-  
-      res.on('error', function(e) {
-        callback(e, null);
-      }); 
-  
-      res.on('timeout', function(e) {
-        callback(e, null);
-      }); 
-  
-      res.on('end', function() {
-        parseString(xml, function(err, result) {
-          callback(null, result);
-        });
-      });
-    });
-  }
+	xmlToJson(callback) {
+		var req = http.get(this.url, function (res) {
+			var xml = '';
+
+			res.on('data', function (chunk) {
+				xml += chunk;
+			});
+
+			res.on('error', function (e) {
+				callback(e, null);
+			});
+
+			res.on('timeout', function (e) {
+				callback(e, null);
+			});
+
+			res.on('end', function () {
+				parseString(xml, function (err, result) {
+					callback(null, result);
+				});
+			});
+		});
+	}
 
 }
 
@@ -70,6 +70,11 @@ import checkbox_template from './static-components/checkbox.html'; // checkbox
 import option_template from './static-components/option.html'; // dropdown
 // import error_template from './static-components/error.html';
 
+//
+// filters for feed (requires jquery)
+//
+
+// version for smartjobboard!!
 export default class JobBoardFilteredFeed {
 
 	constructor(sel, url, params = { sorting: false }) {
@@ -99,10 +104,10 @@ export default class JobBoardFilteredFeed {
 		//
 		// 2.a. if the given url is INVALID
 		//
-		if(!this.isUrlValid(this.url)) {
+		if (!this.isUrlValid(this.url)) {
 			console.log('invalid source url given.'); // console log the issue
 		}
-		
+
 		//
 		// 2.b. if the given url is VALID
 		//
@@ -112,20 +117,20 @@ export default class JobBoardFilteredFeed {
 				const json = await feedObj.fetchJsonFromXmlSource(); // xml as json, await the promise of data
 
 				// no jobs found in source
-				if(!json.source.job || json.source.job.length <= 0) {
+				if (!json.source.job || json.source.job.length <= 0) {
 					console.log('no jobs data available from given source, tho the url was valid'); // console log the issue
-					if(this.isElementValid(document.querySelector(this.sel))) this.renderErrorTemplate(this.sel); // render the error template. this template should say no jobs found & be placed in html, but be hidden
-				} 
-				
+					if (this.isElementValid(document.querySelector(this.sel))) this.renderErrorTemplate(this.sel); // render the error template. this template should say no jobs found & be placed in html, but be hidden
+				}
+
 				// jobs found in source, yay!
 				else {
 					this.jobs = json.source.job; // the jobs array, added as an object property now
 
 					// INVALID element selector given
-					if(!this.isElementValid(document.querySelector(this.sel))) {
+					if (!this.isElementValid(document.querySelector(this.sel))) {
 						console.log('invalid element selector given. jobs could not be rendered to the page, but still exist in json, as a property of the JobBoardFilteredFeed object.');
 					}
-					
+
 					// VALID element selector given, yay!
 					else {
 						this.renderTheJobs(this.jobs); // finally, render the jobs....
@@ -143,7 +148,7 @@ export default class JobBoardFilteredFeed {
 	// and populateFilters(), which sets up & populates the filter's data...
 	// and FilterJS(), which configs the filters scipts...
 	// and also sorts the jobs & does some additional template stuff
-	renderTheJobs(jobs){
+	renderTheJobs(jobs) {
 
 		//
 		// testing vars...
@@ -172,31 +177,31 @@ export default class JobBoardFilteredFeed {
 		//
 		// setup data & populate filters
 		//
-		if(active_filters) this.populateFilters(jobs);
+		if (active_filters) this.populateFilters(jobs);
 
 		//
 		// job template stuff
 		//
 		var _template = false;
 		var _template_html = job_template;
-		if(this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
-		if(this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
+		if (this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
+		if (this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
 
 		//
 		// pagination & perpage template stuff
 		//
 		var _pagination_template = false;
 		var _perpage_template = false;
-		if(this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
-		if(this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
+		if (this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
+		if (this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
 
 		//
 		// filters: updating the counts - a callback for later (inside FilterJS())
 		//
 		var filter_callbacks = {
-			afterFilter: function(result, jQ){
+			afterFilter: function (result, jQ) {
 				var initial_results = jobs; // initial jobs/result before any filtering done to them
-				if(active_filters_2){
+				if (active_filters_2) {
 					updateCountsLogic(result, jQ, initial_results);
 					hidePagination();
 					hidePerPage(result);
@@ -234,7 +239,7 @@ export default class JobBoardFilteredFeed {
 
 			//search: {ele: '#searchbox', fields: ['runtime']}, // With specific fields
 			search: the_search, // define search box
-			
+
 			// firing after filtering
 			// callbacks: {
 			//   afterFilter: this.afterFiltering() // afterfilter to reset the counts. clever!
@@ -249,29 +254,29 @@ export default class JobBoardFilteredFeed {
 		//
 		// activate filter criterias
 		//
-		if(active_filters_3){
-			FJS.addCriteria({field: 'city', ele: '#city_filter', all: 'all'});
-			FJS.addCriteria({field: 'jobtypes', ele: '#jobtype_filter', all: 'all'});
-			FJS.addCriteria({field: 'company', ele: '#company_filter', all: 'all'});
-			FJS.addCriteria({field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all'});
+		if (active_filters_3) {
+			FJS.addCriteria({ field: 'city', ele: '#city_filter', all: 'all' });
+			FJS.addCriteria({ field: 'jobtypes', ele: '#jobtype_filter', all: 'all' });
+			FJS.addCriteria({ field: 'company', ele: '#company_filter', all: 'all' });
+			FJS.addCriteria({ field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all' });
 		}
 
 	}
 
 	// getting & populating the filter's data
 	populateFilters(jobs) {
-		if(jobs){
-		
+		if (jobs) {
+
 			//
 			// manipulate the job items data here...
 			//
 
 			for (let job of jobs) {
 
-				if(job.category.length > 0) job.categories = job.category.split(', '); // add as array
-				if(job.jobtype.length > 0) job.jobtypes = job.jobtype.split(', '); // add as array
+				if (job.category.length > 0) job.categories = job.category.split(', '); // add as array
+				if (job.jobtype.length > 0) job.jobtypes = job.jobtype.split(', '); // add as array
 
-				if(job.companywebsite.length > 0){
+				if (job.companywebsite.length > 0) {
 
 					const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
 					const companywebsiteWithHttp = withHttp(job.companywebsite);
@@ -291,7 +296,7 @@ export default class JobBoardFilteredFeed {
 					categories.push(cat);
 				}
 			}
-			var unique_categories = categories.filter(function (value, index, array) { 
+			var unique_categories = categories.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
 
@@ -303,10 +308,10 @@ export default class JobBoardFilteredFeed {
 
 			const cities = [];
 			for (let job of jobs) {
-				if(Object.keys(job.city).length == 0) job.city = 'Midlands';
+				if (Object.keys(job.city).length == 0) job.city = 'Midlands';
 				cities.push(job.city);
 			}
-			var unique_cities = cities.filter(function (value, index, array) { 
+			var unique_cities = cities.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
 
@@ -322,7 +327,7 @@ export default class JobBoardFilteredFeed {
 					jobtypes.push(type);
 				}
 			}
-			var unique_jobtypes = jobtypes.filter(function (value, index, array) { 
+			var unique_jobtypes = jobtypes.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
 
@@ -336,7 +341,7 @@ export default class JobBoardFilteredFeed {
 			for (let job of jobs) {
 				companies.push(job.company);
 			}
-			var unique_companies = companies.filter(function (value, index, array) { 
+			var unique_companies = companies.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
 
@@ -347,10 +352,10 @@ export default class JobBoardFilteredFeed {
 	}
 
 	// render method
-	renderMainTemplate(sel){
+	renderMainTemplate(sel) {
 
 		// check if a template exists in the DOM for main.html first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#main-template'))){
+		if (this.isElementValid(document.querySelector('#main-template'))) {
 
 			// console.log('template override exists');
 
@@ -381,22 +386,22 @@ export default class JobBoardFilteredFeed {
 			// );
 
 		}
-	
+
 	}
 
 	// render method
-	renderCheckboxesTemplate(data, sel){
+	renderCheckboxesTemplate(data, sel) {
 
 		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#checkbox-template'))){
+		if (this.isElementValid(document.querySelector('#checkbox-template'))) {
 
 			// console.log('template override exists');
 
 			var html = $('#checkbox-template').html();
 			var templateFn = FilterJS.templateBuilder(html);
 			var container = $(sel);
-		
-			$.each(data, function(i, c){
+
+			$.each(data, function (i, c) {
 				container.append(templateFn({ name: c, value: c }))
 			});
 
@@ -407,28 +412,28 @@ export default class JobBoardFilteredFeed {
 			var html = checkbox_template;
 			var templateFn = FilterJS.templateBuilder(html)
 			var container = $(sel);
-		
-			$.each(data, function(i, c){
+
+			$.each(data, function (i, c) {
 				container.append(templateFn({ name: c, value: c }))
 			});
 
 		}
-	
+
 	}
 
 	// render method
-	renderOptionsTemplate(data, sel){
+	renderOptionsTemplate(data, sel) {
 
 		// check if a template exists in the DOM for #checkbox-template first & use that, else just use main.html
-		if(this.isElementValid(document.querySelector('#option-template'))){
+		if (this.isElementValid(document.querySelector('#option-template'))) {
 
 			// console.log('template override exists');
 
 			var html = $('#option-template').html();
 			var templateFn = FilterJS.templateBuilder(html);
 			var container = $(sel);
-		
-			$.each(data, function(i, c){
+
+			$.each(data, function (i, c) {
 				container.append(templateFn({ name: c, value: c }));
 			});
 
@@ -439,19 +444,19 @@ export default class JobBoardFilteredFeed {
 			var html = option_template;
 			var templateFn = FilterJS.templateBuilder(html)
 			var container = $(sel);
-		
-			$.each(data, function(i, c){
+
+			$.each(data, function (i, c) {
 				container.append(templateFn({ name: c, value: c }));
 			});
 
 		}
-	
+
 	}
 
 	// render method
-	renderErrorTemplate(sel){
+	renderErrorTemplate(sel) {
 
-		if(this.isElementValid(document.querySelector('#error-template'))){
+		if (this.isElementValid(document.querySelector('#error-template'))) {
 
 			var html = $('#error-template').html();
 			var templateFn = FilterJS.templateBuilder(html);
@@ -463,22 +468,22 @@ export default class JobBoardFilteredFeed {
 	}
 
 	// general function for sorting the job's json data by a given key
-	sortDataBy(data, byKey){
+	sortDataBy(data, byKey) {
 		let sortedData;
-		if(byKey == 'title'){
-			sortedData = data.sort(function(a,b){
+		if (byKey == 'title') {
+			sortedData = data.sort(function (a, b) {
 
 				let x = a.title.toLowerCase();
 				let y = b.title.toLowerCase();
 
-				if(x>y){return 1;}
-				if(x<y){return -1;}
+				if (x > y) { return 1; }
+				if (x < y) { return -1; }
 
 				return 0;
 			});
 		}
-		else if(byKey == 'date'){
-			sortedData = data.sort(function(a,b){
+		else if (byKey == 'date') {
+			sortedData = data.sort(function (a, b) {
 
 				let x = new Date(a.date);
 				let y = new Date(b.date);
@@ -490,8 +495,8 @@ export default class JobBoardFilteredFeed {
 				return 0;
 			});
 		}
-		else if(byKey == 'referencenumber'){
-			sortedData = data.sort(function(a,b){
+		else if (byKey == 'referencenumber') {
+			sortedData = data.sort(function (a, b) {
 
 				let x = a.referencenumber;
 				let y = b.referencenumber;
@@ -503,12 +508,12 @@ export default class JobBoardFilteredFeed {
 				return 0;
 			});
 		}
-		else if(byKey == 'random'){
+		else if (byKey == 'random') {
 
 			sortedData = data
-			.map(value => ({ value, sort: Math.random() }))
-			.sort((a, b) => a.sort - b.sort)
-			.map(({ value }) => value);
+				.map(value => ({ value, sort: Math.random() }))
+				.sort((a, b) => a.sort - b.sort)
+				.map(({ value }) => value);
 
 		}
 		return sortedData;
@@ -533,9 +538,9 @@ export default class JobBoardFilteredFeed {
 		}
 		if (url) {
 			if (isValidUrl(url)) {
-        return true
+				return true
 				// if(url.includes("midlandjobs.ie")){
-					// return true
+				// return true
 				// }
 			}
 		}
@@ -549,41 +554,41 @@ window.JobBoardFilteredFeed = JobBoardFilteredFeed;
 // general functions for filtered feed
 //
 
-function hidePagination(){
+function hidePagination() {
 	var paginationItems = $("#pagination nav ul").children();
-	if(paginationItems.length == 1){
+	if (paginationItems.length == 1) {
 		$("#pagination").hide();
 	} else {
 		$("#pagination").show();
 	}
 }
-function hidePerPage(result){
+function hidePerPage(result) {
 
 	var perPageOptions = $('#per_page select option');
 	const result_count = result.length;
 
 	// loop thru the per page options & hide ones where the jobs results is less than it
 	// ignore 12 as it still makes sense to show 12 when jobs results are less than 12
-	if(perPageOptions.length > 0){
-		perPageOptions.each(function(){
+	if (perPageOptions.length > 0) {
+		perPageOptions.each(function () {
 
 			var c = $(this);
-	
+
 			// the numbers here should correspond to the values given to the pagination->perPage settings in the the FilterJS object (ignoring 12, the lowest value)
-			if(c.val() == 18) {
-				if(result_count < 18){
+			if (c.val() == 18) {
+				if (result_count < 18) {
 					c.hide();
 				} else {
 					c.show();
 				}
-			} else if(c.val() == 15) {
-				if(result_count < 15){
+			} else if (c.val() == 15) {
+				if (result_count < 15) {
 					c.hide();
 				} else {
 					c.show();
 				}
 			}
-	
+
 		});
 	}
 
@@ -610,10 +615,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 
 	// only if theCompanies dont have any currently selected (we leave them alone if them get selected)
 	// conditions upon which the companies counts will change
-	if(checkboxes.is(":checked") || jobtypeSelected !='all' || citySelected !='all' || searchBox.length >= 2){
+	if (checkboxes.is(":checked") || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
 
 		// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-		theCompanies.each(function(){
+		theCompanies.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'company');
 		});
@@ -621,10 +626,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 	}
 
 	// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-	if(!checkboxes.is(":checked") && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2){
+	if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
 
 		// we update the count based on INITIAL results instead
-		theCompanies.each(function(){
+		theCompanies.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'company');
 		});
@@ -637,10 +642,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 
 	// only if theJobtypes dont have any currently selected (we leave them alone if them get selected)
 	// conditions upon which the jobtypes counts will change
-	if(checkboxes.is(":checked") || companySelected !='all' || citySelected !='all' || searchBox.length >= 2){
+	if (checkboxes.is(":checked") || companySelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
 
 		// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-		theJobtypes.each(function(){
+		theJobtypes.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'jobtypes');
 		});
@@ -648,10 +653,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 	}
 
 	// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-	if(!checkboxes.is(":checked") && companySelected === 'all' && citySelected === 'all' && searchBox.length < 2){
+	if (!checkboxes.is(":checked") && companySelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
 
 		// we update the count based on INITIAL results instead
-		theJobtypes.each(function(){
+		theJobtypes.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'jobtypes');
 		});
@@ -664,10 +669,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 
 	// only if theCities dont have any currently selected (we leave them alone if them get selected)
 	// conditions upon which the companies counts will change
-	if(checkboxes.is(":checked") || jobtypeSelected !='all' || companySelected !='all' || searchBox.length >= 2){
+	if (checkboxes.is(":checked") || jobtypeSelected != 'all' || companySelected != 'all' || searchBox.length >= 2) {
 
 		// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-		theCities.each(function(){
+		theCities.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'city');
 		});
@@ -675,10 +680,10 @@ function updateCountsLogic(result, jQ, initial_results) {
 	}
 
 	// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-	if(!checkboxes.is(":checked") && jobtypeSelected === 'all' && companySelected === 'all' && searchBox.length < 2){
+	if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && companySelected === 'all' && searchBox.length < 2) {
 
 		// we update the count based on INITIAL results instead
-		theCities.each(function(){
+		theCities.each(function () {
 			var c = $(this), count = 0
 			updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'city');
 		});
@@ -691,26 +696,26 @@ function updateCountsLogic(result, jQ, initial_results) {
 
 	// only if the cats dont have any currently checked (we leave them alone if them get checked)
 	// conditions upon which the cats counts will change
-	if(!checkboxes.is(":checked")){
+	if (!checkboxes.is(":checked")) {
 
 		// if company or jobtype or searchbox selected
-		if(companySelected !='all' || jobtypeSelected !='all' || citySelected !='all' || searchBox.length >= 2){
+		if (companySelected != 'all' || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
 
 			// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-			checkboxes.each(function(){
+			checkboxes.each(function () {
 				var c = $(this), count = 0
 				updateCheckboxesCountsAndHideEmtpies(c, count, result, jQ, 'categories');
 			});
-			
+
 		}
 
 	}
 
 	// if all companySelected & all jobtype selected, update the cat counts from on INITIAL results
-	if(companySelected === 'all' && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2){
+	if (companySelected === 'all' && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
 
 		// we update the count based on INITIAL results instead
-		checkboxes.each(function(){
+		checkboxes.each(function () {
 
 			var c = $(this), count = 0
 
@@ -721,32 +726,32 @@ function updateCountsLogic(result, jQ, initial_results) {
 	}
 
 }
-function updateCheckboxesCountsAndHideEmtpies(c, count, result, jQ, key){
+function updateCheckboxesCountsAndHideEmtpies(c, count, result, jQ, key) {
 
-	if(result.length > 0){
+	if (result.length > 0) {
 		jQ.records = result; // set querying from live jobs
 		count = jQ.where({ [key]: c.val() }).count;
 	}
 
 	c.next().text(c.val() + '(' + count + ')');
 
-	if(count == 0) c.parent('label').parent('.checkbox').hide();
-	if(count > 0) c.parent('label').parent('.checkbox').show();
+	if (count == 0) c.parent('label').parent('.checkbox').hide();
+	if (count > 0) c.parent('label').parent('.checkbox').show();
 
 }
-function updateOptionsCountsAndHideEmtpies(c, count, result, jQ, key){
+function updateOptionsCountsAndHideEmtpies(c, count, result, jQ, key) {
 
-	if(c.val() != 'all'){
+	if (c.val() != 'all') {
 
-		if(result.length > 0){
+		if (result.length > 0) {
 			jQ.records = result; // set querying from live jobs
 			count = jQ.where({ [key]: c.val() }).count;
 		}
 
 		c.text(c.val() + '(' + count + ')');
 
-		if(count == 0) c.hide();
-		if(count > 0) c.show();
+		if (count == 0) c.hide();
+		if (count > 0) c.show();
 
 	}
 
