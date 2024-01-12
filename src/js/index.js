@@ -58,26 +58,44 @@ class JsonFromXmlFeed {
 }
 
 //
-// filters for feed (requires jquery)
+// filtered feeds
 //
 
+// requirements
 import $ from 'jquery';
 import './filter.js';
 
+// templates: main/wrap 
 import main_template from './static-components/main.html';
+import main_sidebar_template from './static-components/main_sidebar.html';
+
+// templates: partials
 import job_template from './static-components/job.html';
 import checkbox_template from './static-components/checkbox.html'; // checkbox
 import option_template from './static-components/option.html'; // dropdown
 // import error_template from './static-components/error.html';
 
-//
-// filters for feed (requires jquery)
-//
+// templates: more partials
+import count_template from './static-components/_count.html';
+import filters_template from './static-components/_filters.html';
+import jobswrap_template from './static-components/_jobswrap.html';
+import topbar_template from './static-components/_topbar.html';
+import divider_template from './static-components/_divider.html';
+import search_template from './static-components/_search.html';
+import company_template from './static-components/_company.html';
+import jobtype_template from './static-components/_jobtype.html';
+import city_template from './static-components/_city.html';
+import cats_template from './static-components/_cats.html';
+import pagi_template from './static-components/_pagi.html';
+import perpagi_template from './static-components/_perpagi.html';
 
-// version for smartjobboard!!
+// the class itself. the jobboard version...
+// notes.. currently, jobs count requires pagination to be active, because the filters callback only fires when pagintion fires
 export default class JobBoardFilteredFeed {
 
-	constructor(sel, url, params = { sorting: false }) {
+	constructor(sel, url, params = { sorting: false, scope: '.uk-scope', active_filters: false, active_pagination: false, active_perpage: false, active_search: false, active_counts: false }) {
+
+		this.hello = 'https://stackoverflow.com/questions/20279484/how-to-access-the-correct-this-inside-a-callback';
 
 		//
 		// 1. the constructor properties
@@ -86,6 +104,15 @@ export default class JobBoardFilteredFeed {
 		this.url = url; // url to xml source
 		this.params = params; // extra paramaters/settings
 		if (this.params.scope) UIkit.container = this.params.scope; // scoping for uikit
+
+		//
+		// testing properties...
+		//
+		// this.active_filters = this.params.active_filters;
+		// this.active_pagination = this.params.active_pagination;
+		// this.active_perpage = this.params.active_perpage;
+		// this.active_search = this.params.active_search;
+		// this.active_counts = this.params.active_counts;
 
 		//
 		// 2. here we are adding the jobs as a property of the object, if all is good...
@@ -150,16 +177,6 @@ export default class JobBoardFilteredFeed {
 	// and also sorts the jobs & does some additional template stuff
 	renderTheJobs(jobs) {
 
-		//
-		// testing vars...
-		//
-		var active_filters = true;
-		var active_filters_2 = true;
-		var active_filters_3 = true;
-		var filters_pagination = true;
-		var filters_perpage = true;
-		var filters_search = true;
-
 
 		//
 		// render the wrapper template to start... waiting for jobs first. object can be placed above or below html, but all html pops in together. can just use a loader animation...
@@ -175,9 +192,9 @@ export default class JobBoardFilteredFeed {
 		if (this.params.sorting == 'random') jobs = this.sortDataBy(jobs, 'random');
 
 		//
-		// setup data & populate filters
+		// setup new jobs data & then populate filters (if filters are not disabled)
 		//
-		if (active_filters) this.populateFilters(jobs);
+		this.populateFilters(jobs);
 
 		//
 		// job template stuff
@@ -188,78 +205,74 @@ export default class JobBoardFilteredFeed {
 		if (this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
 
 		//
-		// pagination & perpage template stuff
-		//
-		var _pagination_template = false;
-		var _perpage_template = false;
-		if (this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
-		if (this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
-
-		//
 		// filters: updating the counts - a callback for later (inside FilterJS())
 		//
 		var filter_callbacks = {
 			afterFilter: function (result, jQ) {
 				var initial_results = jobs; // initial jobs/result before any filtering done to them
-				if (active_filters_2) {
-					updateCountsLogic(result, jQ, initial_results);
-					hidePagination();
-					hidePerPage(result);
-				}
-			}
+				if(this.params.active_pagination && this.params.active_counts) updateCountsLogic(result, jQ, initial_results, this.params.active_search);
+				if(this.params.active_pagination) hidePagination();
+				if(this.params.active_pagination && this.params.active_perpage) hidePerPage(result);
+			}.bind(this)
 		};
 
 		//
 		// other stuff for the filters configs, selective
 		//
+		var _pagination_template = false;
+		var _perpage_template = false;
+		// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
+		if (this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
+		if (this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
 
-		var the_pagi = {
-			container: '#pagination', // define container for pagi
-			visiblePages: 5, // set init visible pages
-			perPage: {
-				values: [12, 15, 18], // per page dropdown options
-				container: '#per_page', // per page container
-				// perPageView: _perpage_template,
-			},
-			// paginationView: _pagination_template,
-		};
-		// console.log(the_pagi);
+		var the_pagination = false;
+		// setup the pagination & perpage array to be used in FilterJS(), selectivley
+		if(this.params.active_pagination){
+			var the_pagination = {
+				container: '#pagination', // define container for pagi
+				visiblePages: 5, // set init visible pages
+				paginationView: _pagination_template,
+				perPage: false
+			};
+			if(this.params.active_perpage){
+				the_pagination.perPage = {
+					values: [12, 15, 18], // per page dropdown options
+					container: '#per_page', // per page container
+					perPageView: _perpage_template,
+				};
+			}
+		}
 
-		var the_search = { ele: '#searchbox' };
-		// console.log(the_search);
+		var the_search = false;
+		// set th ele for the searchbox, to be used in FilterJS()
+		if(this.params.active_search) var the_search = { ele: '#searchbox' };
 
 		//
 		// activate filters & configs
 		//
 		var FJS = FilterJS(jobs, '#jobs', {
-
-			// template: '#job-template', // define template for job
 			template: _template, // set to false so we can use pre rendered html template
 			template_html: _template_html, // define template for job
-
-			//search: {ele: '#searchbox', fields: ['runtime']}, // With specific fields
 			search: the_search, // define search box
-
-			// firing after filtering
-			// callbacks: {
-			//   afterFilter: this.afterFiltering() // afterfilter to reset the counts. clever!
-			// },
-			callbacks: filter_callbacks,
-
-			// pagination setup
-			pagination: the_pagi,
-
+			pagination: the_pagination, // define pagination & perpage elements
+			callbacks: filter_callbacks, // callbacks, after filtering.. redo counts, filters etc...
 		});
 
 		//
 		// activate filter criterias
 		//
-		if (active_filters_3) {
+		if (this.params.active_filters) {
 			FJS.addCriteria({ field: 'city', ele: '#city_filter', all: 'all' });
 			FJS.addCriteria({ field: 'jobtypes', ele: '#jobtype_filter', all: 'all' });
 			FJS.addCriteria({ field: 'company', ele: '#company_filter', all: 'all' });
 			FJS.addCriteria({ field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all' });
 		}
+
+		//
+		// afterFilter wont get fired unless pagination is set...
+		// so when pagination is false but active counts is still active, we set the counts here manually. 
+		//
+		if(this.params.active_counts && !this.params.active_pagination) setInitialCounts(jobs.length);
 
 	}
 
@@ -270,7 +283,6 @@ export default class JobBoardFilteredFeed {
 			//
 			// manipulate the job items data here...
 			//
-
 			for (let job of jobs) {
 
 				if (job.category.length > 0) job.categories = job.category.split(', '); // add as array
@@ -287,9 +299,8 @@ export default class JobBoardFilteredFeed {
 			}
 
 			//
-			// data for categories
+			// reform data for categories
 			//
-
 			const categories = [];
 			for (let job of jobs) {
 				for (let cat of job.categories) {
@@ -299,13 +310,13 @@ export default class JobBoardFilteredFeed {
 			var unique_categories = categories.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
-
-			this.renderCheckboxesTemplate(unique_categories, '#categories_criteria');
+			// render the new data now into the filters
+			if (this.params.active_filters) this.renderCheckboxesTemplate(unique_categories, '#categories_criteria');
+			
 
 			//
-			// data for cities
+			// reform data for cities
 			//
-
 			const cities = [];
 			for (let job of jobs) {
 				if (Object.keys(job.city).length == 0) job.city = 'Midlands';
@@ -314,13 +325,12 @@ export default class JobBoardFilteredFeed {
 			var unique_cities = cities.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
-
-			this.renderOptionsTemplate(unique_cities, '#city_filter');
+			// render the new data now into the filters
+			if (this.params.active_filters) this.renderOptionsTemplate(unique_cities, '#city_filter');
 
 			//
-			// data for jobtypes
+			// reform data for jobtypes
 			//
-
 			const jobtypes = [];
 			for (let job of jobs) {
 				for (let type of job.jobtypes) {
@@ -330,13 +340,12 @@ export default class JobBoardFilteredFeed {
 			var unique_jobtypes = jobtypes.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
-
-			this.renderOptionsTemplate(unique_jobtypes, '#jobtype_filter');
+			// render the new data now into the filters
+			if (this.params.active_filters) this.renderOptionsTemplate(unique_jobtypes, '#jobtype_filter');
 
 			//
-			// data for company
+			// reform data for companies
 			//
-
 			const companies = [];
 			for (let job of jobs) {
 				companies.push(job.company);
@@ -344,48 +353,129 @@ export default class JobBoardFilteredFeed {
 			var unique_companies = companies.filter(function (value, index, array) {
 				return array.indexOf(value) === index;
 			});
-
-			this.renderOptionsTemplate(unique_companies, '#company_filter');
+			// render the new data now into the filters
+			if (this.params.active_filters) this.renderOptionsTemplate(unique_companies, '#company_filter');
 
 		}
 		return jobs;
 	}
 
 	// render method
+	// the main wrapper template
 	renderMainTemplate(sel) {
 
 		// check if a template exists in the DOM for main.html first & use that, else just use main.html
 		if (this.isElementValid(document.querySelector('#main-template'))) {
 
-			// console.log('template override exists');
-
 			var html = $('#main-template').html();
 			var templateFn = FilterJS.templateBuilder(html);
 			var container = $(sel);
-			// container.append(templateFn({}))
 			container.empty().append(templateFn({}))
-
-			// var theMainEle = document.querySelector(sel);
-			// theMainEle.dispatchEvent(
-			// 	new CustomEvent("Rendered"),
-			// );
 
 		} else {
 
-			// console.log('template override does not exist');
+			if(this.params.active_counts || this.params.active_filters || this.params.active_search){
+				var html = main_sidebar_template;
+			} else {
+				var html = main_template;
+			}
 
-			var html = main_template;
 			var templateFn = FilterJS.templateBuilder(html);
 			var container = $(sel);
-			// container.append(templateFn({}))
 			container.empty().append(templateFn({}))
 
-			// var theMainEle = document.querySelector(sel);
-			// theMainEle.dispatchEvent(
-			// 	new CustomEvent("Rendered"),
-			// );
-
 		}
+
+		// partial: test
+		// var hello_html = hello_template;
+		// var hello_templateFn = FilterJS.templateBuilder(hello_html);
+		// var hello_container = $('#Hello');
+		// hello_container.empty().append(hello_templateFn({}))
+
+		// this.params.active_filters
+		// this.params.active_pagination
+		// this.params.active_perpage
+		// this.params.active_search
+		// this.params.active_counts
+
+		// partial: #FiltersCount
+		if(this.params.active_counts){
+			var count_html = count_template;
+			var count_templateFn = FilterJS.templateBuilder(count_html);
+			var count_container = $('#FiltersCount');
+			count_container.empty().append(count_templateFn({}))
+		}
+		
+		// partial: #FiltersDivider
+		if((this.params.active_filters || this.params.search) && this.params.active_counts){
+			var divider_html = divider_template;
+			var divider_templateFn = FilterJS.templateBuilder(divider_html);
+			var divider_container = $('#FiltersDivider');
+			divider_container.empty().append(divider_templateFn({}))
+		}
+
+		// partial: #FiltersList
+		if(this.params.active_filters || this.params.active_search){
+			var filters_html = filters_template;
+			var filters_templateFn = FilterJS.templateBuilder(filters_html);
+			var filters_container = $('#FiltersList');
+			filters_container.empty().append(filters_templateFn({}))
+		}
+
+		// #searchFilters
+		if(this.params.active_search){
+			var search_html = search_template;
+			var search_templateFn = FilterJS.templateBuilder(search_html);
+			var search_container = $('#searchFilters');
+			search_container.empty().append(search_templateFn({}))
+		}
+		if(this.params.active_filters){
+			var company_html = company_template;
+			var company_templateFn = FilterJS.templateBuilder(company_html);
+			var company_container = $('#companyFilters');
+			company_container.empty().append(company_templateFn({}))
+
+			var jobtype_html = jobtype_template;
+			var jobtype_templateFn = FilterJS.templateBuilder(jobtype_html);
+			var jobtype_container = $('#jobtypeFilters');
+			jobtype_container.empty().append(jobtype_templateFn({}))
+
+			var city_html = city_template;
+			var city_templateFn = FilterJS.templateBuilder(city_html);
+			var city_container = $('#cityFilters');
+			city_container.empty().append(city_templateFn({}))
+
+			var cats_html = cats_template;
+			var cats_templateFn = FilterJS.templateBuilder(cats_html);
+			var cats_container = $('#catsFilters');
+			cats_container.empty().append(cats_templateFn({}))
+		}
+
+		// partial: #FiltersTopBar
+		if(this.params.active_pagination){
+			var topbar_html = topbar_template;
+			var topbar_templateFn = FilterJS.templateBuilder(topbar_html);
+			var topbar_container = $('#FiltersTopBar');
+			topbar_container.empty().append(topbar_templateFn({}))
+
+			var pagi_html = pagi_template;
+			var pagi_templateFn = FilterJS.templateBuilder(pagi_html);
+			var pagi_container = $('#filtersPagintion');
+			pagi_container.empty().append(pagi_templateFn({}))
+
+			if(this.params.active_perpage){
+				var perpagi_html = perpagi_template;
+				var perpagi_templateFn = FilterJS.templateBuilder(perpagi_html);
+				var perpagi_container = $('#filtersPerPage');
+				perpagi_container.empty().append(perpagi_templateFn({}))
+			}
+		}
+
+		// partial: #FiltersJobsWrap
+		var jobswrap_html = jobswrap_template;
+		var jobswrap_templateFn = FilterJS.templateBuilder(jobswrap_html);
+		var jobswrap_container = $('#FiltersJobsWrap');
+		jobswrap_container.empty().append(jobswrap_templateFn({}))
 
 	}
 
@@ -553,7 +643,6 @@ window.JobBoardFilteredFeed = JobBoardFilteredFeed;
 //
 // general functions for filtered feed
 //
-
 function hidePagination() {
 	var paginationItems = $("#pagination nav ul").children();
 	if (paginationItems.length == 1) {
@@ -593,8 +682,11 @@ function hidePerPage(result) {
 	}
 
 }
-
-function updateCountsLogic(result, jQ, initial_results) {
+function setInitialCounts(length) {
+	var total = $('#total_jobs'); // get total
+	total.text(length);
+}
+function updateCountsLogic(result, jQ, initial_results, active_search) {
 
 	var total = $('#total_jobs'); // get total
 	var checkboxes = $("#category_criteria :input"); // get checkboxes
@@ -604,7 +696,9 @@ function updateCountsLogic(result, jQ, initial_results) {
 	var jobtypeSelected = $('#jobtype_filter option:selected').val(); // check jobtype select box for selections
 	var companySelected = $('#company_filter option:selected').val(); // check company select box for selections
 	var citySelected = $('#city_filter option:selected').val(); // check city select box for selections
-	var searchBox = $('#searchbox').val(); //
+	var searchBox = [];
+	searchBox.length = 0; // default to empty array so .length = 0; allows disable of the searching properly
+	if(active_search) var searchBox = $('#searchbox').val();
 
 	// add jobs count to total
 	total.text(result.length);

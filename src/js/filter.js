@@ -1419,6 +1419,9 @@ import pagination_template from './static-components/pagination.html'; // dropdo
   F.initPagination = function(){
     var self = this,
     opts = this.opts.pagination;
+
+    var original_opts_per_page = true;
+    if(!opts.perPage) var original_opts_per_page = false;
   
     if(!opts.perPage){
       opts.perPage = {}
@@ -1438,7 +1441,7 @@ import pagination_template from './static-components/pagination.html'; // dropdo
       }else{
         self.show(self.lastResult())
       }
-    })
+    }, original_opts_per_page)
   
     this.filter();
   };
@@ -1485,7 +1488,7 @@ import pagination_template from './static-components/pagination.html'; // dropdo
     }
   };
 
-  var Paginator = function(recordsCount, opts, onPagination) {
+  var Paginator = function(recordsCount, opts, onPagination, original_opts_per_page) {
     var paginationView;
   
     this.recordsCount = recordsCount;;
@@ -1502,7 +1505,7 @@ import pagination_template from './static-components/pagination.html'; // dropdo
   
     this.currentPage = 1;
     this.onPagination = onPagination;
-    this.initPerPage();
+    this.initPerPage(original_opts_per_page);
     this.render();
     this.bindEvents();
   };
@@ -1616,28 +1619,37 @@ import pagination_template from './static-components/pagination.html'; // dropdo
     return { currentPage: this.currentPage, totalPages: total, pages: makePageArray(start, end), self: this };
   },
   
-  P.initPerPage = function(){
+  P.initPerPage = function(original_opts_per_page){
     var opts = this.opts.perPage,
-        template,
-        html,
-        ele,
-        event_type,
-        self = this;
+    template,
+    html,
+    ele,
+    event_type,
+    self = this;
+
+    if(!original_opts_per_page){
+      
+      self.setPerPage(12);
+
+    } else {
+
+      this.perPageCount = opts.values[0];
+
+      template = opts.perPageView ? $(opts.perPageView).html() : views.per_page;
+      html = templateBuilder(template)({ values: opts.values });
+      $(opts.container).html(html);
   
-    this.perPageCount = opts.values[0];
+      ele = $(opts.container).find('[data-perpage]')
+      event_type = ele.get(0).tagName == 'SELECT' ? 'change' : 'click';
   
-    template = opts.perPageView ? $(opts.perPageView).html() : views.per_page;
-    html = templateBuilder(template)({ values: opts.values });
-    $(opts.container).html(html);
-  
-    ele = $(opts.container).find('[data-perpage]')
-    event_type = ele.get(0).tagName == 'SELECT' ? 'change' : 'click';
-  
-    $(opts.container).on(event_type, '[data-perpage]', function(e){
-      var value = parseInt($(this).val() || $(this).data('value'));
-      self.setPerPage(value)
-      e.preventDefault();
-    });
+      $(opts.container).on(event_type, '[data-perpage]', function(e){
+        var value = parseInt($(this).val() || $(this).data('value'));
+        self.setPerPage(value)
+        e.preventDefault();
+      });
+
+    }
+
   };
   
   P.setPerPage = function(value){

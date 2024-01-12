@@ -8,15 +8,19 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="public/images/favicon.png" />
     
+    <!-- not -->
     <link href="public/css/styles.css" rel="stylesheet">
     <!-- <link href="https://cdn.smartjobboard.com/2023.11/templates/BootstrapDND/assets/styles.css" rel="stylesheet"> -->
 
+    <!-- not -->
     <link href="public/css/bootstrap_styles.css" rel="stylesheet">
     <!-- <link href="https://midlandjobs.ie/templates/BootstrapDND/assets/style/styles.css?v=1704471056.3611" rel="stylesheet" id="styles"> -->
 
+    <!-- not -->
     <link href="public/css/fonts.css" rel="stylesheet">
     <!-- <link href="https://cdn.smartjobboard.com/fonts/fira-sans/style.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'; this.onload=null;"> -->
 
+    <!-- not -->
     <style type="text/css">
       .navbar{background-color:rgba(14,27,43,1.0)}
       .navbar .navbar-left .navbar__item .navbar__link{color:#fff;}
@@ -41,28 +45,28 @@
       .footer .container div.leocredit{width:50%; float:left; text-align:right;}
     </style>
 
-    <!-- this code will be placed within the custom js section when editing a jobboard page...
-      end result will make use of cdn via github...
-      for this, use urls like https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/feeds.js 
-      ...but remember the cache on these update slowly after github push (about an hour)
-    -->
-
-    <!-- feeds init -->
-    <script type="text/javascript" src="public/js/feeds.js"></script>
-    <link rel="stylesheet" href="public/css/scoped.min.css" />
+    <!-- feed: wrapper -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/feeds.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/css/scoped.min.css" />
     <script>
-      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml', { sorting: 'random', scope: '.uk-scope' });
-      console.log(Feed_1);
+      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml');
     </script>
     
   </head>
 
   <body>
 
-    <!-- this html will be placed using the html block onto a jobboard page -->
+    <!-- feed: wrapper -->
     <div class="uk-scope">
       <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
     </div>
+
+    <!-- feed: override main template -->
+    <script id="main-template" type="text/html">
+      <div class="uk-container uk-container-small">
+        <div id="FiltersJobsWrap"></div>
+      </div>
+    </script>
 
   </body>
 
