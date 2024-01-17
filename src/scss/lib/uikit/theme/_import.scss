@@ -4,7 +4,7 @@
 
 // Elements
 @import "link.scss";
-// @import "heading.scss";
+@import "heading.scss";
 // @import "divider.scss";
 // @import "list.scss";
 // @import "description-list.scss";
@@ -40,7 +40,7 @@
 // @import "drop.scss";
 // @import "dropbar.scss";
 @import "modal.scss";
-// @import "slider.scss";
+@import "slider.scss";
 // @import "sticky.scss";
 // @import "offcanvas.scss";
 // @import "leader.scss";
@@ -58,8 +58,8 @@
 // @import "breadcrumb.scss";
 @import "pagination.scss";
 // @import "tab.scss";
-// @import "slidenav.scss";
-// @import "dotnav.scss";
+@import "slidenav.scss";
+@import "dotnav.scss";
 // @import "thumbnav.scss";
 // @import "iconnav.scss";
 

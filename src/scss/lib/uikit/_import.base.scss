@@ -5,7 +5,7 @@
 
 // Elements
 @import "components/link.scss";
-// @import "components/heading.scss";
+@import "components/heading.scss";
 // @import "components/divider.scss";
 // @import "components/list.scss";
 // @import "components/description-list.scss";
@@ -42,8 +42,8 @@
 // @import "components/dropbar.scss";
 // @import "components/dropnav.scss"; // After: Dropbar
 @import "components/modal.scss"; // After: Close
-// @import "components/slideshow.scss";
-// @import "components/slider.scss";
+@import "components/slideshow.scss";
+@import "components/slider.scss";
 // @import "components/sticky.scss";
 // @import "components/offcanvas.scss";
 // @import "components/switcher.scss";
@@ -65,8 +65,8 @@
 // @import "components/breadcrumb.scss";
 @import "components/pagination.scss";
 // @import "components/tab.scss";
-// @import "components/slidenav.scss"; // After: Icon
-// @import "components/dotnav.scss";
+@import "components/slidenav.scss"; // After: Icon
+@import "components/dotnav.scss";
 // @import "components/thumbnav.scss";
 // @import "components/iconnav.scss";
 

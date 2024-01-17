@@ -46,27 +46,180 @@
     </style>
 
     <!-- feed: wrapper -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/js/feeds.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds/public/css/scoped.min.css" />
+    <script type="text/javascript" src="public/js/feeds.js"></script>
+    <link rel="stylesheet" href="public/css/scoped.min.css" />
+    
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds@master/public/js/feeds.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds@latest/public/css/scoped.min.css" /> -->
     <script>
-      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml');
+      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/center-parcs.xml');
     </script>
+
+    <!-- UIkit CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" /> -->
+
+    <!-- UIkit JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script> -->
     
   </head>
 
   <body>
 
-    <!-- feed: wrapper -->
-    <div class="uk-scope">
-      <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container container-fluid">
+        <div class="logo navbar-header">
+          <a class="logo__text navbar-brand" href="https://midlandjobs.ie">
+            <img src="https://midlandjobs.ie/templates/BootstrapDND/assets/images/midlandjobs-logo-wh.png"
+              alt="Midland Jobs">
+          </a>
+        </div>
+        <div class="burger-button__wrapper burger-button__wrapper__js visible-sm visible-xs" data-target="#navbar-collapse"
+          data-toggle="collapse">
+          <a href="#" aria-label="Navigation Menu">
+            <div class="burger-button"></div>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <div class="visible-sm visible-xs">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/jobs/"><span>Jobs</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/companies/"><span>Companies Hiring</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/add-listing/?listing_type_id=Job"><span>Post a Job</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/employer-products/"><span>Pricing</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="https://midlandjobs.ie/how-we-advertise-your-job/"><span>What we do</span></a>
+              </li>
+            </ul>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar__item navbar__item ">
+              <a class="navbar__link navbar__login" href="https://midlandjobs.ie/login/">Sign in</a>
+            </li>
+            <li class="navbar__item navbar__item__filled"><a class="navbar__link  btn__blue"
+                href="https://midlandjobs.ie/registration/">Sign up</a></li>
+          </ul>
+          <div class="visible-md visible-lg">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/jobs/"><span>Jobs</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/companies/"><span>Companies Hiring</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/add-listing/?listing_type_id=Job"><span>Post a Job</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/employer-products/"><span>Pricing</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="https://midlandjobs.ie/how-we-advertise-your-job/"><span>What we do</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- header -->
+    <div class="details-header company-profile">
+      <div class="container">
+        <div class="results">
+          <a href="javascript:history.back();" class="btn__back">
+            Back </a>
+        </div>
+        <div class="media-left listing-item__logo">
+          <div class="listing-item__logo--wrapper">
+            <img src="https://midlandjobs.ie/files/pictures/CP_Logo_MASTER_IRELAND_1042x1042_png.png" border="0" alt=""
+              class="featured-company__image">
+          </div>
+        </div>
+        <div class="media-body">
+          <h1 class="details-header__title">Center Parcs Ltd</h1>
+          <ul class="listing-item__info">
+            <li class="listing-item__info--item listing-item__info--item-location">
+              Ballymahon, Co. Longford, Ireland
+            </li>
+            <li class="listing-item__info--item listing-item__info--item-website">
+              <a href="https://www.centerparcs.ie/" target="_blank" aria-label="https://www.centerparcs.ie/ (New Window)">
+                https://www.centerparcs.ie/
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
+    <div class="uk-scope">
+
+      <!-- slideshow -->
+      <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 7:3; min-height: 300; max-height: 600">
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+      
+          <ul class="uk-slideshow-items">
+            <li>
+              <img src="https://getuikit.com/assets/uikit/tests/images/photo.jpg" alt="" uk-cover>
+              <div class="uk-position-center uk-position-medium uk-text-center">
+                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
+                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
+              </div>
+            </li>
+            <li>
+              <img src="https://getuikit.com/assets/uikit/tests/images/dark.jpg" alt="" uk-cover>
+              <div class="uk-position-center uk-position-medium uk-text-center">
+                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
+                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
+              </div>
+            </li>
+            <li>
+              <img src="https://getuikit.com/assets/uikit/tests/images/light.jpg" alt="" uk-cover>
+              <div class="uk-position-center uk-position-medium uk-text-center">
+                <h1 class="uk-heading-medium" uk-slideshow-parallax="y: -100,0,0; opacity: 1,1,0">Heading</h1>
+                <p class="uk-text-lead" uk-slideshow-parallax="y: 100,0,0; opacity: 1,1,0">Lorem ipsum dolor sit amet.</p>
+              </div>
+            </li>
+            <li>
+              <img src="https://getuikit.com/assets/uikit/tests/images/photo2.jpg" alt="" uk-cover>
+              <div class="uk-position-center uk-position-medium uk-text-center">
+                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
+                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
+              </div>
+            </li>
+          </ul>
+      
+          <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slideshow-item="previous"></a>
+          <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slideshow-item="next"></a>
+      
+          <div class="uk-position-bottom-center uk-position-medium">
+            <ul class="uk-slideshow-nav uk-dotnav"></ul>
+          </div>
+      
+        </div>
+      </div>
+
+    </div>
+
+    <!-- feed: wrapper -->
+    <!-- <div class="uk-scope">
+      <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
+    </div> -->
+
     <!-- feed: override main template -->
-    <script id="main-template" type="text/html">
-      <div class="uk-container uk-container-small">
+    <!-- <script id="main-template" type="text/html">
+      <div class="uk-section uk-section-small uk-container uk-container-small">
         <div id="FiltersJobsWrap"></div>
       </div>
-    </script>
+    </script> -->
 
   </body>
 
