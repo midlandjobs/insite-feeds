@@ -51,8 +51,9 @@
     
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds@master/public/js/feeds.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds@latest/public/css/scoped.min.css" /> -->
+
     <script>
-      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/center-parcs.xml');
+      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml');
     </script>
 
     <!-- UIkit CSS -->
@@ -61,6 +62,17 @@
     <!-- UIkit JS -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script> -->
+
+    <style>
+      .uk-scope .uk-overlay-primary {
+        background: rgb(34 34 34 / 54%);
+      }
+      .uk-scope .uk-light .uk-button-primary {
+        background-color: #647e1b;
+        color: #fff;
+        font-weight: 800;
+      }
+    </style>
     
   </head>
 
@@ -131,42 +143,16 @@
       </div>
     </nav>
 
-    <!-- header -->
-    <div class="details-header company-profile">
-      <div class="container">
-        <div class="results">
-          <a href="javascript:history.back();" class="btn__back">
-            Back </a>
-        </div>
-        <div class="media-left listing-item__logo">
-          <div class="listing-item__logo--wrapper">
-            <img src="https://midlandjobs.ie/files/pictures/CP_Logo_MASTER_IRELAND_1042x1042_png.png" border="0" alt=""
-              class="featured-company__image">
-          </div>
-        </div>
-        <div class="media-body">
-          <h1 class="details-header__title">Center Parcs Ltd</h1>
-          <ul class="listing-item__info">
-            <li class="listing-item__info--item listing-item__info--item-location">
-              Ballymahon, Co. Longford, Ireland
-            </li>
-            <li class="listing-item__info--item listing-item__info--item-website">
-              <a href="https://www.centerparcs.ie/" target="_blank" aria-label="https://www.centerparcs.ie/ (New Window)">
-                https://www.centerparcs.ie/
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+    <!-- uikit stuff -->
     <div class="uk-scope">
 
       <!-- slideshow -->
       <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 7:3; min-height: 300; max-height: 600">
         <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
       
-          <ul class="uk-slideshow-items">
+          <ul class="uk-slideshow-items" uk-height-match>
+
+            <!-- tests slide one -->
             <li>
               <img src="https://getuikit.com/assets/uikit/tests/images/photo.jpg" alt="" uk-cover>
               <div class="uk-position-center uk-position-medium uk-text-center">
@@ -174,6 +160,8 @@
                 <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
               </div>
             </li>
+
+            <!-- tests slide two -->
             <li>
               <img src="https://getuikit.com/assets/uikit/tests/images/dark.jpg" alt="" uk-cover>
               <div class="uk-position-center uk-position-medium uk-text-center">
@@ -181,6 +169,8 @@
                 <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
               </div>
             </li>
+
+            <!-- tests slide three -->
             <li>
               <img src="https://getuikit.com/assets/uikit/tests/images/light.jpg" alt="" uk-cover>
               <div class="uk-position-center uk-position-medium uk-text-center">
@@ -188,6 +178,8 @@
                 <p class="uk-text-lead" uk-slideshow-parallax="y: 100,0,0; opacity: 1,1,0">Lorem ipsum dolor sit amet.</p>
               </div>
             </li>
+
+            <!-- tests slide four -->
             <li>
               <img src="https://getuikit.com/assets/uikit/tests/images/photo2.jpg" alt="" uk-cover>
               <div class="uk-position-center uk-position-medium uk-text-center">
@@ -195,6 +187,7 @@
                 <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
               </div>
             </li>
+            
           </ul>
       
           <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -207,19 +200,17 @@
         </div>
       </div>
 
+      <!-- feed: wrapper -->
+      <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
+
     </div>
 
-    <!-- feed: wrapper -->
-    <!-- <div class="uk-scope">
-      <div id="Feed_1" class="midlandjobs-feed">Loading...</div>
-    </div> -->
-
     <!-- feed: override main template -->
-    <!-- <script id="main-template" type="text/html">
+    <script id="main-template" type="text/html">
       <div class="uk-section uk-section-small uk-container uk-container-small">
         <div id="FiltersJobsWrap"></div>
       </div>
-    </script> -->
+    </script>
 
   </body>
 

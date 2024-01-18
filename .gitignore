@@ -7,3 +7,5 @@ node_modules/
 .ftpconfig
 package-lock.json
 composer.lock
+__index.html
+_index.html
