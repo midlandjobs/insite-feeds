@@ -12,7 +12,8 @@
     <div class="media-body">
       <div class="media-right text-right">
         <a class="save-job" data-toggle="modal" data-target="#apply-modal" data-id="<%= referencenumber %>" title="Save" data-href="/saved-jobs/?id=<%= referencenumber %>&amp;action=save&amp;reload=✓" rel="nofollow" href="#"></a>
-        <%  var dt = new Date(date); %>
+        
+        <% var dt = new Date(date); %>
         <div class="listing-item__date">
           <%= dt.toLocaleDateString('en-GB') %>
         </div>
@@ -54,6 +55,7 @@
       <div class="listing-item__info listing-item__info--item-salary-range clearfix">
 
       </div>
+
       <div class="listing-item__info clearfix">
         <span class="listing-item__info--item listing-item__info--item-company">
           <%= company %>
@@ -70,25 +72,11 @@
           <% } %>
         </span>
       </div>
-      <div class="listing-item__desc">
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Review of incoming engineering and architectural
-        drawings and enquiries from clients and preparation of material and product quantities and labour
-        estimates to assemble an estimate/quotation for project.
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Liaison with the client and design engineers in the
-        pre-bid review of design and preliminary design development
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Preparation of the project estimate and processing
-        of documentation for submission to client.
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prepare cost plans to enable design teams to produce
-        practical designs for construction projects, which involves liaising with architects, engineers and
-        subcontractors
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Liaison with Estimating Manager and/or Commercial
-        Director on final bid and strategy. &nbsp;
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Follow up communication with our client/customer to
-        track bid progress and access status of bids.
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Updating our Jarvis CRM (Customer Relations
-        Management) records with all estimates/tender/ bids.
-        ·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uploading...
-      </div>
+
+      <% if(description.length > 0) { %>
+      <div class="listing-item__desc"><%= description.replace(/(<([^>]+)>)/gi, "") %></div>
+      <% } %>
+
     </div>
 
   </article>

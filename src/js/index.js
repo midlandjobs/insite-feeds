@@ -296,6 +296,10 @@ export default class JobBoardFilteredFeed {
 
 				}
 
+				if (job.description.length > 0) {
+
+				}
+
 			}
 
 			//
