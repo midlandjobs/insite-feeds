@@ -177,6 +177,12 @@ export default class JobBoardFilteredFeed {
 	// and also sorts the jobs & does some additional template stuff
 	renderTheJobs(jobs) {
 
+		// if jobs is not an array (a single job object) turn it into an array containing the object
+		if(typeof jobs === 'object' && !Array.isArray(jobs)){
+			var _jobs = [];
+			_jobs.push(jobs);
+			jobs = _jobs;
+		}
 
 		//
 		// render the wrapper template to start... waiting for jobs first. object can be placed above or below html, but all html pops in together. can just use a loader animation...
@@ -361,6 +367,7 @@ export default class JobBoardFilteredFeed {
 			if (this.params.active_filters) this.renderOptionsTemplate(unique_companies, '#company_filter');
 
 		}
+		// console.log(jobs);
 		return jobs;
 	}
 

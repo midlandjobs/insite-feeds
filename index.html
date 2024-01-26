@@ -20,6 +20,9 @@
     <link href="public/css/fonts.css" rel="stylesheet">
     <!-- <link href="https://cdn.smartjobboard.com/fonts/fira-sans/style.css" rel="stylesheet" type="text/css" media="print" onload="this.media='all'; this.onload=null;"> -->
 
+    <!-- need to check this in order to check the url on ALL browsers -->
+    <meta property="og:url" content="https://test.com/projects/jobboardfeed/" />
+
     <!-- not -->
     <style type="text/css">
       .navbar{background-color:rgba(14,27,43,1.0)}
@@ -53,7 +56,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/midlandjobs/insite-feeds@latest/public/css/scoped.min.css" /> -->
 
     <script>
-      const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/standard.xml');
+      // console.log('hello');
+      if(location.href === 'https://test.com/projects/jobboardfeed/'){
+        // console.log(location.href);
+        const Feed_1 = new JobBoardFilteredFeed('#Feed_1', 'https://test.com/feeds/job.xml');
+        // console.log(Feed_1);
+      }
+      // if(document.querySelector("meta[property='og:url']") && document.querySelector("meta[property='og:url']").getAttribute("content") === 'https://test.com/projects/jobboardfeed/') console.log(document.querySelector("meta[property='og:url']").getAttribute("content"));
     </script>
 
     <!-- UIkit CSS -->
@@ -68,14 +77,21 @@
         background: rgb(34 34 34 / 54%);
       }
       .uk-scope .uk-light .uk-button-primary {
-        background-color: #647e1b;
+        background-color: #0068a8;
+        border-radius: 5px;
         color: #fff;
-        font-weight: 800;
+        text-transform: capitalize;
+      }
+      .uk-scope .uk-text-lead {
+        font-size: 1.3rem;
+        line-height: 1.3;
+      }
+      .uk-scope .uk-light .uk-text-lead {
+        color: rgba(255,255,255,.9);
       }
     </style>
     
   </head>
-
   <body>
 
     <!-- navbar -->
@@ -147,52 +163,20 @@
     <div class="uk-scope">
 
       <!-- slideshow -->
-      <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 7:3; min-height: 300; max-height: 600">
+      <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 7:3; min-height: 300; max-height: 500">
         <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
       
           <ul class="uk-slideshow-items" uk-height-match>
 
             <li>
-              <img src="https://resources.midlandjobs.ie/files/images/compress/1920/landscape/20231130_170200.jpg" alt="" uk-cover>
+              <img src="https://decotek.com/wp-content/uploads/2021/01/CKP3454-home-e1610542858402.jpg" alt="" uk-cover>
               <div class="uk-overlay-primary uk-position-cover"></div>
               <div class="uk-overlay uk-light uk-position-center uk-position-medium uk-text-center">
-                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Careers with Some Company</h1>
-                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">A career with Some Company</p>
-                <a href="#Feed_1" class="uk-button uk-button-primary" uk-scroll>View Roles</a>
+                <h1 class="uk-heading-medium uk-text-bold" uk-slideshow-parallax="x: 200,-200">Careers with Reach Active</h1>
+                <p class="uk-text-lead uk-container uk-container-small uk-visible@m" uk-slideshow-parallax="x: 400,-400">ReachActive is a contractor specializing within the Power, Construction, Multi-Utility Diversions, Telecommunications, Rail and Building Management Services. We have a strong growth profile with the ability to provide technical expertise to our clients within our developing portfolio of major Irish and UK clients.</p>
+                <a href="#Feed_2" class="uk-button uk-button-primary" uk-scroll>Browse Jobs</a>
               </div>
             </li>
-
-            <!-- <li>
-              <img src="https://getuikit.com/assets/uikit/tests/images/photo.jpg" alt="" uk-cover>
-              <div class="uk-position-center uk-position-medium uk-text-center">
-                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
-                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
-              </div>
-            </li>
-
-            <li>
-              <img src="https://getuikit.com/assets/uikit/tests/images/dark.jpg" alt="" uk-cover>
-              <div class="uk-position-center uk-position-medium uk-text-center">
-                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
-                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
-              </div>
-            </li>
-
-            <li>
-              <img src="https://getuikit.com/assets/uikit/tests/images/light.jpg" alt="" uk-cover>
-              <div class="uk-position-center uk-position-medium uk-text-center">
-                <h1 class="uk-heading-medium" uk-slideshow-parallax="y: -100,0,0; opacity: 1,1,0">Heading</h1>
-                <p class="uk-text-lead" uk-slideshow-parallax="y: 100,0,0; opacity: 1,1,0">Lorem ipsum dolor sit amet.</p>
-              </div>
-            </li>
-
-            <li>
-              <img src="https://getuikit.com/assets/uikit/tests/images/photo2.jpg" alt="" uk-cover>
-              <div class="uk-position-center uk-position-medium uk-text-center">
-                <h1 class="uk-heading-medium" uk-slideshow-parallax="x: 200,-200">Heading</h1>
-                <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p>
-              </div>
-            </li> -->
             
           </ul>
       
