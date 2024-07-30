@@ -1,3 +1,0 @@
-# Insite Feeds (master)
-
----

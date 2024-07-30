@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <!-- metas -->
+    <title>API feed examples - 1</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="public/images/favicon.png" />
+
+    <!-- resources -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../public/js/api/feed.js" data-requires="jquery"></script>
+    
+  </head>
+
+  <body>
+
+    <header>
+      <h1 id="MyTitle">API feed examples - 1</h1>
+      <hr>
+      <div id="MyDiv">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <a href="./">Index</a>
+      </div>
+    </header>
+
+    <hr>
+
+    <main>
+
+      <!-- feed initilization -->
+      <script>
+        (async function () {
+          var jobsJson = await fetchJobsJson('https://test.com/feeds/standard.xml', {proxy: 'https://proxy.com', key: 'gki56872y6ddr6hk7g1uzp3t45sbxg1b'});
+          console.log(jobsJson);
+        })();
+      </script>
+
+      <!-- feed html -->
+      <div id="MyFeed" class="midlandjobs-feed">...loading</div>
+
+    </main>
+
+  </body>
+
+</html>
