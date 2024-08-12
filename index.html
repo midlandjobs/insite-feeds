@@ -29,6 +29,7 @@
         // dfseghjfjksgfs.com
         
         // get the jobs json data from a xml source
+        var hello = null;
         var jobsJson = await fetchJobsJson('https://test.com/feeds/standard.xml', {proxy: 'https://proxy.com', key: 'gki56872y6ddr6hk7g1uzp3t45sbxg1b'});
         console.log(jobsJson);
         // set MODE or PROXY args up for the API build, to differenciate between cors for outside proxy (like proxy.com) & same-origin for internal proxy (like inside a wp plugin)

@@ -141,7 +141,6 @@ class JsonFromXml {
 			if(this.url){
 				if(this.url === '') throw new Error('Bad URL', { cause: 'Please provide a URL to a valid XML source.' }); // just incase. empty url
 				if(!fns.isUrlValid(this.url)) throw new Error('Bad URL', { cause: 'The URL provided is not valid.' }); // badly formed url
-				if(!fns.isUrlValid(this.url, {domain: document.location.hostname})) throw new Error('Bad URL', { cause: 'The URL provided should be for a resource within the current domain: '+document.location.hostname }); // resource needs to be local
 				if(!fns.isUrlValid(this.url, {ext: '.xml'})) throw new Error('Bad URL', { cause: 'The URL provided is not for valid XML resource.' }); // not an xml extension
 			} else {
 				throw new Error('Bad URL', { cause: 'Please provide a URL to a valid XML source.' }); // no url
@@ -152,7 +151,7 @@ class JsonFromXml {
         if(this.proxy === '') throw new Error('Bad Proxy', { cause: 'Please provide a valid proxy URL..' }); // just incase. empty url
         if(!fns.isUrlAbsolute(this.proxy)) this.proxy = new URL(this.proxy, document.baseURI).href;
         if(!fns.isUrlValid(this.proxy)) throw new Error('Bad Proxy', { cause: 'The proxy URL provided is not valid.' }); // badly formed url
-        if(this.proxy.includes(window.location.host)) mode = 'same-origin';
+        if(this.proxy.includes(window.location.host)) mode = 'same-origin'; // local proxy such as wp, set mode to same-origin
         proxy_url = encodeURI(this.proxy) + "?url=" + encodeURIComponent(this.url); // define proxy_url property from url & proxy
       } else {
         throw new Error('Bad Proxy', { cause: 'Please provide a valid proxy URL..' }); // no url
@@ -160,6 +159,8 @@ class JsonFromXml {
 
       // key check, basic.key gets checked again @ proxy
       if(fns.isKeyValid(this.key) === false || typeof this.key !== 'string') throw new Error('Bad API key', { cause: 'The APi key provided is invalid.' });
+
+			throw new Error('Blech', { cause: 'Blech' });
 
 			var response = await fetch(proxy_url, {
 				mode: mode,
