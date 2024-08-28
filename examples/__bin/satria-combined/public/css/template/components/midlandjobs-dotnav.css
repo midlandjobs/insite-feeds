@@ -1,0 +1,75 @@
+/* scoped: midlandjobs-scope */
+.midlandjobs-scope .midlandjobs-dotnav {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-top: -15px;
+  padding: 0;
+  list-style: none;
+}
+.midlandjobs-scope .midlandjobs-dotnav > * {
+  -ms-flex: none;
+  -webkit-flex: none;
+  flex: none;
+  padding-left: 15px;
+  margin-top: 15px;
+}
+.midlandjobs-scope .midlandjobs-dotnav:before,
+.midlandjobs-scope .midlandjobs-dotnav:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+}
+.midlandjobs-scope .midlandjobs-dotnav:after {
+  clear: both;
+}
+.midlandjobs-scope .midlandjobs-dotnav > * {
+  float: left;
+}
+.midlandjobs-scope .midlandjobs-dotnav > * > * {
+  display: block;
+  box-sizing: content-box;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(50, 50, 50, 0.1);
+  text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.midlandjobs-scope .midlandjobs-dotnav > * > :hover,
+.midlandjobs-scope .midlandjobs-dotnav > * > :focus {
+  background: rgba(50, 50, 50, 0.4);
+  outline: none;
+}
+.midlandjobs-scope .midlandjobs-dotnav > * > :active {
+  background: rgba(50, 50, 50, 0.6);
+}
+.midlandjobs-scope .midlandjobs-dotnav > .midlandjobs-active > * {
+  background: rgba(50, 50, 50, 0.4);
+}
+.midlandjobs-scope .midlandjobs-dotnav-contrast > * > * {
+  background: rgba(255, 255, 255, 0.4);
+}
+.midlandjobs-scope .midlandjobs-dotnav-contrast > * > :hover,
+.midlandjobs-scope .midlandjobs-dotnav-contrast > * > :focus {
+  background: rgba(255, 255, 255, 0.7);
+}
+.midlandjobs-scope .midlandjobs-dotnav-contrast > * > :active {
+  background: rgba(255, 255, 255, 0.9);
+}
+.midlandjobs-scope .midlandjobs-dotnav-contrast > .midlandjobs-active > * {
+  background: rgba(255, 255, 255, 0.9);
+}
+.midlandjobs-scope .midlandjobs-dotnav-vertical {
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.midlandjobs-scope .midlandjobs-dotnav-vertical > * {
+  float: none;
+}

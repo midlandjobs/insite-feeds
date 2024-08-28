@@ -12,7 +12,7 @@ const fns = require('./_fns.cjs'); // general functions
 //
 class JsonFromXml {
 
-	constructor(url = null) {
+	constructor(url) {
 		this.url = url;
 	}
 
@@ -34,15 +34,14 @@ class JsonFromXml {
 	// api and local will both expect json from fetchJobsJson, regardless of input, the json just might have jobs or an error
 	// then fetchJobsJson can do the rest
 	async fetchFeedJson() {
-
-		var json = {};
-
 		try {
+
+			var json = {};
+			var response = {};
 
 			// url check/s
 			if(this.url){
-				if(this.url === '' || typeof this.url !== 'string') throw new Error('Bad URL', { cause: 'Please provide a URL to a valid XML source.' }); // just incase. empty url
-				if(!fns.isUrlAbsolute(this.url)) this.url = new URL(this.url, document.baseURI).href;
+				if(this.url === '') throw new Error('Bad URL', { cause: 'Please provide a URL to a valid XML source.' }); // just incase. empty url
 				if(!fns.isUrlValid(this.url)) throw new Error('Bad URL', { cause: 'The URL provided is not valid.' }); // badly formed url
 				if(!fns.isUrlValid(this.url, {domain: document.location.hostname})) throw new Error('Bad URL', { cause: 'The URL provided should be for a resource within the current domain: '+document.location.hostname }); // resource needs to be local
 				if(!fns.isUrlValid(this.url, {ext: '.xml'})) throw new Error('Bad URL', { cause: 'The URL provided is not for valid XML resource.' }); // not an xml extension
@@ -50,39 +49,27 @@ class JsonFromXml {
 				throw new Error('Bad URL', { cause: 'Please provide a URL to a valid XML source.' }); // no url
 			}
 
-			// do the fetch
-			var response = await fetch(this.url);
-
+			try {
+				response = await fetch(this.url);
+			} catch (e) {
+				throw new Error('Bad URL', { cause: 'No result gotten from request. Please check the URL provided.' });
+			}
 			if(response.ok) {
 				const content = await response.text();
 				if(content.length > 0){
 					const parser = require('xml2js').Parser({ explicitArray: false });
 					json = await parser.parseStringPromise(content);
-				} else {
-					throw new Error('Content error', { cause: 'A valid XML resource was located but it\'s content is empty.' });
-				}
-			} else {
-				throw new Error('Content error', { cause: 'No result gotten from request. Please check the URL provided.' });
+				} 
 			}
+			
+			return json;
 
-		}
-		
-		catch (e) {
+		} catch (e) {
 
-			if(e.cause){
-				json.error = e.cause;
-			} else {
-				json.error = 'Local host is offline or not configured properly.';
-			}
-
-		}
-
-		finally {
-
+			json.error = e.cause;
 			return json;
 
 		}
-
 	}
 
 	//
@@ -134,7 +121,7 @@ class JsonFromXml {
 //
 async function fetchJobsJson(url = null, params = {proxy: null, key: null}) {
   try {
-    const obj = new JsonFromXml(url, params.proxy, params.key);
+    const obj = new JsonFromXml(url, params.proxy, params.key)
     const response = await obj.fetchFeedJson();
 		if(!response.error){
 			var jobs = fns.jsonToJobs(response);

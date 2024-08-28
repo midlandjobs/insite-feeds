@@ -91,7 +91,7 @@ function _loadMyScript(src, onload) {
 
 // feed v3: simple
 if (document.querySelector("meta[property='og:url']") && document.querySelector("meta[property='og:url']").getAttribute("content") === 'https://test.com/projects/jobboardfeed/') {
-  loadScript('public/js/feeds.js', true)
+  loadScript('../midlandjobs/public/js/feeds.js', true)
   .then(data => {
     // console.log("The feeds script was loaded successfully", data);
     const DefaultFeed = new JobBoardFilteredFeed('#RoboticsDrivesJobs', 'https://test.com/feeds/manufacturing.xml', { scope: '.uk-scope' });
@@ -99,12 +99,12 @@ if (document.querySelector("meta[property='og:url']") && document.querySelector(
   .catch(err => {
     console.error(console.error('feeds.js failed to load'));
   });
-  loadCSS('public/css/scoped.min.css');
+  loadCSS('../midlandjobs/public/css/scoped.min.css');
 }
 
 // feed v3: filters
 if (document.querySelector("meta[property='og:url']") && document.querySelector("meta[property='og:url']").getAttribute("content") === 'https://test.com/projects/jobboardfeed/filters') {
-  loadScript('public/js/feeds.js', true)
+  loadScript('../midlandjobs/public/js/feeds.js', true)
   .then(data => {
     // console.log("The feeds script was loaded successfully", data);
     const FeedWithFilters = new JobBoardFilteredFeed('#RoboticsDrivesJobs', 'https://test.com/feeds/manufacturing.xml', {
@@ -114,12 +114,12 @@ if (document.querySelector("meta[property='og:url']") && document.querySelector(
   .catch(err => {
     console.error('feeds.js failed to load');
   });
-  loadCSS('public/css/scoped.min.css');
+  loadCSS('../midlandjobs/public/css/scoped.min.css');
 }
 
 // feed v3: filters controls
 if (document.querySelector("meta[property='og:url']") && document.querySelector("meta[property='og:url']").getAttribute("content") === 'https://test.com/projects/jobboardfeed/filters-controls') {
-  loadScript('public/js/feeds.js', true)
+  loadScript('../midlandjobs/public/js/feeds.js', true)
   .then(data => {
     // console.log("The feeds script was loaded successfully", data);
     const FeedWithFiltersAndControls = new JobBoardFilteredFeed('#RoboticsDrivesJobs', 'https://test.com/feeds/standard.xml', {
@@ -131,7 +131,7 @@ if (document.querySelector("meta[property='og:url']") && document.querySelector(
   .catch(err => {
     console.error('feeds.js failed to load');
   });
-  loadCSS('public/css/scoped.min.css');
+  loadCSS('../midlandjobs/public/css/scoped.min.css');
 }
 
 // components custom template/s
@@ -241,7 +241,7 @@ if (document.querySelector("meta[property='og:url']") && document.querySelector(
   });
 
   // for including feeds & uikit js (v3) alongside v2. scoped (uk-scope)
-  loadScript('public/js/feeds.js', true)
+  loadScript('../midlandjobs/public/js/feeds.js', true)
   .then(data => {
     // console.log("The feeds script was loaded successfully", data);
     const FeedWithFiltersAndControls = new JobBoardFilteredFeed('#RoboticsDrivesJobs', 'https://midlandjobs.ie/feeds/standard.xml', {
@@ -254,10 +254,10 @@ if (document.querySelector("meta[property='og:url']") && document.querySelector(
     console.error('feeds.js failed to load');
   });
   //unscoped styles (taken from midlandjobs)
-  loadCSS('public/css/styles.css');
-  loadCSS('public/css/bootstrap_styles.css');
+  loadCSS('../midlandjobs/public/css/styles.css');
+  loadCSS('../midlandjobs/public/css/bootstrap_styles.css');
   // scoped uikit styles
-  loadCSS('public/css/scoped.min.css'); // for including feeds & uikit css (v3) alongside v2. scoped (uk-scope)
+  loadCSS('../midlandjobs/public/css/scoped.min.css'); // for including feeds & uikit css (v3) alongside v2. scoped (uk-scope)
   loadCSS('public/css/custom.css'); // for including feeds & uikit css (v3) alongside v2. scoped (uk-scope)
 
 }

@@ -1,0 +1,2631 @@
+@import "mediaquery.css";
+@import "nez-style.css";
+/* scoped: midlandjobs-scope */
+.midlandjobs-scope body {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 26px;
+  color: #939292;
+}
+@media (min-width: 1220px) {
+  .midlandjobs-scope .midlandjobs-container {
+    max-width: 1150px;
+  }
+}
+.midlandjobs-scope .midlandjobs-padding {
+  padding-top: 60px;
+  padding-bottom: 52px;
+}
+.midlandjobs-scope .midlandjobs-padding-small {
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+.midlandjobs-scope .midlandjobs-text-large {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+}
+.midlandjobs-scope .midlandjobs-text-thin {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+.midlandjobs-scope .uppercase {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.midlandjobs-scope .thin {
+  font-weight: 300;
+}
+.midlandjobs-scope .text-width90 {
+  width: 90%;
+  margin: 0 auto;
+}
+.midlandjobs-scope .text-width80 {
+  width: 80%;
+  margin: 0 auto;
+}
+.midlandjobs-scope .text-width70 {
+  width: 70%;
+  margin: 0 auto;
+}
+.midlandjobs-scope .text-width60 {
+  width: 60%;
+  margin: 0 auto;
+}
+.midlandjobs-scope .text-width50 {
+  width: 50%;
+  margin: 0 auto;
+}
+.midlandjobs-scope aside {
+  margin-bottom: 34px;
+}
+.midlandjobs-scope h1,
+.midlandjobs-scope h2,
+.midlandjobs-scope h3,
+.midlandjobs-scope h4,
+.midlandjobs-scope h5 {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: #393939;
+}
+.midlandjobs-scope h1,
+.midlandjobs-scope .midlandjobs-h1 {
+  font-size: 36px;
+  line-height: 42px;
+}
+.midlandjobs-scope h2,
+.midlandjobs-scope .midlandjobs-h2 {
+  font-size: 28px;
+  line-height: 30px;
+}
+.midlandjobs-scope h3,
+.midlandjobs-scope .midlandjobs-h3 {
+  font-size: 22px;
+  line-height: 24px;
+}
+.midlandjobs-scope h4,
+.midlandjobs-scope .midlandjobs-h4 {
+  font-size: 18px;
+  line-height: 22px;
+}
+.midlandjobs-scope h5,
+.midlandjobs-scope .midlandjobs-h5 {
+  font-size: 15px;
+  line-height: 20px;
+}
+.midlandjobs-scope h6,
+.midlandjobs-scope .midlandjobs-h6 {
+  font-size: 12px;
+  line-height: 18px;
+}
+.midlandjobs-scope blockquote {
+  padding-left: 25px;
+  border-left: 5px solid #ddd;
+  font-size: 16px;
+  line-height: 29px;
+  font-style: italic;
+}
+.midlandjobs-scope blockquote p {
+  position: relative;
+  top: -1px;
+}
+.midlandjobs-scope .pullquote-right,
+.midlandjobs-scope .pullquote-left {
+  color: #9c9c9c;
+  float: right;
+  font-size: 16px;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  margin-top: 9px;
+  margin-left: 25px;
+  padding-left: 25px;
+  width: 50%;
+  font-style: italic;
+  line-height: 28px;
+  border-left: 5px solid #ddd;
+}
+.midlandjobs-scope .pullquote-left {
+  border-right: 5px solid #ddd;
+  border-left: none;
+  float: left;
+  margin-left: 0;
+  margin-right: 25px;
+  padding-left: 0;
+  padding-right: 25px;
+}
+.midlandjobs-scope blockquote cite:before {
+  content: "\2014 \0020";
+}
+.midlandjobs-scope .highlight {
+  padding: 4px 7px;
+  background: #0090cf;
+  border-radius: 3px;
+  color: #fff;
+  vertical-align: baseline;
+}
+.midlandjobs-scope .dropcap1 {
+  width: 42px;
+  height: 42px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 42px;
+  background: #42454a;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  float: left;
+  margin: 7px 10px 0 0;
+}
+.midlandjobs-scope .dropcap2 {
+  width: 42px;
+  height: 42px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 42px;
+  background: #42454a;
+  border-radius: 4px;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  float: left;
+  margin: 7px 10px 0 0;
+}
+.midlandjobs-scope .dropcap3 {
+  font-size: 42px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: #42454a;
+  text-align: center;
+  float: left;
+  margin: 14px 10px 0 0;
+}
+.midlandjobs-scope pre {
+  padding: 10px 15px;
+  background: #f3f3f3 url(../../images/pre_bg.gif) repeat 0 -9px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  font: 12px / 18px Consolas, monospace, serif;
+  color: #969696;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+}
+.midlandjobs-scope .midlandjobs-text-primary {
+  color: #0090cf !important;
+}
+.midlandjobs-scope .midlandjobs-margin-medium {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.midlandjobs-scope .midlandjobs-margin-medium-top {
+  margin-top: 25px !important;
+}
+.midlandjobs-scope .midlandjobs-margin-medium-bottom {
+  margin-bottom: 25px !important;
+}
+.midlandjobs-scope .midlandjobs-button i.midlandjobs-icon-chevron-circle-right {
+  font-size: 14px;
+  margin-left: 12px;
+}
+.midlandjobs-scope .midlandjobs-button-small i.midlandjobs-icon-chevron-circle-right {
+  font-size: 13px;
+  margin-left: 10px;
+}
+.midlandjobs-scope .midlandjobs-button-mini {
+  font-weight: 700;
+  min-height: 20px;
+  padding: 5px 25px 6px;
+  line-height: 20px;
+  font-size: 11px;
+}
+.midlandjobs-scope .midlandjobs-button-small {
+  font-weight: 700;
+  min-height: 25px;
+  padding: 6px 30px 7px;
+  line-height: 25px;
+  font-size: 13px;
+}
+.midlandjobs-scope .midlandjobs-button-large {
+  font-weight: 700;
+  min-height: 40px;
+  padding: 5px 36px 6px;
+  line-height: 40px;
+  font-size: 16px;
+}
+.midlandjobs-scope .midlandjobs-table {
+  margin-bottom: 35px;
+}
+.midlandjobs-scope .midlandjobs-panel-box {
+  padding: 20px;
+  background: #f4f4f4;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope .midlandjobs-panel-box.info h1,
+.midlandjobs-scope .midlandjobs-panel-box.info h2,
+.midlandjobs-scope .midlandjobs-panel-box.info h3,
+.midlandjobs-scope .midlandjobs-panel-box.info h4,
+.midlandjobs-scope .midlandjobs-panel-box.info h5,
+.midlandjobs-scope .midlandjobs-panel-box.info h6 {
+  color: #3194b1;
+}
+.midlandjobs-scope .midlandjobs-panel-box.warning h1,
+.midlandjobs-scope .midlandjobs-panel-box.warning h2,
+.midlandjobs-scope .midlandjobs-panel-box.warning h3,
+.midlandjobs-scope .midlandjobs-panel-box.warning h4,
+.midlandjobs-scope .midlandjobs-panel-box.warning h5,
+.midlandjobs-scope .midlandjobs-panel-box.warning h6 {
+  color: #978c68;
+}
+.midlandjobs-scope .midlandjobs-panel-box h1 i,
+.midlandjobs-scope .midlandjobs-panel-box h2 i,
+.midlandjobs-scope .midlandjobs-panel-box h3 i,
+.midlandjobs-scope .midlandjobs-panel-box h4 i,
+.midlandjobs-scope .midlandjobs-panel-box h5 i,
+.midlandjobs-scope .midlandjobs-panel-box h6 i {
+  margin-right: 8px;
+}
+.midlandjobs-scope .midlandjobs-panel-padding {
+  padding: 23px 31px;
+}
+.midlandjobs-scope .midlandjobs-panel-title {
+  margin: -20px -20px 20px;
+  padding: 20px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  text-transform: none;
+  background: #e5e5e5;
+  color: #444;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.midlandjobs-scope .midlandjobs-panel-title i {
+  margin-right: 7px;
+}
+.midlandjobs-scope .midlandjobs-panel-box .midlandjobs-panel-teaser {
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.midlandjobs-scope .midlandjobs-alert {
+  margin-bottom: 15px;
+  padding: 10px 12px 14px 17px;
+  background: #cce9f2;
+  border: 1px solid #86cde3;
+  color: #3194b1;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope .midlandjobs-alert-success {
+  background: #d8f1c6;
+  border-color: #b3cda1;
+  color: #749958;
+}
+.midlandjobs-scope .midlandjobs-alert-warning {
+  background: #fbf4dd;
+  border-color: #d1c9ae;
+  color: #978c68;
+}
+.midlandjobs-scope .midlandjobs-alert-danger {
+  background: #f9d9d9;
+  border-color: #e1a1a1;
+  color: #b55454;
+}
+.midlandjobs-scope .midlandjobs-alert-plain {
+  background: #f8f8f8;
+  border-color: #d1d1d1;
+  color: #8c8c8c;
+}
+.midlandjobs-scope .midlandjobs-alert-close {
+  position: relative;
+  top: 7px;
+}
+.midlandjobs-scope .midlandjobs-alert i {
+  margin-right: 8px;
+  top: 10px;
+  font-size: 16px;
+  position: relative;
+  float: left;
+}
+.midlandjobs-scope .midlandjobs-tab {
+  border-bottom: 2px solid #e8e8e8;
+  z-index: 999;
+}
+.midlandjobs-scope .midlandjobs-tab > li {
+  margin-bottom: -2px;
+}
+.midlandjobs-scope .midlandjobs-tab > li > a {
+  padding: 16px 32px 10px;
+  background: #f3f3f3;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #e8e8e8;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #7e7d7d;
+  z-index: 888;
+}
+.midlandjobs-scope .midlandjobs-tab > li:nth-child(n+2) > a {
+  margin-left: 2px;
+}
+.midlandjobs-scope .midlandjobs-tab > li > a:hover,
+.midlandjobs-scope .midlandjobs-tab > li > a:focus,
+.midlandjobs-scope .midlandjobs-tab > li.midlandjobs-open > a {
+  border-color: #f3f3f3;
+  background: #f3f3f3;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab > li.midlandjobs-active > a {
+  border-color: #e8e8e8;
+  border-bottom-color: transparent;
+  background: #fff;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab > li i {
+  margin-right: 8px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom {
+  border-top: 2px solid #e8e8e8;
+  border-bottom: none;
+  z-index: 999;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li {
+  margin-top: -2px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li > a {
+  padding: 10px 32px 16px;
+  background: #f3f3f3;
+  border: 2px solid transparent;
+  border-top: 2px solid #e8e8e8;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #7e7d7d;
+  z-index: 888;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li:nth-child(n+2) > a {
+  margin-left: 2px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li > a:hover,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li > a:focus,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li.midlandjobs-open > a {
+  margin-top: 0;
+  padding: 10px 32px 16px;
+  border-color: #f3f3f3;
+  border-top: 2px solid #e8e8e8;
+  background: #f3f3f3;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li.midlandjobs-active > a {
+  border-color: #e8e8e8;
+  border-top-color: transparent;
+  background: #fff;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-bottom > li i {
+  margin-right: 8px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left {
+  padding: 20px 0;
+  border-right: 2px solid #e8e8e8;
+  border-bottom: none;
+  z-index: 999;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li > a {
+  margin-right: 1px;
+  padding: 12px 18px;
+  background: #f3f3f3;
+  border: 2px solid transparent;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+  color: #7e7d7d;
+  z-index: 888;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li:nth-child(n+2) > a {
+  margin-top: 4px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li > a:hover,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li > a:focus,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li.midlandjobs-open > a {
+  padding: 12px 18px;
+  border-color: #f3f3f3;
+  background: #f3f3f3;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li.midlandjobs-active > a {
+  margin-right: -2px;
+  padding: 12px 20px 12px 18px;
+  border-color: #e8e8e8;
+  border-right-color: transparent;
+  background: #fff;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-left > li i {
+  margin-right: 8px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right {
+  padding: 20px 0;
+  border-left: 2px solid #e8e8e8;
+  border-bottom: none;
+  z-index: 999;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li {
+  text-align: right;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li > a {
+  margin-left: 1px;
+  padding: 12px 18px;
+  background: #f3f3f3;
+  border: 2px solid transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 4px;
+  color: #7e7d7d;
+  z-index: 888;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li:nth-child(n+2) > a {
+  margin-top: 4px;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li > a:hover,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li > a:focus,
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li.midlandjobs-open > a {
+  padding: 12px 18px;
+  border-color: #f3f3f3;
+  background: #f3f3f3;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li.midlandjobs-active > a {
+  margin-left: -2px;
+  padding: 12px 18px 12px 20px;
+  border-color: #e8e8e8;
+  border-left-color: transparent;
+  background: #fff;
+  color: #393939;
+}
+.midlandjobs-scope .midlandjobs-tab.midlandjobs-tab-right > li i {
+  margin-left: 8px;
+}
+.midlandjobs-scope .midlandjobs-tab-center {
+  border-bottom: 2px solid #e8e8e8;
+}
+.midlandjobs-scope h6.midlandjobs-accordion-title,
+.midlandjobs-scope h6.midlandjobs-accordion-title.midlandjobs-active {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: -15px;
+  padding: 16px 20px;
+  background: #f4f4f4;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #393939;
+  -webkit-box-shadow: inset 0 0 0 1px #dedede;
+  -moz-box-shadow: inset 0 0 0 1px #dedede;
+  box-shadow: inset 0 0 0 1px #dedede;
+}
+.midlandjobs-scope h6.midlandjobs-accordion-title.midlandjobs-active {
+  margin-bottom: 10px;
+  background: #0090cf;
+  color: #fff;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.midlandjobs-scope h6.midlandjobs-accordion-title:before,
+.midlandjobs-scope h6.midlandjobs-accordion-title.midlandjobs-active:before {
+  font-family: FontAwesome;
+  font-size: 12px;
+  content: "\f054";
+  color: #7e7d7d;
+  position: relative;
+  margin-right: 10px;
+  top: 1px;
+}
+.midlandjobs-scope h6.midlandjobs-accordion-title.midlandjobs-active:before {
+  content: "\f078";
+  color: #fff;
+}
+.midlandjobs-scope .midlandjobs-accordion-content {
+  margin-bottom: -15px;
+  padding: 18px 25px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 0 1px #dedede;
+  -moz-box-shadow: inset 0 0 0 1px #dedede;
+  box-shadow: inset 0 0 0 1px #dedede;
+}
+.midlandjobs-scope .midlandjobs-accordion-content img {
+  margin-top: 10px;
+}
+.midlandjobs-scope .midlandjobs-tooltip {
+  font-size: 14px !important;
+  padding: 6px 12px !important;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope .pricing-grid {
+  display: block;
+  overflow: hidden;
+  padding: 16px 0;
+}
+.midlandjobs-scope .pricing-grid > li {
+  display: block;
+  height: auto;
+  float: left;
+}
+.midlandjobs-scope .pricing-grid.one-up {
+  margin: 15px -19px;
+}
+.midlandjobs-scope .pricing-grid.one-up > li {
+  width: 97.9%;
+  margin: 15px 10px;
+  padding: 0;
+}
+.midlandjobs-scope .pricing-grid.one-up > li.featured-plan {
+  margin-top: 31px;
+  margin-bottom: -1px;
+}
+.midlandjobs-scope .pricing-grid.two-up {
+  margin: 15px -19px;
+}
+.midlandjobs-scope .pricing-grid.two-up > li {
+  width: 47.896%;
+  margin: 15px 10px;
+  padding: 0;
+}
+.midlandjobs-scope .pricing-grid.three-up {
+  margin: 15px -19px;
+}
+.midlandjobs-scope .pricing-grid.three-up > li {
+  width: 29.75%;
+  margin: 15px 19px;
+  padding: 0;
+}
+.midlandjobs-scope .pricing-grid.four-up {
+  margin: 15px -19px;
+}
+.midlandjobs-scope .pricing-grid.four-up > li {
+  width: 21.42%;
+  margin: 15px 19px;
+  padding: 0;
+}
+.midlandjobs-scope .pricing-column {
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope .pricing-column2 {
+  background: #e9e9e9;
+  color: #676A6F;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  top: 30px;
+  position: relative;
+}
+.midlandjobs-scope .pricing-column2.green-plan {
+  color: #fff;
+  background: #9bc23c;
+}
+.midlandjobs-scope .pricing-column .pricing-title {
+  text-align: center;
+  margin-bottom: 53px;
+  padding: 25px 20px 19px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.midlandjobs-scope .pricing-column2 .pricing-title {
+  text-align: center;
+  margin-bottom: 0;
+  padding: 0 20px;
+}
+.midlandjobs-scope .pricing-column .pricing-title h3 {
+  margin-bottom: -11px;
+}
+.midlandjobs-scope .pricing-column2 .pricing-title h3 {
+  margin-top: 15px;
+  margin-bottom: -11px;
+}
+.midlandjobs-scope .pricing-column2.green-plan .pricing-title h3 {
+  color: #fff;
+}
+.midlandjobs-scope .pricing-column .pricing-title i {
+  width: 84px;
+  height: 84px;
+  margin-bottom: -69px;
+  font-size: 46px;
+  line-height: 86px;
+  background: #0090cf;
+  color: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.midlandjobs-scope .pricing-column2 .pricing-title i {
+  width: 84px;
+  height: 84px;
+  margin-top: -42px;
+  font-size: 46px;
+  line-height: 86px;
+  background: #42454a;
+  color: #fff;
+  text-align: center;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.midlandjobs-scope .pricing-column2.green-plan .pricing-title i {
+  border: 3px solid #fff;
+  margin-top: -45px;
+  margin-bottom: -3px;
+}
+.midlandjobs-scope ul.pricing-content {
+  text-align: center;
+  margin-bottom: 18px;
+  padding: 0 27px;
+}
+.midlandjobs-scope .pricing-content li {
+  list-style-type: none;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 10px 0;
+}
+.midlandjobs-scope .pricing-column2 .pricing-content li {
+  border-bottom: 1px solid #d8d8d8;
+}
+.midlandjobs-scope .pricing-column2.green-plan .pricing-content li {
+  border-bottom: 1px solid #bfe06e;
+}
+.midlandjobs-scope .pricing-content li:last-child,
+.midlandjobs-scope .pricing-column2.green-plan .pricing-content li:last-child {
+  border-bottom: none;
+}
+.midlandjobs-scope .pricing-column .pricing-button {
+  background: #0090cf;
+  color: #fff;
+  margin: 0 -1px -1px;
+  padding: 25px 46px 37px 56px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.midlandjobs-scope .pricing-column2 .pricing-button {
+  background: #dfdfdf;
+  text-align: center;
+  color: #fff;
+  padding: 20px 25px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.midlandjobs-scope .pricing-column2.green-plan .pricing-button {
+  background: #91b53a;
+}
+.midlandjobs-scope .pricing-column2.green-plan .idz-button-white {
+  background: rgba(244, 244, 244, 0.25);
+  color: #fff;
+}
+.midlandjobs-scope .pricing-column2.green-plan .idz-button-white:hover {
+  color: #536c16;
+}
+.midlandjobs-scope .pricing-column .pricing-button h3 {
+  padding-right: 28px;
+  line-height: 16px;
+  font-size: 28px;
+  color: #fff;
+  border-right: 1px solid #fff;
+  float: left;
+}
+.midlandjobs-scope span.permonth {
+  font-size: 14px;
+}
+.midlandjobs-scope .pricing-button .dollar {
+  font-size: 16px;
+}
+.midlandjobs-scope .pricing-button a.price-btn {
+  margin-left: 23px;
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  position: relative;
+  top: 5px;
+}
+.midlandjobs-scope .pricing-button a:hover {
+  text-decoration: none;
+}
+.midlandjobs-scope .pricing-button a i {
+  margin-left: 13px;
+}
+.midlandjobs-scope .green-plan .pricing-title i {
+  background: #9bc23c;
+}
+.midlandjobs-scope .green-plan .pricing-button {
+  background: #9bc23c;
+}
+.midlandjobs-scope #filter li i {
+  color: #d8d8d8;
+  font-size: 18px;
+  margin: 0 -10px 0 -8px;
+  top: 2px;
+  position: relative;
+}
+.midlandjobs-scope #filter li:after {
+  font-size: 11px;
+  color: #393939;
+  content: "\2F";
+  margin-left: 2px;
+  top: 0;
+  position: relative;
+}
+.midlandjobs-scope #filter li:first-child:after,
+.midlandjobs-scope #filter li:last-child:after {
+  content: "";
+  display: inline-block;
+}
+.midlandjobs-scope #filter li a {
+  padding: 0 10px;
+  color: #393939;
+  text-decoration: none;
+}
+.midlandjobs-scope #filter.midlandjobs-subnav-pill > .midlandjobs-active > * {
+  background: none;
+  color: #0090cf;
+}
+.midlandjobs-scope #filter.midlandjobs-subnav-pill > * > :hover,
+.midlandjobs-scope #filter.midlandjobs-subnav-pill > * > :focus {
+  background: none;
+  color: #0090cf;
+}
+.midlandjobs-scope #pf-container li {
+  list-style: none;
+}
+.midlandjobs-scope .midlandjobs-overlay-icon:before {
+  font-size: 24px;
+  line-height: 48px;
+  background: #0090cf;
+  color: #fff;
+  border-radius: 50%;
+}
+.midlandjobs-scope .testi-container {
+  width: 100%;
+  margin-bottom: 14px;
+  background-color: #f4f4f4;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: relative;
+  float: left;
+}
+.midlandjobs-scope .testi-container:before {
+  width: 25px;
+  height: 17px;
+  background: #f4f4f4;
+  content: '';
+  position: absolute;
+  z-index: 999;
+  left: 42px;
+  bottom: 0;
+  margin-left: -7px;
+}
+.midlandjobs-scope .testi-container:after {
+  width: 17px;
+  height: 17px;
+  background: #f4f4f4;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  content: '';
+  position: absolute;
+  z-index: 888;
+  left: 45px;
+  bottom: -5px;
+  margin-left: -7px;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.midlandjobs-scope .testi-text {
+  padding: 28px 28px 12px 28px;
+  float: left;
+}
+.midlandjobs-scope .testi-text blockquote {
+  padding: 0;
+  border-left: none;
+  font-size: 16px;
+  line-height: 28px;
+  font-style: italic;
+}
+.midlandjobs-scope .testi-text blockquote:before {
+  content: "\f10d";
+  font-family: FontAwesome;
+  font-size: 40px;
+  color: #d8d8d8;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+.midlandjobs-scope .testi-image {
+  margin: 3px 15px 45px;
+  background-color: #e7e7e7;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+  float: left;
+}
+.midlandjobs-scope .testi-image img {
+  width: 64px;
+  height: 64px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+  float: left;
+}
+.midlandjobs-scope .testi-name {
+  line-height: 22px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: #393939;
+  font-size: 16px;
+  margin-top: 15px;
+  float: left;
+}
+.midlandjobs-scope .company-name {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #393939;
+}
+.midlandjobs-scope .client-testimoni ul li img {
+  width: 120px;
+  height: 120px;
+  margin: 40px 0 10px;
+  border: 4px solid #fff;
+}
+.midlandjobs-scope .client-testimoni ul li {
+  color: #676A6F;
+}
+.midlandjobs-scope .client-testimoni ul li h4 {
+  margin: 22px 0 3px;
+}
+.midlandjobs-scope .client-testimoni ul li .midlandjobs-badge {
+  padding: 0 8px;
+  margin-bottom: 30px;
+}
+.midlandjobs-scope .client-testimoni .midlandjobs-dotnav > * > * {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+}
+.midlandjobs-scope .client-testimoni .midlandjobs-dotnav > * > :hover,
+.midlandjobs-scope .client-testimoni .midlandjobs-dotnav > * > :focus,
+.midlandjobs-scope .client-testimoni .midlandjobs-dotnav > .midlandjobs-active > * {
+  background: rgba(0, 144, 207, 0.7);
+}
+.midlandjobs-scope .client-testimoni .midlandjobs-text-large {
+  font-size: 16px;
+  line-height: 26px;
+}
+.midlandjobs-scope .team-panel {
+  margin-bottom: 38px !important;
+  background: #222;
+  border-radius: 0;
+}
+.midlandjobs-scope .team-panel h1,
+.midlandjobs-scope .team-panel h2,
+.midlandjobs-scope .team-panel h3,
+.midlandjobs-scope .team-panel h4,
+.midlandjobs-scope .team-panel h5,
+.midlandjobs-scope .team-panel h6,
+.midlandjobs-scope .team-panel p {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.midlandjobs-scope header {
+  background: #222;
+}
+.midlandjobs-scope [data-midlandjobs-sticky] {
+  width: 100%;
+  background: #222;
+  margin: 0 auto;
+  z-index: 9999;
+  float: none;
+}
+.midlandjobs-scope #logo {
+  width: 117px;
+  margin-top: 28px;
+}
+.midlandjobs-scope _:-ms-fullscreen,
+:root #logo {
+  height: 37px;
+}
+.midlandjobs-scope #top-header {
+  background: #181818;
+  border-bottom: 1px solid #292929;
+  color: #a4a4a4;
+}
+.midlandjobs-scope #top-phone,
+.midlandjobs-scope #top-social {
+  float: left;
+}
+.midlandjobs-scope #top-phone {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border-right: 1px solid #292929;
+  padding: 8px 20px 10px 0;
+}
+.midlandjobs-scope #top-social {
+  margin-left: 20px;
+  padding-top: 9px;
+}
+.midlandjobs-scope #top-social ul,
+.midlandjobs-scope #top-button ul {
+  margin: 0;
+  padding: 0;
+}
+.midlandjobs-scope #top-social ul li {
+  margin-right: 10px;
+  display: inline;
+}
+.midlandjobs-scope #top-social ul li a {
+  font-size: 15px;
+  color: #a4a4a4;
+}
+.midlandjobs-scope #top-social ul li a:hover {
+  color: #fff;
+}
+.midlandjobs-scope #top-button {
+  padding-top: 8px;
+  float: right;
+}
+.midlandjobs-scope #top-button ul li {
+  display: inline;
+}
+.midlandjobs-scope #top-button ul li a,
+.midlandjobs-scope #top-button ul li.login button {
+  font: 12px 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background: #616161;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin-left: 9px;
+  padding: 5px 17px 6px 15px;
+  color: #ececec;
+}
+.midlandjobs-scope #top-button ul li a:hover {
+  text-decoration: none;
+}
+.midlandjobs-scope #top-button ul li a i {
+  font-size: 13px;
+  margin-right: 8px;
+}
+.midlandjobs-scope #top-button ul li.login button i {
+  font-size: 8px;
+  margin-left: 8px;
+  top: -1px;
+  position: relative;
+}
+.midlandjobs-scope #top-button ul li.login a {
+  background: #83a531;
+}
+.midlandjobs-scope #top-button ul li.login button {
+  background: #83a531;
+  padding: 5px 17px 6px 15px;
+  border: none;
+}
+.midlandjobs-scope #top-button .midlandjobs-dropdown {
+  padding: 0;
+}
+.midlandjobs-scope #top-button ul li.login .midlandjobs-dropdown a {
+  color: #939292;
+  padding: 11px 15px;
+  background: #fff;
+  margin-left: 0;
+}
+.midlandjobs-scope #top-button ul.midlandjobs-nav-dropdown li a i {
+  color: #83a531;
+}
+.midlandjobs-scope #top-button ul.midlandjobs-nav-dropdown li a {
+  border-bottom: 1px solid #e8e8e8;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.midlandjobs-scope #top-button ul.midlandjobs-nav-dropdown li:last-child a {
+  border-bottom: 2px solid #83a531;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.midlandjobs-scope #pagetitle {
+  padding: 30px 0 34px;
+  background: #f3f3f3;
+  border-bottom: 2px solid #e8e8e8;
+}
+.midlandjobs-scope #pagetitle h3 {
+  margin-top: 14px;
+  color: #7e7d7d;
+}
+.midlandjobs-scope #pagetitle-search {
+  position: relative;
+  bottom: -21px;
+  margin-bottom: -34px;
+}
+.midlandjobs-scope #pagetitle-search input[type="search"] {
+  width: 240px;
+  height: 40px;
+  margin-top: 5px;
+  padding: 4px 14px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+.midlandjobs-scope #pagetitle-search .midlandjobs-form-icon i {
+  margin: -5px 0 0 6px;
+}
+.midlandjobs-scope #breadcrumb-style {
+  margin: 10px 16px 0 0;
+}
+.midlandjobs-scope #breadcrumb-style a,
+.midlandjobs-scope #breadcrumb-style a:visited {
+  color: #939292;
+}
+.midlandjobs-scope #breadcrumb-style a:hover {
+  color: #0090cf;
+  text-decoration: none;
+}
+.midlandjobs-scope .midlandjobs-breadcrumb > li:nth-child(n+2):before {
+  content: "\f054";
+  font-family: FontAwesome;
+  font-size: 10px;
+  display: inline-block;
+  margin: 0 12px;
+  color: #bbb;
+}
+.midlandjobs-scope .midlandjobs-navbar {
+  background: transparent;
+}
+.midlandjobs-scope .midlandjobs-navbar-nav > li {
+  border-right: 1px solid #292929;
+}
+.midlandjobs-scope .midlandjobs-navbar-nav > li:last-child {
+  border-right: none;
+}
+.midlandjobs-scope .midlandjobs-navbar-nav > li > a {
+  height: 102px;
+  padding: 33px 25px 37px;
+  line-height: 32px;
+  color: #b3b3b3;
+  font-size: 13px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.midlandjobs-scope .midlandjobs-navbar-nav > li:hover > a,
+.midlandjobs-scope .midlandjobs-navbar-nav > li > a:focus,
+.midlandjobs-scope .midlandjobs-navbar-nav > li.midlandjobs-open > a {
+  background-color: #181818;
+  color: #fff;
+}
+.midlandjobs-scope .midlandjobs-navbar-nav > li.midlandjobs-active > a {
+  background-color: transparent;
+  color: #fff;
+}
+.midlandjobs-scope .midlandjobs-dropdown {
+  border: 1px solid #d7d7d7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope #mainmenu {
+  margin-top: -65px;
+}
+.midlandjobs-scope #mainmenu .midlandjobs-navbar-flip {
+  width: 85%;
+}
+.midlandjobs-scope #mainmenu ul.midlandjobs-navbar-nav {
+  float: right;
+}
+.midlandjobs-scope #mainmenu .midlandjobs-dropdown {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: none;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.midlandjobs-scope #mainmenu .midlandjobs-dropdown li a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.midlandjobs-scope #mainmenu .midlandjobs-dropdown li:last-child a {
+  margin: 0 -1px -1px;
+  padding: 10px 16px;
+  border-bottom: 2px solid #0090cf;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.midlandjobs-scope .midlandjobs-navbar-toggle {
+  background: #181818;
+  padding: 7px 14px 40px;
+  font-size: 22px;
+  color: #b3b3b3;
+  border-radius: 3px;
+  position: relative;
+  top: -19px;
+  float: right;
+}
+.midlandjobs-scope .midlandjobs-navbar-toggle:hover,
+.midlandjobs-scope .midlandjobs-navbar-toggle:focus {
+  color: #fff;
+}
+.midlandjobs-scope .midlandjobs-nav-offcanvas > li > a {
+  color: #b3b3b3;
+  font-size: 13px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-bottom: 1px solid #272727;
+}
+.midlandjobs-scope .midlandjobs-nav-offcanvas > li.midlandjobs-parent > a:after {
+  margin-right: -5px;
+}
+.midlandjobs-scope .midlandjobs-nav-offcanvas ul.midlandjobs-nav-sub {
+  padding: 0;
+  background: #272727;
+}
+.midlandjobs-scope .midlandjobs-nav-offcanvas ul.midlandjobs-nav-sub li a {
+  padding: 9px 0 10px 15px;
+}
+.midlandjobs-scope .midlandjobs-nav-offcanvas ul.midlandjobs-nav-sub li a:hover {
+  background: #00a8e6;
+}
+.midlandjobs-scope #slideshow-container {
+  height: 480px;
+  background: #efefef;
+}
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav > * {
+  padding-left: 7px;
+}
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav {
+  position: relative;
+  top: -35px;
+  right: 22.3%;
+}
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav > * > * {
+  width: 40px;
+  height: 4px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav > * > :hover,
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav > * > :focus,
+.midlandjobs-scope #slideshow-container .midlandjobs-dotnav > .midlandjobs-active > * {
+  background: rgba(0, 144, 207, 0.7);
+}
+.midlandjobs-scope .slide-content1 {
+  padding: 34px 36px 38px;
+  background: rgba(0, 144, 207, 0.7);
+  position: relative;
+  bottom: -20px;
+}
+.midlandjobs-scope .slide-content1:after {
+  width: 588px;
+  height: 313px;
+  margin-bottom: -313px;
+  background: url(../../images/slideshow/ribbon_slider.png) no-repeat;
+  content: "";
+  display: block;
+  position: relative;
+  top: -274px;
+  left: 486px;
+}
+.midlandjobs-scope .slide-content1 hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.midlandjobs-scope .slide-content2 {
+  position: relative;
+  bottom: 75px;
+}
+.midlandjobs-scope .slide-content2 h1 {
+  font-size: 48px;
+  line-height: 48px;
+}
+.midlandjobs-scope .slide-content3 {
+  float: left;
+  position: relative;
+  top: -100px;
+  left: 400px;
+  color: #393939;
+}
+.midlandjobs-scope .sld3-img {
+  position: relative;
+  top: 274px;
+}
+.midlandjobs-scope .ribbon-slide {
+  position: relative;
+  top: 209px;
+}
+.midlandjobs-scope .ribbon-slide:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 0;
+  height: 282px;
+  border: 94px solid #f07406;
+  border-top: 0 solid;
+  border-bottom: 30px solid rgba(0, 0, 0, 0);
+  content: "";
+  display: block;
+  position: relative;
+  margin-top: -270px;
+  z-index: 777;
+}
+.midlandjobs-scope .ribbon-slide h1,
+.midlandjobs-scope .ribbon-slide h2,
+.midlandjobs-scope .ribbon-slide h3,
+.midlandjobs-scope .ribbon-slide h4,
+.midlandjobs-scope .ribbon-slide p {
+  position: relative;
+  z-index: 999;
+}
+.midlandjobs-scope .ribbon-slide h1 {
+  margin: 26px 0 -5px;
+  font-size: 70px;
+}
+.midlandjobs-scope .ribbon-slide h2 {
+  margin-bottom: -5px;
+  font-size: 52px;
+}
+.midlandjobs-scope .ribbon-slide h3 {
+  font-size: 36px;
+}
+.midlandjobs-scope .ribbon-slide h4 {
+  margin-bottom: -8px;
+}
+.midlandjobs-scope .ribbon-slide p {
+  margin-top: 24px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.midlandjobs-scope .ribbon-slide h3 span.small-month {
+  font-size: 18px;
+}
+.midlandjobs-scope .slide-content4 {
+  width: 83%;
+  padding: 48px 0 33px;
+  border: 2px solid #fff;
+  position: relative;
+  top: -81px;
+}
+.midlandjobs-scope .slide-content4 hr {
+  width: 73%;
+  margin: 25px auto 0;
+  border-top: 2px solid #fff;
+}
+.midlandjobs-scope .slide-content4 h2 {
+  text-transform: uppercase;
+}
+.midlandjobs-scope .sld-spacing1 {
+  font-size: 36px;
+  letter-spacing: 6.6px;
+  left: 4px;
+  position: relative;
+}
+.midlandjobs-scope .sld-spacing2 {
+  letter-spacing: 2.7px;
+}
+.midlandjobs-scope .sld-spacing3 {
+  font-size: 36px;
+  letter-spacing: 9.2px;
+  left: 5px;
+  position: relative;
+}
+.midlandjobs-scope #homepage4 .midlandjobs-dotnav {
+  top: -77px;
+}
+.midlandjobs-scope #homepage4 .slide-content1 {
+  bottom: 19px;
+}
+.midlandjobs-scope #homepage4 .slide-content4 {
+  top: -102px;
+}
+.midlandjobs-scope #homepage4 .slide-content3 {
+  top: -120px;
+}
+.midlandjobs-scope #homepage4 .sld3-img {
+  top: 235px;
+}
+.midlandjobs-scope #homepage4 .slide-content2 {
+  bottom: 95px;
+}
+.midlandjobs-scope .blog-wrapper {
+  padding: 36px 40px 40px;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 70px;
+}
+.midlandjobs-scope .blog-wrapper h2 a,
+.midlandjobs-scope blog-wrapper h2 a:visited {
+  color: #0090cf;
+}
+.midlandjobs-scope .blog-wrapper h2 a:hover {
+  text-decoration: none;
+  color: #009fe5;
+}
+.midlandjobs-scope .blog-wrapper a.midlandjobs-button {
+  float: right;
+  position: relative;
+  bottom: -15px;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope .blog-wrapper .blog-slider,
+.midlandjobs-scope .blog-wrapper .selfhost-video,
+.midlandjobs-scope .blog-wrapper .blog-quote,
+.midlandjobs-scope .blog-wrapper .iframe-video,
+.midlandjobs-scope .blog-wrapper .blog-link,
+.midlandjobs-scope .blog-wrapper .blog-picture {
+  margin-top: 10px;
+}
+.midlandjobs-scope .blog-wrapper .blog-audio {
+  margin-top: 20px;
+}
+.midlandjobs-scope .blog-slider img,
+.midlandjobs-scope .blog-picture img {
+  width: 100%;
+}
+.midlandjobs-scope .iframe-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0px;
+  height: 0;
+  margin-bottom: 33px;
+  overflow: hidden;
+}
+.midlandjobs-scope .iframe-video iframe {
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.midlandjobs-scope .blog-quote {
+  background-image: url("../../images/bg_quote.gif");
+  background-repeat: repeat-y;
+  border: solid 1px #dedede;
+  padding: 29px 30px 0px 40px;
+  position: relative;
+}
+.midlandjobs-scope .blog-quote blockquote {
+  border-left: none;
+  margin-bottom: 15px;
+  padding-bottom: 1px;
+  padding-left: 0px;
+}
+.midlandjobs-scope .blog-quote blockquote cite {
+  line-height: 55px;
+}
+.midlandjobs-scope .blog-link {
+  background: #f3f3f3;
+  padding: 33px 20px;
+  text-align: center;
+}
+.midlandjobs-scope .blog-link a {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #979696;
+}
+.midlandjobs-scope ul.post-info {
+  margin-top: 28px;
+  border-top: 1px solid #e1e1e1;
+}
+.midlandjobs-scope ul.post-info li {
+  font-size: 14px;
+  color: #393939;
+  margin: 27px 25px 25px 0;
+  display: inline-block;
+}
+.midlandjobs-scope ul.post-info li i {
+  position: relative;
+  top: -1px;
+  margin-right: 6px;
+}
+.midlandjobs-scope ul.post-info li a,
+.midlandjobs-scope ul.post-info li a:visited {
+  color: #393939;
+  text-decoration: none;
+}
+.midlandjobs-scope .post-type {
+  width: 49px;
+  height: 49px;
+  font-size: 22px;
+  line-height: 48px;
+  text-align: center;
+  color: #7e7d7d;
+  background: #fff;
+  margin-top: -119px;
+  float: right;
+  border-radius: 5px;
+  border: 1px solid #e1e1e1;
+}
+.midlandjobs-scope #aside-btn {
+  font-size: 18px;
+}
+.midlandjobs-scope .panel-popular {
+  padding: 30px;
+}
+.midlandjobs-scope #sharing-wrapper {
+  margin-top: 40px;
+  padding-top: 45px;
+  border-top: 2px solid #e8e8e8;
+}
+.midlandjobs-scope ul.social-share {
+  margin: -3px 0 0;
+  float: right;
+}
+.midlandjobs-scope ul.social-share li {
+  font-size: 16px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.midlandjobs-scope ul.social-share li a,
+.midlandjobs-scope ul.social-share li a:visited {
+  color: #939292;
+}
+.midlandjobs-scope ul.midlandjobs-comment-list {
+  margin-bottom: 60px;
+}
+.midlandjobs-scope .avatar {
+  width: 60px;
+  height: 60px;
+  margin-top: 30px;
+  background-color: #e7e7e7;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
+.midlandjobs-scope .avatar img {
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
+.midlandjobs-scope .comment-text {
+  margin: -64px 0 20px 90px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.midlandjobs-scope .comment-text h6.subheader {
+  font-size: 12px;
+  font-weight: 300;
+  color: #939292;
+  margin-top: -12px;
+}
+.midlandjobs-scope .comment-text a.midlandjobs-button {
+  font-size: 10px;
+  padding: 2px 15px 3px;
+  margin-top: -69px;
+  float: right;
+}
+.midlandjobs-scope form#comment-form {
+  margin: 15px 0 25px;
+}
+.midlandjobs-scope form#comment-form label {
+  width: 15%;
+  margin-top: 10px;
+  float: left;
+}
+.midlandjobs-scope form#comment-form input {
+  width: 55%;
+  height: 44px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0 15px 15px 0;
+  float: left;
+}
+.midlandjobs-scope form#comment-form textarea {
+  width: 75%;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  float: left;
+  overflow: hidden;
+}
+.midlandjobs-scope form#comment-form em {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #db4e43;
+  display: inline;
+}
+.midlandjobs-scope .midlandjobs-pagination > li > a,
+.midlandjobs-scope .midlandjobs-pagination > li > span {
+  padding: 8px 7px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.midlandjobs-scope #bg-parallax1 {
+  height: 520px;
+}
+.midlandjobs-scope #bg-parallax2 {
+  height: 570px;
+}
+.midlandjobs-scope ul#flck-thumb {
+  margin: -26px -17px 0 -7px;
+}
+.midlandjobs-scope ul#flck-thumb div.no-image {
+  display: none;
+}
+.midlandjobs-scope .thumbs {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.midlandjobs-scope .thumbs div {
+  width: 89px;
+  height: 89px;
+  list-style: none;
+  float: left;
+  margin: 0 8px 16px;
+}
+.midlandjobs-scope .thumbs div img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.midlandjobs-scope .thumbs div a img {
+  border: none;
+}
+.midlandjobs-scope #map {
+  width: 100%;
+  height: 320px;
+  background: #f6f6f6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float: left;
+}
+.midlandjobs-scope #newsletter-bg-img {
+  background: #444 url(../../images/bg_newsletter.png) no-repeat center top;
+}
+.midlandjobs-scope form#newsletter-form input {
+  height: 44px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0 15px 15px 0;
+}
+.midlandjobs-scope ul.midlandjobs-inline-icon {
+  padding: 0;
+  float: left;
+}
+.midlandjobs-scope .midlandjobs-inline-icon > li {
+  list-style-type: none;
+  display: inline;
+  color: #0090cf;
+  border-right: 1px solid #ddd;
+  padding-right: 22px;
+  margin-right: 22px;
+}
+.midlandjobs-scope .midlandjobs-inline-icon > li:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+.midlandjobs-scope .midlandjobs-inline-icon > li i {
+  margin-right: 8px;
+  font-size: 22px;
+  position: relative;
+  top: 2px;
+}
+.midlandjobs-scope .midlandjobs-list-line > li:nth-child(n+2) {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+.midlandjobs-scope .midlandjobs-list-line > li a,
+.midlandjobs-scope .midlandjobs-list-line > li a:visited {
+  color: #939292;
+}
+.midlandjobs-scope .midlandjobs-list-line > li a:hover {
+  color: #009FE5;
+  text-decoration: none;
+}
+.midlandjobs-scope #get-started-wrap {
+  height: 84px;
+  background: #83a531;
+  color: #fff;
+}
+.midlandjobs-scope #get-started-wrap a {
+  margin-left: 56px;
+  color: #fff;
+  font-size: 22px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  position: relative;
+  top: 30px;
+}
+.midlandjobs-scope #get-started-wrap a:hover {
+  text-decoration: none;
+}
+.midlandjobs-scope #get-started-wrap a i {
+  font-size: 18px;
+  margin-left: 13px;
+}
+.midlandjobs-scope .price-start {
+  padding: 7px 39px 5px 36px;
+  background: #9bc23c;
+  float: left;
+}
+.midlandjobs-scope .price-start h1 {
+  color: #fff;
+  margin-bottom: 0;
+}
+.midlandjobs-scope .price-start p {
+  margin-bottom: -29px;
+}
+.midlandjobs-scope #domain-search input,
+.midlandjobs-scope #domain-search select {
+  height: 84px;
+  padding: 4px 22px 4px 0;
+  font-size: 18px;
+  color: #b6b6b6;
+  border: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+.midlandjobs-scope #domain-search input {
+  background: #fafafa;
+  padding: 4px 22px;
+  border-left: 2px solid #e8e8e8;
+}
+.midlandjobs-scope #domain-search2 input,
+.midlandjobs-scope #domain-search2 select,
+.midlandjobs-scope #domain-search4 input,
+.midlandjobs-scope #domain-search4 select,
+.midlandjobs-scope #domain-search5 input,
+.midlandjobs-scope #domain-search5 select {
+  height: 84px;
+  padding: 4px 22px;
+  font-size: 18px;
+  color: #b6b6b6;
+  border: none;
+  border-bottom: 2px solid #d4d4d4;
+}
+.midlandjobs-scope #domain-search5 input,
+.midlandjobs-scope #domain-search5 select {
+  font-size: 14px;
+  height: 56px;
+}
+.midlandjobs-scope #domain-search4 input,
+.midlandjobs-scope #domain-search5 input {
+  border-top: 1px solid #dedede;
+  border-left: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope #domain-search4 select,
+.midlandjobs-scope #domain-search5 select {
+  border-bottom: 1px solid #dedede;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope #domain-search3 input[type="text"] {
+  height: 44px;
+  margin-top: 5px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope #domain-search4 {
+  margin-bottom: -42px;
+  position: relative;
+  top: -42px;
+}
+.midlandjobs-scope #domain-search5 {
+  margin-top: 40px;
+  position: relative;
+}
+.midlandjobs-scope #domain-search3 button {
+  margin: 18px 0 15px;
+}
+.midlandjobs-scope #domain-search3 input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0 2px 10px 0;
+  position: relative;
+  top: 3px;
+}
+.midlandjobs-scope #domain-search3 label {
+  margin-right: 10px;
+}
+.midlandjobs-scope #domain-search input:focus {
+  background: #f0fafe;
+}
+.midlandjobs-scope #domain-search input {
+  width: 59%;
+}
+.midlandjobs-scope _:-ms-fullscreen,
+:root #domain-search input {
+  width: 60.6%;
+}
+.midlandjobs-scope #domain-search2 input {
+  width: 69.3%;
+}
+.midlandjobs-scope #domain-search4 input {
+  width: 82.13%;
+}
+.midlandjobs-scope #domain-search5 input {
+  width: 58.13%;
+}
+.midlandjobs-scope #domain-search select,
+.midlandjobs-scope #domain-search2 select,
+.midlandjobs-scope #domain-search4 select,
+.midlandjobs-scope #domain-search5 select {
+  margin-left: -3px;
+  padding: 4px 40px 4px 19px;
+  background: #f3f3f3;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.midlandjobs-scope select::-ms-expand {
+  display: none;
+}
+.midlandjobs-scope #domain-search i.midlandjobs-icon-chevron-down,
+.midlandjobs-scope #domain-search2 i.midlandjobs-icon-chevron-down,
+.midlandjobs-scope #domain-search4 i.midlandjobs-icon-chevron-down,
+.midlandjobs-scope #domain-search5 i.midlandjobs-icon-chevron-down {
+  font-size: 11px;
+  color: #b6b6b6;
+  position: relative;
+  left: -38px;
+}
+.midlandjobs-scope #domain-search button {
+  width: 86px;
+  height: 84px;
+  margin-left: -19px;
+  background: #0090cf;
+  border-bottom: 2px solid #0081ba;
+}
+.midlandjobs-scope #domain-search2 button {
+  width: 86px;
+  height: 84px;
+  margin-left: -19px;
+  background: #9bc23c;
+  border-bottom: 2px solid #84a632;
+}
+.midlandjobs-scope #domain-search4 button,
+.midlandjobs-scope #domain-search5 button {
+  width: 86px;
+  height: 84px;
+  margin-left: -19px;
+  background: #0090cf;
+  border-bottom: 1px solid #0081ba;
+}
+.midlandjobs-scope #domain-search5 button {
+  height: 56px;
+}
+.midlandjobs-scope #domain-search4 button,
+.midlandjobs-scope #domain-search5 button {
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope #domain-search button.midlandjobs-icon-search,
+.midlandjobs-scope #domain-search2 button.midlandjobs-icon-search,
+.midlandjobs-scope #domain-search4 button.midlandjobs-icon-search,
+.midlandjobs-scope #domain-search5 button.midlandjobs-icon-search {
+  font-size: 22px;
+  color: #fff;
+}
+.midlandjobs-scope #domain-search5 button.midlandjobs-icon-search {
+  font-size: 16px;
+  color: #fff;
+}
+.midlandjobs-scope .section-grey {
+  background: #f4f4f4;
+}
+.midlandjobs-scope .section-blue {
+  background: #0090cf;
+}
+.midlandjobs-scope .section-green {
+  background: #91b53a;
+}
+.midlandjobs-scope .section-green2 {
+  background: #9bc23c;
+}
+.midlandjobs-scope .content-bg1 {
+  height: 530px;
+  background: url(../../images/sample/content_bg1.jpg) no-repeat;
+}
+.midlandjobs-scope .content-bg2 {
+  height: 528px;
+  background: url(../../images/sample/content_bg2.jpg) no-repeat right;
+}
+.midlandjobs-scope .notebook-align {
+  position: relative;
+  top: 17px;
+  right: -60px;
+  float: right;
+}
+.midlandjobs-scope .feature-wrap {
+  max-width: 464px;
+  margin-left: 76px;
+}
+.midlandjobs-scope .feature-wrap2 {
+  max-width: 557px;
+}
+.midlandjobs-scope .feature-wrap2.midlandjobs-float-right {
+  margin-right: 35px;
+}
+.midlandjobs-scope .feature-wrap2.midlandjobs-float-left {
+  margin-left: 0;
+}
+.midlandjobs-scope #mobile-partner-logo {
+  margin-left: -40px !important;
+}
+.midlandjobs-scope .partner-logo {
+  width: 190px;
+  margin: 55px 0 30px;
+}
+.midlandjobs-scope .idz-panel-logo,
+.midlandjobs-scope .idz-panel-domain,
+.midlandjobs-scope .idz-panel-domain.alt {
+  height: 110px;
+  background: #fff;
+  -webkit-box-shadow: inset 0 0 0 2px #e8e8e8;
+  -moz-box-shadow: inset 0 0 0 2px #e8e8e8;
+  box-shadow: inset 0 0 0 2px #e8e8e8;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+.midlandjobs-scope .idz-panel-domain.alt {
+  height: 76px;
+}
+.midlandjobs-scope .idz-panel-logo .midlandjobs-vertical-align-middle {
+  width: 100%;
+}
+.midlandjobs-scope .idz-panel-logo img {
+  width: 70%;
+  opacity: 0.7;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
+}
+.midlandjobs-scope .idz-panel-domain img {
+  width: 90%;
+  opacity: 0.7;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
+  position: relative;
+  top: -12px;
+}
+.midlandjobs-scope .idz-panel-logo:hover img,
+.midlandjobs-scope .idz-panel-domain:hover img {
+  opacity: 1;
+}
+.midlandjobs-scope .idz-panel-domain-green {
+  height: 110px;
+  background: #9bc23c;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.midlandjobs-scope .idz-panel-domain-green.alt {
+  height: 70px;
+}
+.midlandjobs-scope .datacenter-location {
+  max-height: 510px;
+  margin-top: 38px;
+}
+.midlandjobs-scope .datacenter-location img {
+  width: 75%;
+}
+.midlandjobs-scope .datacenter-location .marker {
+  width: 29px;
+  height: 37px;
+  background: url(../../images/sample/datacenter_marker.svg) no-repeat;
+  display: inline-block;
+  position: relative;
+}
+.midlandjobs-scope #newark {
+  top: -365px;
+  left: 385px;
+}
+.midlandjobs-scope #louisville {
+  top: -290px;
+  left: 215px;
+}
+.midlandjobs-scope #denver {
+  top: -320px;
+  left: -90px;
+}
+.midlandjobs-scope #dallas {
+  top: -170px;
+  left: -10px;
+}
+.midlandjobs-scope #sanfranscisco {
+  top: -330px;
+  left: -410px;
+}
+.midlandjobs-scope #irvine {
+  top: -250px;
+  left: -410px;
+}
+.midlandjobs-scope .quick-info {
+  font-size: 28px;
+}
+.midlandjobs-scope .quick-info i.midlandjobs-icon-button {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  background: #0090cf;
+  color: #fff;
+  font-size: 28px;
+  transition: all 0.5s ease;
+}
+.midlandjobs-scope .quick-info:hover i.midlandjobs-icon-button {
+  background: #9bc23c;
+}
+.midlandjobs-scope .quick-info:hover a {
+  color: #9bc23c;
+}
+.midlandjobs-scope .quick-info a {
+  color: #0090cf;
+  text-decoration: none;
+  position: relative;
+  top: 25px;
+  transition: all 0.5s ease;
+}
+.midlandjobs-scope .product-box {
+  border: 1px solid #eaeaea;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope .product-box img {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope .people-align {
+  margin-top: -45px;
+  position: absolute;
+}
+.midlandjobs-scope .app-list li {
+  padding: 20px;
+  text-align: center;
+  -webkit-box-shadow: inset 0 0 0 2px #7e9f2e;
+  -moz-box-shadow: inset 0 0 0 2px #7e9f2e;
+  box-shadow: inset 0 0 0 2px #7e9f2e;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope .domain-list li {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 24px;
+  line-height: 55px;
+}
+.midlandjobs-scope .domain-list li a.midlandjobs-button {
+  margin-top: 11px;
+}
+.midlandjobs-scope .section-black {
+  background: #222;
+}
+.midlandjobs-scope .specs-bg-img {
+  background: url(../../images/bg_specs.png) no-repeat 4.3% bottom;
+}
+.midlandjobs-scope  .midlandjobs-text-medium {
+  font-size: 16px;
+}
+.midlandjobs-scope .section-purple {
+  background: #a881c9;
+  background: -moz-linear-gradient(top, #a881c9 0%, #61a0d6 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a881c9), color-stop(100%, #61a0d6));
+  background: -webkit-linear-gradient(top, #a881c9 0%, #61a0d6 100%);
+  background: -o-linear-gradient(top, #a881c9 0%, #61a0d6 100%);
+  background: -ms-linear-gradient(top, #a881c9 0%, #61a0d6 100%);
+  background: linear-gradient(to bottom, #a881c9 0%, #61a0d6 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#a881c9', endColorstr='#61a0d6', GradientType=0);
+}
+.midlandjobs-scope .abstract-bg-img {
+  background: url(../../images/bg_abstract.png) no-repeat center bottom;
+}
+.midlandjobs-scope .idz-dedicated-pricing {
+  border-bottom: 1px solid #d3d3d3;
+}
+.midlandjobs-scope .idz-dedicated-pricing thead th,
+.midlandjobs-scope .idz-dedicated-pricing tr td {
+  text-align: center;
+}
+.midlandjobs-scope .idz-dedicated-pricing thead th {
+  font-size: 18px;
+  font-weight: 400;
+  color: #393939;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #d3d3d3;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td {
+  line-height: 18px;
+  vertical-align: middle;
+  font-size: 16px;
+  padding: 18px 0;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td.dct-cpu {
+  padding-left: 20px;
+  font-weight: 400;
+  color: #0090cf;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td.dct-cpu img {
+  margin-bottom: 5px;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td img.intel-logo {
+  width: 40px;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td img.amd-logo {
+  width: 60px;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td.dct-price {
+  font-size: 22px;
+  font-weight: 400;
+  color: #0090cf;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td.dct-button {
+  padding-right: 20px;
+}
+.midlandjobs-scope .idz-dedicated-pricing tr td.dct-button a.midlandjobs-button {
+  position: relative;
+  top: -2px;
+}
+.midlandjobs-scope .features-bg-img {
+  background: url(../../images/bg_features.png) no-repeat 4.3% bottom;
+}
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-1-']:not(.midlandjobs-width-1-1):nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-2-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-3-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-4-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-5-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-6-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-7-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-8-']:nth-child(n+2),
+.midlandjobs-scope .midlandjobs-grid-divider > [class*='midlandjobs-width-large-9-']:nth-child(n+2) {
+  border-left: 2px solid #e8e8e8;
+}
+.midlandjobs-scope hr.midlandjobs-grid-divider:empty {
+  border-top: 2px solid #e8e8e8;
+}
+.midlandjobs-scope ul#client-area-tab.midlandjobs-tab {
+  margin: -20px -22px 0 -25px;
+  border-bottom: none;
+}
+.midlandjobs-scope ul#client-area-tab.midlandjobs-tab-grid:before {
+  border-top: none;
+}
+.midlandjobs-scope ul#client-area-tab.midlandjobs-tab > li > a {
+  font-size: 16px;
+  padding: 22px 12px 24px;
+  border: none;
+  border-radius: 0;
+}
+.midlandjobs-scope ul#client-area-tab.midlandjobs-tab > li:not(.midlandjobs-active) > a:hover {
+  margin-bottom: 0;
+}
+.midlandjobs-scope ul#client-area-tab.midlandjobs-tab > li.midlandjobs-width-large-1-2 {
+  margin-right: -2px;
+}
+.midlandjobs-scope #client-area .midlandjobs-modal-caption a {
+  color: #fff;
+}
+.midlandjobs-scope #signin-account,
+.midlandjobs-scope #create-account {
+  padding: 22px 16px;
+}
+.midlandjobs-scope #signin-account .midlandjobs-form-icon,
+.midlandjobs-scope #signin-account input[type="text"],
+.midlandjobs-scope #create-account .midlandjobs-form-icon,
+.midlandjobs-scope #create-account input[type="text"] {
+  width: 100%;
+}
+.midlandjobs-scope #signin-account .midlandjobs-form-icon > [class*='midlandjobs-icon-'],
+.midlandjobs-scope #create-account .midlandjobs-form-icon > [class*='midlandjobs-icon-'] {
+  left: 8px;
+  margin-top: -17px;
+}
+.midlandjobs-scope #signin-account .midlandjobs-form-icon:not(.midlandjobs-form-icon-flip) > input,
+.midlandjobs-scope #create-account .midlandjobs-form-icon:not(.midlandjobs-form-icon-flip) > input {
+  padding-left: 38px !important;
+}
+.midlandjobs-scope #signin-account input[type="text"],
+.midlandjobs-scope #create-account input[type="text"] {
+  height: 44px;
+  margin-bottom: 20px;
+  padding: 4px 12px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.midlandjobs-scope #signin-account input[type="checkbox"],
+.midlandjobs-scope #create-account input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0 2px 10px 0;
+  position: relative;
+  top: 3px;
+}
+.midlandjobs-scope #signin-account .midlandjobs-button,
+.midlandjobs-scope #create-account .midlandjobs-button {
+  margin: 18px 0 -15px;
+}
+.midlandjobs-scope .account-hr {
+  margin: 18px 0;
+}
+.midlandjobs-scope #account-box a:hover {
+  text-decoration: none;
+}
+.midlandjobs-scope .idz-panel.account h4 {
+  margin-top: -4px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.midlandjobs-scope .idz-panel.account h1 {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 2px;
+  font-size: 44px;
+  line-height: 60px;
+  text-align: center;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+.midlandjobs-scope .panel-promo i {
+  margin-right: 25px;
+  float: left;
+}
+.midlandjobs-scope .panel-promo h2 {
+  margin-top: 2px;
+}
+.midlandjobs-scope #active-services:after,
+.midlandjobs-scope #active-domain:after,
+.midlandjobs-scope #due-invoices:after,
+.midlandjobs-scope #open-tickets:after {
+  font-family: FontAwesome;
+  font-size: 90px;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.1);
+  margin-top: -40px;
+  float: right;
+}
+.midlandjobs-scope #active-services:after {
+  content: "\f058";
+}
+.midlandjobs-scope #active-domain:after {
+  content: "\f0c1";
+}
+.midlandjobs-scope #due-invoices:after {
+  content: "\f0d6";
+}
+.midlandjobs-scope #open-tickets:after {
+  content: "\f0c5";
+}
+.midlandjobs-scope #notif-icon {
+  border-right: 1px solid #d2d2d2;
+  margin: 11px 35px 0 0;
+  padding-right: 4px;
+}
+.midlandjobs-scope #notif-icon li {
+  width: 42px;
+  display: inline;
+  margin-right: 10px;
+  list-style: none;
+  float: left;
+}
+.midlandjobs-scope #notif-icon li a,
+.midlandjobs-scope #notif-icon li a:visited {
+  color: #a8a8a8;
+}
+.midlandjobs-scope #notif-icon li i {
+  font-size: 18px;
+}
+.midlandjobs-scope #notif-icon li .midlandjobs-badge {
+  position: relative;
+  top: 3px;
+  left: -10px;
+}
+.midlandjobs-scope #notif-icon li .midlandjobs-badge {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.midlandjobs-scope #notif-icon li .midlandjobs-badge-notification {
+  min-width: 16px;
+}
+.midlandjobs-scope ul.overview-list {
+  margin-top: -9px;
+}
+.midlandjobs-scope .overview-list li {
+  border-bottom: 1px solid #ddd;
+  line-height: 44px;
+}
+.midlandjobs-scope .overview-list li:last-child {
+  border-bottom: none;
+}
+.midlandjobs-scope .overview-list li .midlandjobs-badge {
+  position: relative;
+  top: 12px;
+}
+.midlandjobs-scope #contact-form-wrapper {
+  border-top: 2px solid #e8e8e8;
+  width: 100%;
+  margin-top: 30px;
+  padding-top: 40px;
+  float: left;
+}
+.midlandjobs-scope #contact-form-wrapper .midlandjobs-alert {
+  padding-top: 14px;
+  padding-bottom: 15px;
+}
+.midlandjobs-scope form#contact-form label {
+  width: 15%;
+  margin-top: 10px;
+  float: left;
+  clear: both;
+}
+.midlandjobs-scope form#contact-form input {
+  width: 55%;
+  height: 44px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0 15px 15px 0;
+  float: left;
+}
+.midlandjobs-scope form#contact-form textarea {
+  width: 75%;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #b6b6b6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  float: left;
+  overflow: hidden;
+}
+.midlandjobs-scope form#contact-form button {
+  background: #0090cf;
+  color: #fff;
+  float: left;
+}
+.midlandjobs-scope form#contactform em {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #db4e43;
+  display: inline;
+}
+.midlandjobs-scope .loading {
+  font-size: 13px;
+  height: 20px;
+  background: url(../../images/loading.gif) 0 4px no-repeat;
+  margin: 7px 0 0 12px;
+  padding: 0 0 0 23px;
+  color: #797979;
+  float: left;
+}
+.midlandjobs-scope ul.hosting-apps li {
+  width: 33.33%;
+  height: 66px;
+  margin: 0 -1px 0 0;
+  display: inline-block;
+  list-style-type: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  float: left;
+}
+.midlandjobs-scope ul.hosting-apps li:nth-child(3n) {
+  border-right: none;
+}
+.midlandjobs-scope ul.hosting-apps li:nth-child(n+4) {
+  border-bottom: none;
+}
+.midlandjobs-scope ul.hosting-apps li img {
+  width: 30px;
+  margin: 18px 5px 18px 26px;
+}
+.midlandjobs-scope .feature-ic-section {
+  text-align: center;
+  padding: 22px 12px!important;
+  color: #fff;
+}
+.midlandjobs-scope .feature-ic-section i {
+  font-size: 48px;
+}
+.midlandjobs-scope .feature-ic-section p {
+  font-size: 10px;
+  line-height: 16px;
+  text-transform: uppercase;
+  position: relative;
+  top: 3px;
+}
+.midlandjobs-scope ul.hosting-apps {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.1);
+  float: left;
+}
+.midlandjobs-scope .sitemap-wrap li a,
+.midlandjobs-scope .sitemap-wrap li a:visited {
+  color: #939292;
+  text-decoration: none;
+}
+.midlandjobs-scope .error404-wrap {
+  margin-bottom: 30px;
+}
+.midlandjobs-scope .error404-wrap h1 {
+  font-size: 48px;
+}
+.midlandjobs-scope .error404-wrap h1 i {
+  font-size: 72px;
+}
+.midlandjobs-scope .error404-wrap ul.midlandjobs-inline-icon {
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+.midlandjobs-scope .error404-wrap ul.midlandjobs-inline-icon li {
+  padding-left: 20px;
+  float: left;
+}
+.midlandjobs-scope .error404-wrap .midlandjobs-inline-icon > li:nth-child(n+2) {
+  margin-left: -5px;
+}
+.midlandjobs-scope .error404-wrap ul.midlandjobs-inline-icon li a {
+  color: #fff;
+}
+.midlandjobs-scope .error404-wrap ul.midlandjobs-inline-icon li:before {
+  font-family: FontAwesome;
+  font-size: 15px;
+  content: "\f138";
+  position: absolute;
+  margin-left: -20px;
+  color: #fff;
+}
+.midlandjobs-scope ul#icon-tablist li ul li .panel-border {
+  -webkit-box-shadow: inset 0 0 0 1px #e8e8e8;
+  -moz-box-shadow: inset 0 0 0 1px #e8e8e8;
+  box-shadow: inset 0 0 0 1px #e8e8e8;
+}
+.midlandjobs-scope ul#icon-tablist li ul li pre {
+  background: #f3f3f3;
+  margin-bottom: -32px;
+  padding: 8px 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  font-size: 10px;
+  font-family: Consolas, "Andale Mono", Courier, "Courier New", monospace;
+  position: relative;
+  top: -32px;
+}
+.midlandjobs-scope .idz-domain-pricing {
+  border-bottom: 1px solid #d3d3d3;
+}
+.midlandjobs-scope .idz-domain-pricing thead th,
+.midlandjobs-scope .idz-domain-pricing tr td {
+  text-align: center;
+}
+.midlandjobs-scope .idz-domain-pricing thead th {
+  font-size: 18px;
+  font-weight: 400;
+  color: #393939;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #d3d3d3;
+}
+.midlandjobs-scope .idz-domain-pricing tr td {
+  line-height: 18px;
+  vertical-align: middle;
+  font-size: 16px;
+  padding: 10px 0;
+}
+.midlandjobs-scope th.idz-domain-tld {
+  width: 160px;
+}
+.midlandjobs-scope th.idz-domain-price {
+  width: 200px;
+}
+.midlandjobs-scope th.idz-domain-register {
+  width: 200px;
+}
+.midlandjobs-scope .idz-domain-pricing tr td.idz-domain-tld {
+  font-size: 22px;
+  font-weight: 400;
+  color: #0090cf;
+}
+.midlandjobs-scope .idz-domain-pricing tr td.idz-domain-tld i {
+  margin-right: 4px;
+  font-size: 18px;
+  color: #0090cf;
+}
+.midlandjobs-scope .idz-domain-pricing tr td.idz-domain-tld {
+  text-align: left;
+  padding-left: 28px;
+}
+.midlandjobs-scope .idz-domain-pricing tr td.idz-domain-register {
+  text-align: right;
+  padding-right: 28px;
+}
+.midlandjobs-scope footer {
+  padding: 60px 0 0;
+  background: #f4f4f4;
+}
+.midlandjobs-scope .footer-bg-img {
+  background: url(../../images/bg_footer.png) no-repeat 91% bottom;
+}
+.midlandjobs-scope footer .midlandjobs-list li a {
+  color: #939292;
+}
+.midlandjobs-scope footer .midlandjobs-list li a:hover {
+  color: #0090cf;
+  text-decoration: none;
+}
+.midlandjobs-scope footer hr {
+  border: 1px solid #e2e2e2;
+  margin: 28px 0 32px;
+}
+.midlandjobs-scope #footer-social ul {
+  margin: 20px 0;
+  padding: 0;
+}
+.midlandjobs-scope #footer-social ul li {
+  margin-right: 20px;
+  display: inline;
+}
+.midlandjobs-scope #footer-social ul li a {
+  font-size: 20px;
+  color: #c4c3c3;
+}
+.midlandjobs-scope #footer-social ul li a:hover {
+  color: #aeaeae;
+}
+.midlandjobs-scope #logo-footer {
+  width: 117px;
+  margin-bottom: 18px;
+}
+.midlandjobs-scope _:-ms-fullscreen,
+:root #logo-footer {
+  height: 37px;
+}
+.midlandjobs-scope .copyright-wrap {
+  font-size: 13px;
+  padding-bottom: 21px;
+}
+.midlandjobs-scope #payment-list {
+  float: right;
+}
+.midlandjobs-scope #payment-list ul {
+  margin: 0;
+  padding: 0;
+}
+.midlandjobs-scope #payment-list ul li {
+  font-size: 28px;
+  margin-left: 8px;
+  display: inline;
+}
+.midlandjobs-scope #payment-list ul li i {
+  color: #aeaeae;
+}
+.midlandjobs-scope #payment-list ul li p {
+  margin-right: 3px;
+  font-size: 13px;
+  float: left;
+}
+.midlandjobs-scope .to-top {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-align: center;
+  background: #0090cf;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 48px;
+  display: none;
+}
+.midlandjobs-scope .to-top:hover {
+  color: #fff;
+}
