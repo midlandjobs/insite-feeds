@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- site/metas -->
+    <title>Tests - Data (API)</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../../../public/images/favicon.png" />
+
+    <!-- UIkit CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" /> -->
+    <link rel="stylesheet" href="../../../public/css/feed.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+
+    <!-- feed styles -->
+    <link href="public/css/styles.css" rel="stylesheet">
+    <link href="public/css/bootstrap_styles.css" rel="stylesheet">
+    <link href="public/css/fonts.css" rel="stylesheet">
+    <style type="text/css">
+      .navbar{background-color:rgba(14,27,43,1.0)}
+      .navbar .navbar-left .navbar__item .navbar__link{color:#fff;}
+      .navbar-default .navbar-collapse{background-color:#0e1b2b}/*mobile nav*/
+      .navbar .navbar-right .navbar__item .navbar__link.btn__blue,
+      .navbar .navbar-right .navbar__item:first-child .navbar__link{color:#fff;}
+      
+      /*homepage styles*/
+      .main-banner__head h1, .main-banner__head-text{color:rgba(255, 255, 255, 0.9); text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.75);}
+      .middle-banner > div, .middle-banner__description{color:rgba(255, 255, 255, 0.9)}
+      
+      .alert__block.subscribe__description{margin-top:2%; vertical-align:top;}
+      
+      /*buttons*/
+      .btn__mjteal{background-color:#74c6ca; color:#fff; font-weight:bold}
+      
+      /*text pages*/
+      .static-pages {max-width:1000px;}
+      
+      /*footer*/
+      .footer .container div.copyright{width:50%; float:left}
+      .footer .container div.leocredit{width:50%; float:left; text-align:right;}
+    </style>
+    <style>
+      .midlandjobs-wrap .uk-overlay-primary {
+        background: rgb(34 34 34 / 54%);
+      }
+      .midlandjobs-wrap .uk-light .uk-button-primary {
+        background-color: #647e1b;
+        color: #fff;
+        font-weight: 800;
+      }
+      /* .midlandjobs-wrap .uk-form-small, .midlandjobs-wrap .uk-text-small {
+        font-size: 16px;
+      } */
+      legend {
+        border-bottom: none;
+      }
+    </style>
+
+    <!-- feeds: jQuery is now required on front rather than included within package -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../../public/js/api/feed.js"></script> 
+    <script>
+      (async function () {
+        var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://robertmccormack.com/wp-json/midlandjobs/v1/customFeed');
+        const myFeedObj = new JobBoardFilteredFeed(jobsJson, {
+
+          //
+          // base setting/s
+          //
+          id: 42, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
+          sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
+          scope: 'midlandjobs-wrap', // sets a custom scope to UiKit if UiKit exists. this is necessary for non-conflict css builds like in the plugin
+
+          //
+          // filters overall
+          //
+          // what parts of the feeds/filters setup are enabled. e.g filters or pagination. set to false to disable that part
+          active_filters: true, active_pagination: true, active_perpage: true, active_search: true, active_counts: true,
+
+          //
+          // filters controls
+          //
+          // what parts of the filters themselves are enabled/disabled. e.g cats or cities. set to true to disable a filter control
+          // we can also set an array to these to remove specific terms from a filter type e.g disable_cats: ['Marketing','marketing']
+          disable_cats: false, disable_cities: false, disable_companies: false, disable_jobtypes: false
+
+        });
+        myFeedObj.renderTheJobs('#SomeDiv');
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container container-fluid">
+        <div class="logo navbar-header">
+          <a class="logo__text navbar-brand" href="https://midlandjobs.ie">
+            <img src="https://midlandjobs.ie/templates/BootstrapDND/assets/images/midlandjobs-logo-wh.png"
+              alt="Midland Jobs">
+          </a>
+        </div>
+        <div class="burger-button__wrapper burger-button__wrapper__js visible-sm visible-xs" data-target="#navbar-collapse"
+          data-toggle="collapse">
+          <a href="#" aria-label="Navigation Menu">
+            <div class="burger-button"></div>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <div class="visible-sm visible-xs">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/jobs/"><span>Jobs</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/companies/"><span>Companies Hiring</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/add-listing/?listing_type_id=Job"><span>Post a Job</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/employer-products/"><span>Pricing</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="https://midlandjobs.ie/how-we-advertise-your-job/"><span>What we do</span></a>
+              </li>
+            </ul>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar__item navbar__item ">
+              <a class="navbar__link navbar__login" href="https://midlandjobs.ie/login/">Sign in</a>
+            </li>
+            <li class="navbar__item navbar__item__filled"><a class="navbar__link  btn__blue"
+                href="https://midlandjobs.ie/registration/">Sign up</a></li>
+          </ul>
+          <div class="visible-md visible-lg">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/jobs/"><span>Jobs</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/companies/"><span>Companies Hiring</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/add-listing/?listing_type_id=Job"><span>Post a Job</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="/employer-products/"><span>Pricing</span></a>
+              </li>
+              <li class="navbar__item ">
+                <a class="navbar__link" href="https://midlandjobs.ie/how-we-advertise-your-job/"><span>What we do</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="SomeDiv" class="midlandjobs-wrap">
+      <p>Some paragraph text...</p>
+    </div>
+
+  </body>
+
+</html>

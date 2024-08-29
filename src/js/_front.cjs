@@ -124,6 +124,84 @@ const JobBoardFilteredFeed = class {
     //
     this.populateFilters(sel); // populate the filters (using the jobs data)
 
+		//
+		// job template stuff
+		//
+		var _template = false;
+		var _template_html = this.#job_template_static;
+		if (this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
+		if (this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
+
+		//
+		// filters: updating the counts - a callback for later (inside FilterJS())
+		//
+		var filter_callbacks = {
+			afterFilter: function (result, jQ) {
+				var initial_results = jobs; // initial jobs/result before any filtering done to them
+				if(this.params.active_pagination && this.params.active_counts) updateCountsLogic(result, jQ, initial_results, this.params.active_search, this.params.disable_cats, this.params.disable_cities, this.params.disable_jobtypes, this.params.disable_companies);
+				if(this.params.active_pagination) hidePagination();
+				if(this.params.active_pagination && this.params.active_perpage) hidePerPage(result);
+			}.bind(this)
+		};
+
+		//
+		// other stuff for the filters configs, selective
+		//
+		var _pagination_template = false;
+		var _perpage_template = false;
+		// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
+		if (this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
+		if (this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
+
+		var the_pagination = false;
+		// setup the pagination & perpage array to be used in FilterJS(), selectivley
+		if(this.params.active_pagination){
+			var the_pagination = {
+				container: '#pagination', // define container for pagi
+				visiblePages: 5, // set init visible pages
+				paginationView: _pagination_template,
+				perPage: false
+			};
+			if(this.params.active_perpage){
+				the_pagination.perPage = {
+					values: [12, 15, 18], // per page dropdown options
+					container: '#per_page', // per page container
+					perPageView: _perpage_template,
+				};
+			}
+		}
+
+		var the_search = false;
+		// set th ele for the searchbox, to be used in FilterJS()
+		if(this.params.active_search) var the_search = { ele: '#searchbox' };
+
+		//
+		// activate filters & configs
+		//
+		var FJS = FilterJS(jobs, '#jobs_'+this.params.id, {
+			template: _template, // set to false so we can use pre rendered html template
+			template_html: _template_html, // define template for job
+			search: the_search, // define search box
+			pagination: the_pagination, // define pagination & perpage elements
+			callbacks: filter_callbacks, // callbacks, after filtering.. redo counts, filters etc...
+		});
+
+		//
+		// activate filter criterias
+		//
+		if (this.params.active_filters) {
+			if (this.params.disable_cities != true) FJS.addCriteria({ field: 'city', ele: '#city_filter', all: 'all' });
+			if (this.params.disable_jobtypes != true) FJS.addCriteria({ field: 'jobtypes', ele: '#jobtype_filter', all: 'all' });
+			if (this.params.disable_companies != true) FJS.addCriteria({ field: 'company', ele: '#company_filter', all: 'all' });
+			if (this.params.disable_cats != true) FJS.addCriteria({ field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all' });
+		}
+
+		//
+		// afterFilter wont get fired unless pagination is set...
+		// so when pagination is false but active counts is still active, we set the counts here manually. 
+		//
+		if(this.params.active_counts && !this.params.active_pagination) setInitialCounts(jobs.length);
+
 	}
 
   reformTheJobs(jobs){
@@ -921,3 +999,230 @@ const JobBoardFilteredFeed = class {
 
 }
 window.JobBoardFilteredFeed = JobBoardFilteredFeed;
+
+//
+// general functions for filtered feed
+//
+function hidePagination() {
+	var paginationItems = $("#pagination nav ul").children();
+	if (paginationItems.length == 1) {
+		$("#pagination").hide();
+	} else {
+		$("#pagination").show();
+	}
+}
+function hidePerPage(result) {
+
+	var perPageOptions = $('#per_page select option');
+	const result_count = result.length;
+
+	// loop thru the per page options & hide ones where the jobs results is less than it
+	// ignore 12 as it still makes sense to show 12 when jobs results are less than 12
+	if (perPageOptions.length > 0) {
+		perPageOptions.each(function () {
+
+			var c = $(this);
+
+			// the numbers here should correspond to the values given to the pagination->perPage settings in the the FilterJS object (ignoring 12, the lowest value)
+			if (c.val() == 18) {
+				if (result_count < 18) {
+					c.hide();
+				} else {
+					c.show();
+				}
+			} else if (c.val() == 15) {
+				if (result_count < 15) {
+					c.hide();
+				} else {
+					c.show();
+				}
+			}
+
+		});
+	}
+
+}
+function setInitialCounts(length) {
+	var total = $('#total_jobs'); // get total
+	total.text(length);
+}
+function updateCountsLogic(result, jQ, initial_results, active_search, disable_cats, disable_cities, disable_jobtypes, disable_companies) {
+
+	var total = $('#total_jobs'); // get total
+	var checkboxes = $("#category_criteria :input"); // get checkboxes
+	var theJobtypes = $('#jobtype_filter option'); // check jobtypes
+	var theCompanies = $('#company_filter option'); // check companies
+	var theCities = $('#city_filter option'); // check cities
+	var jobtypeSelected = $('#jobtype_filter option:selected').val(); // check jobtype select box for selections
+	var companySelected = $('#company_filter option:selected').val(); // check company select box for selections
+	var citySelected = $('#city_filter option:selected').val(); // check city select box for selections
+	var searchBox = [];
+	searchBox.length = 0; // default to empty array so .length = 0; allows disable of the searching properly
+	if(active_search) var searchBox = $('#searchbox').val();
+
+	// add jobs count to total
+	total.text(result.length);
+
+	//
+	// updating theCompanies counts...
+	//
+
+	if (disable_companies != true) {
+
+		// only if theCompanies dont have any currently selected (we leave them alone if them get selected)
+		// conditions upon which the companies counts will change
+		if (checkboxes.is(":checked") || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
+
+			// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
+			theCompanies.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'company');
+			});
+
+		}
+
+		// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
+		if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
+
+			// we update the count based on INITIAL results instead
+			theCompanies.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'company');
+			});
+
+		}
+
+	}
+
+	//
+	// updating theJobtypes counts...
+	//
+
+	if (disable_jobtypes != true) {
+
+		// only if theJobtypes dont have any currently selected (we leave them alone if them get selected)
+		// conditions upon which the jobtypes counts will change
+		if (checkboxes.is(":checked") || companySelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
+
+			// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
+			theJobtypes.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'jobtypes');
+			});
+
+		}
+
+		// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
+		if (!checkboxes.is(":checked") && companySelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
+
+			// we update the count based on INITIAL results instead
+			theJobtypes.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'jobtypes');
+			});
+
+		}
+
+	}
+
+	//
+	// updating theCities counts...
+	//
+
+	if (disable_cities != true) {
+
+		// only if theCities dont have any currently selected (we leave them alone if them get selected)
+		// conditions upon which the companies counts will change
+		if (checkboxes.is(":checked") || jobtypeSelected != 'all' || companySelected != 'all' || searchBox.length >= 2) {
+
+			// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
+			theCities.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, result, jQ, 'city');
+			});
+
+		}
+
+		// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
+		if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && companySelected === 'all' && searchBox.length < 2) {
+
+			// we update the count based on INITIAL results instead
+			theCities.each(function () {
+				var c = $(this), count = 0
+				updateOptionsCountsAndHideEmtpies(c, count, initial_results, jQ, 'city');
+			});
+
+		}
+
+	}
+
+	//
+	// updating the cats counts...
+	//
+	if (disable_cats != true) {
+
+		// only if the cats dont have any currently checked (we leave them alone if them get checked)
+		// conditions upon which the cats counts will change
+		if (!checkboxes.is(":checked")) {
+
+			// if company or jobtype or searchbox selected
+			if (companySelected != 'all' || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
+
+				// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
+				checkboxes.each(function () {
+					var c = $(this), count = 0
+					updateCheckboxesCountsAndHideEmtpies(c, count, result, jQ, 'categories');
+				});
+
+			}
+
+		}
+
+		// if all companySelected & all jobtype selected, update the cat counts from on INITIAL results
+		if (companySelected === 'all' && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
+
+			// we update the count based on INITIAL results instead
+			checkboxes.each(function () {
+
+				var c = $(this), count = 0
+
+				updateCheckboxesCountsAndHideEmtpies(c, count, initial_results, jQ, 'categories');
+
+			});
+
+		}
+
+	}
+	
+
+}
+function updateCheckboxesCountsAndHideEmtpies(c, count, result, jQ, key) {
+
+	if (result.length > 0) {
+		jQ.records = result; // set querying from live jobs
+		count = jQ.where({ [key]: c.val() }).count;
+	}
+
+	c.next().text(c.val() + '(' + count + ')');
+
+	if (count == 0) c.parent('label').parent('.checkbox').hide();
+	if (count > 0) c.parent('label').parent('.checkbox').show();
+
+}
+function updateOptionsCountsAndHideEmtpies(c, count, result, jQ, key) {
+
+	if (c.val() != 'all') {
+
+		if (result.length > 0) {
+			jQ.records = result; // set querying from live jobs
+			count = jQ.where({ [key]: c.val() }).count;
+		}
+
+		c.text(c.val() + '(' + count + ')');
+
+		if (count == 0) c.hide();
+		if (count > 0) c.show();
+
+	}
+
+}

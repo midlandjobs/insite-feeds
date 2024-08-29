@@ -132,21 +132,21 @@
 // $offcanvas-bar-color-mode: none;
 
 // 2. Import themed variables & mixins
-@import "src/scss/lib/uikit/variables-theme.scss";
-@import "src/scss/lib/uikit/mixins-theme.scss";
+@import "src/scss/uikit/variables-theme.scss";
+@import "src/scss/uikit/mixins-theme.scss";
 
 // 2. Or import the default variables & mixins
 // @import "assets/scss/lib/uikit/variables.scss";
 // @import "assets/scss/lib/uikit/mixins.scss";
 
 // 3. If importing the theme, now import the themed uikit components (with custom variables) next
-@import "src/scss/lib/uikit/theme/_import.scss";
+@import "src/scss/uikit/theme/_import.scss";
 
 // 4. next, we do any custom mixin overwrites. we can use this themed or not also
 // @import "assets/scss/theme/accordion-mixins.scss";
 
 // 5. Now we Import the main uikit components (regardless of theme)
-@import "src/scss/lib/uikit/_import.base.scss";
+@import "src/scss/uikit/_import.base.scss";
 
 // 6. finally, import our custom sass styles. this is our own custom stuff which can now also use uikit variables
-@import "src/scss/theme/_import.scss";
+@import "src/scss/custom/_import.scss";
