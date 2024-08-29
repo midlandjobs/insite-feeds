@@ -132,9 +132,9 @@ class JsonFromXml {
 // this function is the same between api.js & local.js, the only difference being which JsonFromXml is set above 
 //
 //
-async function fetchJobsJson(url = null, params = {proxy: null, key: null}) {
+async function fetchJobsJson(url = null, proxy = null) {
   try {
-    const obj = new JsonFromXml(url, params.proxy, params.key);
+    const obj = new JsonFromXml(url);
     const response = await obj.fetchFeedJson();
 		if(!response.error){
 			var jobs = fns.jsonToJobs(response);

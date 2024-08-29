@@ -2,6 +2,7 @@ bin
 dev
 bak
 old
+blech
 _bin
 _dev
 _bak
@@ -16,3 +17,4 @@ node_modules
 node_modules/
 package-lock.json
 composer.lock
+jsbuilds

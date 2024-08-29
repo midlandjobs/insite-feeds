@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- site/metas -->
+    <title>Tests - Data (Local)</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../../../public/images/favicon.png" />
+
+    <!-- feeds: jQuery is now required on front rather than included within package -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../../public/js/local/feed.js"></script> 
+    <script>
+      (async function () {
+        var jobsJson = await fetchJobsJson('/feeds/standard.xml');
+        console.log(jobsJson);
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <h1 id="MyTitle">Hello there...</h1>
+
+    <div id="SomeDiv">
+      <p>Some paragraph text...</p>
+    </div>
+
+  </body>
+
+</html>

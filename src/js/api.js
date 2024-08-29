@@ -12,10 +12,10 @@ const fns = require('./_fns.cjs'); // general functions
 //
 class JsonFromXml {
 
-	constructor(url = null, proxy = null, key = null) {
+	constructor(url = null, proxy = null) {
     this.url = url;
     this.proxy = proxy;
-    this.key = key;
+    // this.key = key;
 	}
 
 	async fetchFeedJson() {
@@ -47,20 +47,20 @@ class JsonFromXml {
       }
 
 			// key check, key gets checked again @ proxy
-			if(this.key){
-				if(this.key === '' || fns.isKeyValid(this.key) === false || typeof this.key !== 'string') throw new Error('Bad API key', { cause: 'Please provide a valid API key.' });
-				if(this.key.length < 16) throw new Error('Bad API key', { cause: 'The API key provided is too short.' });
-				if(this.key.length > 32) throw new Error('Bad API key', { cause: 'The API key provided is too long.' });
-			} else {
-				throw new Error('Bad API key', { cause: 'Please provide an API key.' });
-			}
+			// if(this.key){
+			// 	if(this.key === '' || fns.isKeyValid(this.key) === false || typeof this.key !== 'string') throw new Error('Bad API key', { cause: 'Please provide a valid API key.' });
+			// 	if(this.key.length < 16) throw new Error('Bad API key', { cause: 'The API key provided is too short.' });
+			// 	if(this.key.length > 32) throw new Error('Bad API key', { cause: 'The API key provided is too long.' });
+			// } else {
+			// 	throw new Error('Bad API key', { cause: 'Please provide an API key.' });
+			// }
 
 			// do the fetch
 			var response = await fetch(proxy_url, {
 				mode: mode,
-				headers: {
-					'Midland-Jobs-Feeds-Api-Key': this.key
-				},
+				// headers: {
+				// 	'Midland-Jobs-Feeds-Api-Key': this.key
+				// },
 			});
 
 			// response check
@@ -103,9 +103,9 @@ class JsonFromXml {
 // this function is the same between api.js & local.js, the only difference being which JsonFromXml is set above 
 //
 //
-async function fetchJobsJson(url = null, params = {proxy: null, key: null}) {
+async function fetchJobsJson(url = null, proxy = null) {
   try {
-    const obj = new JsonFromXml(url, params.proxy, params.key);
+    const obj = new JsonFromXml(url, proxy);
     const response = await obj.fetchFeedJson();
 		if(!response.error){
 			var jobs = fns.jsonToJobs(response);
