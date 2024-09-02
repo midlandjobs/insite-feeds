@@ -165,9 +165,9 @@ const JobBoardFilteredFeed = class {
 		var filter_callbacks = {
 			afterFilter: function (result, jQ) {
 				var initial_results = jobs; // initial jobs/result before any filtering done to them
-				if(this.params.active_pagination && this.params.active_counts) updateCountsLogic(result, jQ, initial_results, this.params.active_search, this.params.disable_cats, this.params.disable_cities, this.params.disable_jobtypes, this.params.disable_companies);
-				if(this.params.active_pagination) hidePagination();
-				if(this.params.active_pagination && this.params.active_perpage) hidePerPage(result);
+				if(this.params.active_pagination && this.params.active_counts) this.updateCountsLogic(result, jQ, initial_results, this.params.active_search, this.params.disable_cats, this.params.disable_cities, this.params.disable_jobtypes, this.params.disable_companies);
+				if(this.params.active_pagination) this.hidePagination();
+				if(this.params.active_pagination && this.params.active_perpage) this.hidePerPage(result);
 			}.bind(this)
 		};
 
@@ -196,7 +196,7 @@ const JobBoardFilteredFeed = class {
 		// afterFilter wont get fired unless pagination is set...
 		// so when pagination is false but active counts is still active, we set the counts here manually. 
 		//
-		if(this.params.active_counts && !this.params.active_pagination) setInitialCounts(jobs.length);
+		if(this.params.active_counts && !this.params.active_pagination) this.setInitialCounts(jobs.length);
 
 	}
 

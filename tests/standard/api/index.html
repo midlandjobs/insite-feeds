@@ -7,6 +7,10 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="../../../public/images/favicon.png" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <!-- feed styles -->
     <link href="public/css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../public/css/feed.css" />
@@ -44,17 +48,16 @@
         });
         myFeedObj.renderTheJobs('#SomeDiv');
       })();
-
       (async function () {
-        var jobsJsonTwo = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://robertmccormack.com/wp-json/midlandjobs/v1/customFeed');
-        const myFeedObjTwo = new JobBoardFilteredFeed(jobsJsonTwo, {
-          id: 43, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
-          sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
-          scope: 'midlandjobs-wrap', // sets a custom scope to UiKit if UiKit exists. this is necessary for non-conflict css builds like in the plugin
+        var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://robertmccormack.com/wp-json/midlandjobs/v1/customFeed');
+        const myFeedObj = new JobBoardFilteredFeed(jobsJson, {
+          id: 43, 
+          sorting: false,
+          scope: 'midlandjobs-wrap',
           active_filters: true, active_pagination: true, active_perpage: true, active_search: true, active_counts: true,
           disable_cats: false, disable_cities: false, disable_companies: false, disable_jobtypes: false
         });
-        myFeedObjTwo.renderTheJobs('#AnotherDiv');
+        myFeedObj.renderTheJobs('#AnotherDiv');
       })();
     </script>
 
@@ -62,12 +65,16 @@
 
   <body>
 
-    <div id="SomeDiv" class="midlandjobs-wrap feeds">
-      <p>Some paragraph text...</p>
+    <div id="Feed_42">
+      <div id="SomeDiv" class="midlandjobs-wrap feeds">
+        <p>Some paragraph text...</p>
+      </div>
     </div>
 
-    <div id="AnotherDiv" class="midlandjobs-wrap feeds">
-      <p>Some paragraph text...</p>
+    <div id="Feed_43">
+      <div id="AnotherDiv" class="midlandjobs-wrap feeds">
+        <p>Some paragraph text...</p>
+      </div>
     </div>
 
     <script id="main-template" type="text/html">
