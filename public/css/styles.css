@@ -1,0 +1,896 @@
+/* extracted css. html/body styles. loads some font/icons & applies font/text styles to .feeds */
+@font-face {
+  font-family: "footer-social";
+  src: url("footer-social.eot?fxg2qk");
+  src: url("footer-social.eot?fxg2qk#iefix") format("embedded-opentype"), url("footer-social.ttf?fxg2qk") format("truetype"), url("footer-social.woff?fxg2qk") format("woff"), url("footer-social.svg?fxg2qk#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fira-sans-thin {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.fira-sans-extralight {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.fira-sans-light {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.fira-sans-regular {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.fira-sans-medium {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.fira-sans-semibold {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.fira-sans-bold {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.fira-sans-extrabold {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.fira-sans-black {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.fira-sans-thin-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.fira-sans-extralight-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.fira-sans-light-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.fira-sans-regular-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.fira-sans-medium-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.fira-sans-semibold-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.fira-sans-bold-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.fira-sans-extrabold-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.fira-sans-black-italic {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* just some base styles that were being applied out of the initial boostrap/jquery styles. they look nice */
+.feeds {
+  font-family: "Fira Sans", sans-serif;
+  /* background: #f7f7f7; */
+  color: #666;
+}
+
+/* 
+  extracted css
+  scoped: .feeds
+
+  these styles were taken out of midlandjobs.ie. 
+  only the relevant css was extracted using CSS Used. so the full bootstrap & jquery styles dont get loaded. efficient
+  we have scoped these styles to work within a .feeds container, but not the higher specificity .midlandjobs-feeds-wp.feeds used for the uikit styles
+*/
+.feeds a {
+  background-color: transparent;
+}
+.feeds a:active,
+.feeds a:hover {
+  outline: 0;
+}
+.feeds strong {
+  font-weight: 700;
+}
+.feeds h1 {
+  margin: 0.67em 0;
+  font-size: 2em;
+}
+.feeds img {
+  border: 0;
+}
+.feeds svg:not(:root) {
+  overflow: hidden;
+}
+.feeds hr {
+  height: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.feeds input,
+.feeds select {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+.feeds select {
+  text-transform: none;
+}
+.feeds input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.feeds input {
+  line-height: normal;
+}
+.feeds input[type=checkbox] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+.feeds input[type=search] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
+.feeds fieldset {
+  padding: 0.35em 0.625em 0.75em;
+  margin: 0 2px;
+  border: 1px solid silver;
+}
+.feeds legend {
+  border: 0;
+}
+.feeds legend {
+  padding: 0;
+}
+.feeds input,
+.feeds select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.feeds a {
+  color: #337ab7;
+  text-decoration: none;
+}
+.feeds a:focus,
+.feeds a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+.feeds a:focus,
+.feeds input[type=checkbox]:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.feeds img {
+  vertical-align: middle;
+}
+.feeds hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.feeds [role=button] {
+  cursor: pointer;
+}
+.feeds h1,
+.feeds h4 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+.feeds h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.feeds h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.feeds h1 {
+  font-size: 36px;
+}
+.feeds h4 {
+  font-size: 18px;
+}
+.feeds p {
+  margin: 0 0 10px;
+}
+.feeds .text-right {
+  text-align: right;
+}
+.feeds ul {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.feeds ul ul {
+  margin-bottom: 0;
+}
+.feeds blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #eee;
+}
+.feeds blockquote p:last-child {
+  margin-bottom: 0;
+}
+.feeds fieldset,
+.feeds legend {
+  padding: 0;
+  border: 0;
+}
+.feeds fieldset {
+  min-width: 0;
+  margin: 0;
+}
+.feeds legend {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333;
+  border-bottom: 1px solid #e5e5e5;
+}
+.feeds label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.feeds input[type=checkbox] {
+  margin: 1px\9 0 0;
+  line-height: normal;
+}
+.feeds legend {
+  display: block;
+}
+.feeds select[size] {
+  height: auto;
+}
+.feeds .form-control {
+  display: block;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+}
+.feeds .form-control {
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.feeds .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.feeds input[type=search] {
+  -webkit-appearance: none;
+}
+.feeds .checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.feeds .checkbox label {
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+.feeds .checkbox label {
+  min-height: 20px;
+}
+.feeds .checkbox input[type=checkbox] {
+  position: absolute;
+  margin-top: 4px\9;
+  margin-left: -20px;
+}
+.feeds .checkbox + .checkbox {
+  margin-top: -5px;
+}
+.feeds .pagination {
+  display: inline-block;
+}
+.feeds .pagination {
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.feeds .pagination > li {
+  display: inline;
+}
+.feeds .pagination > li > a {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.feeds .pagination > li:first-child > a {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.feeds .pagination > li:last-child > a {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.feeds .pagination > li > a:focus,
+.feeds .pagination > li > a:hover {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.feeds .media {
+  margin-top: 15px;
+}
+.feeds .media:first-child {
+  margin-top: 0;
+}
+.feeds .media,
+.feeds .media-body {
+  overflow: hidden;
+  zoom: 1;
+}
+.feeds .media-body {
+  width: 10000px;
+}
+.feeds .media-object {
+  display: block;
+}
+.feeds .media-right {
+  padding-left: 10px;
+}
+.feeds .media-left {
+  padding-right: 10px;
+}
+.feeds .media-body,
+.feeds .media-left,
+.feeds .media-right {
+  display: table-cell;
+  vertical-align: top;
+}
+.feeds .media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.feeds .well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.feeds .clearfix:after,
+.feeds .clearfix:before {
+  display: table;
+  content: " ";
+}
+.feeds .clearfix:after {
+  clear: both;
+}
+.feeds select.form-control {
+  cursor: pointer;
+  height: 38px;
+}
+.feeds .form-control {
+  text-align: left;
+  height: auto;
+  padding: 8px 12px;
+  color: #000;
+  font-weight: 300;
+  display: block;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: border color 0.3s ease-in-out;
+  -moz-transition: border color 0.3s ease-in-out;
+  -o-transition: border color 0.3s ease-in-out;
+  transition: border color 0.3s ease-in-out;
+}
+.feeds .listing-item {
+  min-height: 104px;
+  background-color: #fff;
+  box-shadow: none;
+  position: relative;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  -o-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+.feeds .listing-item:last-child {
+  margin-bottom: 0;
+}
+.feeds .listing-item:hover {
+  -webkit-box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.08);
+  -ms-box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.08);
+}
+.feeds .listing-item__logo {
+  vertical-align: middle;
+  min-width: 150px;
+  width: 150px;
+  text-align: center;
+  position: relative;
+}
+.feeds .listing-item__logo .media-object:not(.profile__img) {
+  max-width: 125px;
+  max-height: 125px;
+  margin-right: 15px;
+  display: inline-block;
+}
+.feeds .listing-item .media-right {
+  vertical-align: top;
+  padding-right: 21px;
+  min-width: 110px;
+  padding-top: 2px;
+}
+.feeds .listing-item__employment-type {
+  white-space: nowrap;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.feeds .listing-item__date {
+  margin-bottom: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.feeds .listing-item__title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.feeds .listing-item__title a {
+  color: #0068a8;
+  margin-top: 5px;
+  word-break: break-word;
+}
+.feeds .listing-item__info--item {
+  position: relative;
+  padding-right: 25px;
+  margin: 0 25px 0 0;
+  font-weight: 500;
+  display: inline-block;
+}
+.feeds .listing-item__info--item:last-child {
+  padding-right: 0;
+  margin-right: 0;
+}
+.feeds .listing-item__info--item:before {
+  content: "";
+  display: inline-block;
+  width: 19px;
+  height: 17px;
+  position: relative;
+  top: 2px;
+  background-size: 19px 17px;
+  background-repeat: no-repeat;
+  margin-right: 2px;
+}
+.feeds .listing-item__desc {
+  max-height: 44px;
+}
+.feeds .listing-item__desc {
+  text-overflow: ellipsis;
+  margin-top: 8px;
+  padding-right: 21px;
+  line-height: 24px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  max-width: 700px;
+  word-break: break-word;
+}
+.feeds :not(.my-listings) > .listing-item__jobs .listing-item__info {
+  display: table;
+}
+.feeds :not(.my-listings) > .listing-item__jobs .listing-item__info--item-company,
+.feeds :not(.my-listings) > .listing-item__jobs .listing-item__info--item-location {
+  display: inline-block;
+}
+.feeds :not(.my-listings) > .listing-item__jobs .media-right {
+  display: inline-block;
+  float: right;
+  position: relative;
+}
+.feeds .sidebar {
+  float: right;
+}
+.feeds .profile__img-company {
+  border-radius: 6px;
+}
+.feeds .footer-nav__link {
+  -webkit-transition: color 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out;
+  -o-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+}
+.feeds .footer-nav__link:hover {
+  color: #ff6a50;
+  text-decoration: none;
+}
+.feeds .footer-nav__link-social {
+  position: relative;
+}
+.feeds .footer-nav__link-social:before {
+  font-family: "footer-social" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 18px;
+  height: 14px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+  -webkit-transition: background 0.2s ease-out;
+  -moz-transition: background 0.2s ease-out;
+  -o-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out;
+}
+.feeds .footer-nav__link-facebook:before {
+  content: "";
+}
+.feeds .footer-nav__link-twitter:before {
+  content: "";
+  font-size: 12px;
+}
+.feeds .footer-nav__link-instagram:before {
+  content: "";
+  position: relative;
+  top: 1px;
+}
+.feeds .footer-nav__link-in:before {
+  content: "";
+  font-size: 16px;
+  position: relative;
+  top: 1px;
+}
+.feeds .banner {
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+.feeds .banner--right {
+  float: right;
+  width: 120px;
+  max-height: 1200px;
+  height: 100%;
+}
+.feeds .banner--right.banner--search {
+  margin: 45px 0;
+}
+.feeds .well {
+  border-radius: 6px;
+}
+.feeds .link {
+  color: #0068a8;
+  cursor: pointer;
+}
+.feeds .link:hover,
+.feeds .link:focus {
+  color: #0068a8;
+  text-decoration: underline;
+}
+.feeds .listing-item__logo a:hover {
+  color: #0068a8;
+  text-decoration: none;
+}
+.feeds .link,
+.feeds a {
+  color: #0068a8;
+}
+.feeds .listing-item__date {
+  color: rgba(62, 62, 62, 0.3);
+  font-weight: bold;
+}
+.feeds .listing-item__info {
+  color: #3e3e3e;
+  font-size: 16px;
+}
+.feeds .listing-item__info--item-location:before {
+  background-image: url("icon-marker.svg");
+  width: 14px;
+  height: 17px;
+  background-size: 14px 17px;
+}
+.feeds .listing-item__info--item-company {
+  overflow-wrap: break-word;
+}
+.feeds .listing-item__info--item-company:before {
+  background-image: url("icon-company.svg");
+}
+.feeds .listing-item__info--item-salary-range {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: -3px;
+  margin-bottom: 10px;
+}
+.feeds .listing-item__desc {
+  color: #B7B7B7;
+}
+.feeds .listing-item__employment-type {
+  border-radius: 30px;
+  border: 2px solid rgba(0, 104, 168, 0.7);
+  display: block;
+  padding: 7px 15px;
+  color: #0068a8;
+  text-align: center;
+}
+.feeds .footer-nav__link {
+  color: #7e7e7e;
+  font-weight: 500;
+}
+.feeds .form-control {
+  background-color: #fbfbfb;
+  border: 1px solid rgba(44, 62, 80, 0.4);
+  border-radius: 6px;
+}
+.feeds .save-job {
+  z-index: 1;
+}
+.feeds .save-job:before {
+  content: " ";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  -webkit-mask: url("bookmark-regular.svg") no-repeat center;
+  mask: url("bookmark-regular.svg") no-repeat center;
+  background-color: #d8d8d8;
+  z-index: 1;
+}
+.feeds .save-job:hover:before {
+  background-color: #0068a8;
+}
+
+/* extracted css. media queries 
+scoped: .feeds */
+@media print {
+  .feeds a,
+  .feeds a:visited {
+    text-decoration: underline;
+  }
+  .feeds a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  .feeds a[href^="#"]:after {
+    content: "";
+  }
+  .feeds blockquote {
+    border: 1px solid #999;
+  }
+  .feeds blockquote,
+  .feeds img {
+    page-break-inside: avoid;
+  }
+  .feeds img {
+    max-width: 100% !important;
+  }
+  .feeds p {
+    orphans: 3;
+    widows: 3;
+  }
+}
+@media print {
+  .feeds a[href]:after {
+    content: none !important;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item {
+    padding: 19px 15px;
+  }
+}
+@media (max-width: 992px) {
+  .feeds .listing-item__logo {
+    min-width: 170px;
+    width: 170px;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item__logo {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item .media-right {
+    padding-right: 0;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item__date {
+    font-size: 14px;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item__title {
+    font-size: 16px;
+  }
+}
+@media (max-width: 430px) {
+  .feeds .listing-item__info--item {
+    padding-right: 0;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item__info--item {
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+@media (max-width: 992px) {
+  .feeds .listing-item__desc {
+    overflow: hidden;
+    max-width: auto;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .listing-item__desc {
+    padding-left: 0;
+  }
+}
+@media (min-width: 768px) {
+  .feeds :not(.my-listings) > .listing-item__jobs .media-right {
+    padding-left: 50px;
+    min-width: 150px;
+  }
+}
+@media (min-width: 767px) {
+  .feeds .sidebar {
+    width: 306px;
+  }
+}
+@media (max-width: 767px) {
+  .feeds .sidebar {
+    float: left !important;
+  }
+}
+@media (max-width: 992px) {
+  .feeds .banner--right {
+    display: none;
+  }
+}
+@media (min-width: 767px) {
+  .feeds .listing-item .save-job {
+    position: absolute;
+    left: 0;
+  }
+}
+
+/* extras - scoped: .feeds */
+.feeds .uk-grid-xsmall {
+  margin-left: -5px;
+}
+.feeds .uk-grid-xsmall>* {
+  padding-left: 5px;
+}
+.feeds .uk-form-label {
+  font-size: .875rem !important;
+}
+.feeds .cats-accordion .uk-accordion-content {
+  margin-top: 0;
+}
+.feeds {
+  margin: 0 !important;
+}
+.feeds .uk-border-remove {
+  border: none !important;
+}
+.feeds .banner--right.banner--search {
+  margin: 0;
+}
+.feeds .banner--right {
+  float: none;
+  width: auto;
+  max-height: none;
+  height: auto;
+}
+.feeds .banner--right h4 {
+  font-size: 18px;
+  line-height: 1.1;
+}
+.feeds .banner--right h4 {
+  margin: 10px 0 10px 0;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  color: #333;
+  text-transform: none;
+}
+.feeds .banner--right a {
+  color: #0068a8;
+}
+.feeds .banner--right a.footer-nav__link {
+  color: #7e7e7e !important;
+  font-weight: 500 !important;
+}
+.feeds .banner--right a.footer-nav__link:hover {
+  color: #ff6a50 !important;
+  text-decoration: none !important;
+}
