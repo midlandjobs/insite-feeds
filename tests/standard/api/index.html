@@ -12,55 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- feed styles -->
-    <link href="https://midlandjobs.github.io/insite-feeds/public/css/styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://midlandjobs.github.io/insite-feeds/public/css/feed.css" />
-
-    <!-- feeds js: jQuery & UiKit required -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://midlandjobs.github.io/insite-feeds/public/js/api/feed.js"></script> 
-    <script>
-      (async function () {
-        var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://testwp.com/wp-json/midlandjobs/v1/customFeed');
-        const myFeedObj = new JobBoardFilteredFeed(jobsJson, {
-
-          //
-          // base setting/s
-          //
-          id: 99, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
-          sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
-          scope: 'midlandjobs-wrap', // sets a custom scope to UiKit if UiKit exists. this is necessary for non-conflict css builds like in the plugin
-
-          //
-          // filters overall
-          //
-          // what parts of the feeds/filters setup are enabled. e.g filters or pagination. set to false to disable that part
-          active_filters: true, active_pagination: true, active_perpage: true, active_search: true, active_counts: true,
-
-          //
-          // filters controls
-          //
-          // what parts of the filters themselves are enabled/disabled. e.g cats or cities. set to true to disable a filter control
-          // we can also set an array to these to remove specific terms from a filter type e.g disable_cats: ['Marketing','marketing']
-          disable_cats: false, disable_cities: false, disable_companies: false, disable_jobtypes: false
-
-        });
-        myFeedObj.renderTheJobs('#JobsFeed');
-      })();
-    </script>
+    <link href="../../../public/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/css/feed.css" />
 
   </head>
 
   <body>
 
-    <div id="Feed_99">
-      <div id="JobsFeed" class="midlandjobs-wrap feeds">
-        <p>Some paragraph text...</p>
+    <div id="Feed_99" class="midlandjobs-wrap">
+      <div id="JobsFeed" class="feeds">
+        <p>loading jobs...</p>
       </div>
     </div>
 
-    <script id="main-template" type="text/html">
+    <script id="__main-template" type="text/html">
       <div class="uk-section uk-section-small uk-container">
         <div class="" uk-grid>
       
@@ -100,6 +65,248 @@
       </div>
     </script>
 
+    <script id="job-template" type="text/html">
+      <div class="job">
+        <article class="media well listing-item listing-item__jobs listing-item__featured">
+      
+          <% if(companylogo.length > 0) { %>
+          <div class="media-left listing-item__logo">
+            <a href="#modal-job-<%= referencenumber %>" tabindex="-1" uk-toggle>
+              <img class="media-object profile__img-company" src="<%= companylogo %>" alt="<%= company %>">
+            </a>
+          </div>
+          <% } %>
+      
+          <div class="media-body">
+            <div class="media-right text-right">
+
+              <% var dt = new Date(date); %>
+              <div class="listing-item__date">
+                <%= dt.toLocaleDateString('en-GB') %>
+              </div>
+      
+              <% if(jobtypes.length > 0) { %>
+                <% for (let type of jobtypes) { %>
+                  <% if(type == 'Full time') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Part time') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Apprentice') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Permanent') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Contract') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Temporary') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Work from home') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                  <% if(type == 'Flexible') { %>
+                    <span class="listing-item__employment-type"><%= type %></span>
+                  <% } %>
+                <% } %>
+              <% } %>
+      
+            </div>
+
+            <div class="media-heading listing-item__title">
+              <a href="#modal-job-<%= referencenumber %>" class="link" uk-toggle><%= title %></a>
+            </div>
+      
+            <div class="listing-item__info clearfix">
+              <span class="listing-item__info--item listing-item__info--item-company">
+                <%= company %>
+              </span>
+              <span class="listing-item__info--item listing-item__info--item-location">
+                <% if(city.length > 0) { %>
+                  <%= city %><% if(state.length > 0 || country.length > 0) { %>, <% } %>
+                <% } %>
+                <% if(state.length > 0) { %>
+                  <%= state %><% if(country.length > 0) { %>, <% } %>
+                <% } %>
+                <% if(country.length > 0) { %>
+                  <%= country %>
+                <% } %>
+              </span>
+            </div>
+      
+            <% if(description.length > 0) { %>
+            <div class="listing-item__desc"><%= description.replace(/(<([^>]+)>)/gi, "") %></div>
+            <% } %>
+      
+          </div>
+
+          <div id="modal-job-<%= referencenumber %>" uk-modal>
+            <div class="uk-modal-dialog">
+          
+              <!-- modal close -->
+              <button class="uk-modal-close-default uk-light" type="button" uk-close></button>
+          
+              <!-- modal header with title -->
+              <div class="uk-modal-header uk-background-primary uk-light">
+                <h4 class="uk-text-bold uk-h4"><%= title %></h4>
+              </div>
+          
+              <!-- modal body -->
+              <div class="uk-modal-body" uk-overflow-auto>
+
+                <!-- modal body header -->
+                <div class="uk-margin-bottom">
+
+                  <!-- modal body header: first. logo & details -->
+                  <div class="uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
+
+                    <!-- left: companylogo -->
+                    <% if(companylogo.length > 0) { %>
+                      <div class="uk-width-small uk-card-media-left uk-cover-container uk-flex uk-flex-middle uk-flex-center">
+                        <img class="company-logo" src="<%= companylogo %>" alt="">
+                      </div>
+                    <% } %>
+
+                    <!-- right: details. title, company & location -->
+                    <div class="uk-width-expand">
+                      <div class="uk-card-body uk-padding-small">
+                        <div class="uk-grid-collapse" uk-grid>
+
+                          <!-- details: left -->
+                          <div class="uk-width-expand uk-flex uk-flex-middle">
+                            <div class="job-details">
+
+                              <!-- job title -->
+                              <h5 class="uk-text-bold uk-h5">
+                                <a class="uk-link uk-link-heading" href="<%= url %>"><%= _fid %>. <%= title %></a>
+                              </h5>
+
+                              <!-- company -->
+                              <span class="uk-text-small">
+                                <span uk-icon="home" class="uk-margin-small-right"></span> <%= company %>
+                              </span>
+
+                              <br>
+
+                              <!-- location -->
+                              <span class="uk-text-small uk-text-capitalize">
+                                <span uk-icon="location" class="uk-margin-small-right"></span>
+                                <% if(city.length > 0) { %>
+                                  <%= city %><% if(state.length > 0 || country.length > 0) { %>, <% } %>
+                                <% } %>
+                                <% if(state.length > 0) { %>
+                                  <%= state %><% if(country.length > 0) { %>, <% } %>
+                                <% } %>
+                                <% if(country.length > 0) { %>
+                                  <%= country %>
+                                <% } %>
+                              </span>
+
+                              <br>
+
+                              <!-- company website -->
+                              <% if(companywebsite.length > 0) { %>
+                              <span class="uk-text-small">
+                                <span uk-icon="link" class="uk-margin-small-right"></span> <a href="<%= companywebsite %>" target="_blank" class=""><%= companywebsite %></a>
+                              </span>
+                              <% } %>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <hr class="uk-hr uk-margin-small-top uk-margin-small-bottom">
+
+                  <!-- modal body header: second. jobtype & date -->
+                  <div>
+
+                    <!-- jobtype badges -->
+                    <% if(jobtypes.length > 0) { %>
+                      <span class="the-jobtypes">
+                        <% for (let type of jobtypes) { %>
+                          <% if(type != 'Hybrid') { %>
+                            <span class="uk-badge"><%= type %></span>
+                          <% } else { %>
+                            <span class="uk-badge uk-label-success">Hybrid</span>
+                          <% } %>
+                        <% } %>
+                      </span>
+                    <% } %>
+
+                    <!-- date -->
+                    <span class="the-date">
+                      <%  var dt = new Date(date); %>
+                      <span class="uk-text-muted uk-text-small" style="float:right"><%= dt.toLocaleDateString('en-GB') %></span>
+                    </span>
+
+                  </div>
+
+                </div>
+
+                <!-- modal body. job description -->
+                <div>
+                  <%= description %>
+                </div>
+
+              </div>
+          
+              <!-- modal footer. buttons -->
+              <div class="uk-modal-footer uk-text-right">
+                <a href="<%= url %>" target="_blank" class="uk-button uk-button-primary uk-button-small uk-text-capitalize uk-border-rounded">Apply Now <span uk-icon="icon: chevron-right; ratio: .7" class="uk-icon"></span></a>
+              </div>
+          
+            </div>
+          </div>
+      
+        </article>
+      </div>
+    </script>
+
+    <!-- feeds js: jQuery & UiKit required -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../../public/js/api/feed.js"></script> 
+    <script>
+      var eleID = 'JobsFeed';
+      if(document.getElementById(eleID)){
+        (async function () {
+          var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://testwp.com/wp-json/midlandjobs/v1/customFeed');
+          const myFeedObj = new JobBoardFilteredFeed(jobsJson, {
+
+            //
+            // base setting/s
+            //
+            id: 99, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
+            scope: '#Feed_99 .feeds', // sets a custom scope to UiKit if UiKit exists. this is necessary for non-conflict css builds like in the plugin
+            sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
+
+            //
+            // filters overall
+            //
+            // what parts of the feeds/filters setup are enabled. e.g filters or pagination. set to false to disable that part
+            active_filters: true, active_pagination: true, active_perpage: true, active_search: true, active_counts: true,
+
+            //
+            // filters controls
+            //
+            // what parts of the filters themselves are enabled/disabled. e.g cats or cities. set to true to disable a filter control
+            // we can also set an array to these to remove specific terms from a filter type e.g disable_cats: ['Marketing','marketing']
+            disable_cats: false, disable_cities: false, disable_companies: false, disable_jobtypes: false
+
+          });
+          myFeedObj.renderTheJobs('#'+eleID);
+        })();
+      }
+    </script>
   </body>
 
 </html>

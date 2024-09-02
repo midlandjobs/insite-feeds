@@ -819,7 +819,7 @@ scoped: .feeds */
 @media (min-width: 768px) {
   .feeds :not(.my-listings) > .listing-item__jobs .media-right {
     padding-left: 50px;
-    min-width: 150px;
+    min-width: 100px;
   }
 }
 @media (min-width: 767px) {
