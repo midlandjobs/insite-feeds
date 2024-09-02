@@ -124,37 +124,21 @@ const JobBoardFilteredFeed = class {
     //
     this.populateFilters(sel); // populate the filters (using the jobs data)
 
-		//
 		// job template stuff
-		//
 		var _template = false;
 		var _template_html = this.#job_template_static;
 		if (this.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
 		if (this.isElementValid(document.querySelector('#job-template'))) var _template_html = false;
 
-		//
-		// filters: updating the counts - a callback for later (inside FilterJS())
-		//
-		var filter_callbacks = {
-			afterFilter: function (result, jQ) {
-				var initial_results = jobs; // initial jobs/result before any filtering done to them
-				if(this.params.active_pagination && this.params.active_counts) updateCountsLogic(result, jQ, initial_results, this.params.active_search, this.params.disable_cats, this.params.disable_cities, this.params.disable_jobtypes, this.params.disable_companies);
-				if(this.params.active_pagination) hidePagination();
-				if(this.params.active_pagination && this.params.active_perpage) hidePerPage(result);
-			}.bind(this)
-		};
-
-		//
-		// other stuff for the filters configs, selective
-		//
+		// pagination template stuff
+		// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
 		var _pagination_template = false;
 		var _perpage_template = false;
-		// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
 		if (this.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
 		if (this.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
 
-		var the_pagination = false;
 		// setup the pagination & perpage array to be used in FilterJS(), selectivley
+		var the_pagination = false;
 		if(this.params.active_pagination){
 			var the_pagination = {
 				container: '#pagination', // define container for pagi
@@ -171,9 +155,21 @@ const JobBoardFilteredFeed = class {
 			}
 		}
 
-		var the_search = false;
 		// set th ele for the searchbox, to be used in FilterJS()
+		var the_search = false;
 		if(this.params.active_search) var the_search = { ele: '#searchbox' };
+
+		//
+		// filters: updating the counts - a callback for later (inside FilterJS())
+		//
+		var filter_callbacks = {
+			afterFilter: function (result, jQ) {
+				var initial_results = jobs; // initial jobs/result before any filtering done to them
+				if(this.params.active_pagination && this.params.active_counts) updateCountsLogic(result, jQ, initial_results, this.params.active_search, this.params.disable_cats, this.params.disable_cities, this.params.disable_jobtypes, this.params.disable_companies);
+				if(this.params.active_pagination) hidePagination();
+				if(this.params.active_pagination && this.params.active_perpage) hidePerPage(result);
+			}.bind(this)
+		};
 
 		//
 		// activate filters & configs
