@@ -12,23 +12,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- feed styles -->
-    <link href="public/css/styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../public/css/feed.css" />
+    <link href="https://midlandjobs.github.io/insite-feeds/public/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://midlandjobs.github.io/insite-feeds/public/css/feed.css" />
 
     <!-- feeds js: jQuery & UiKit required -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../../../public/js/api/feed.js"></script> 
+    <script type="text/javascript" src="https://midlandjobs.github.io/insite-feeds/public/js/api/feed.js"></script> 
     <script>
       (async function () {
-        var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://robertmccormack.com/wp-json/midlandjobs/v1/customFeed');
+        var jobsJson = await fetchJobsJson('https://midlandjobs.ie/feeds/standard.xml', 'https://testwp.com/wp-json/midlandjobs/v1/customFeed');
         const myFeedObj = new JobBoardFilteredFeed(jobsJson, {
 
           //
           // base setting/s
           //
-          id: 42, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
+          id: 99, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
           sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
           scope: 'midlandjobs-wrap', // sets a custom scope to UiKit if UiKit exists. this is necessary for non-conflict css builds like in the plugin
 
@@ -46,7 +46,7 @@
           disable_cats: false, disable_cities: false, disable_companies: false, disable_jobtypes: false
 
         });
-        myFeedObj.renderTheJobs('#SomeDiv');
+        myFeedObj.renderTheJobs('#JobsFeed');
       })();
     </script>
 
@@ -54,8 +54,8 @@
 
   <body>
 
-    <div id="Feed_42">
-      <div id="SomeDiv" class="midlandjobs-wrap feeds">
+    <div id="Feed_99">
+      <div id="JobsFeed" class="midlandjobs-wrap feeds">
         <p>Some paragraph text...</p>
       </div>
     </div>
