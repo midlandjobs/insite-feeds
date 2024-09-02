@@ -839,12 +839,12 @@ const JobBoardFilteredFeed = class {
 	
 	}
 	setInitialCounts(length) {
-		var total = $('#total_jobs'); // get total
+		var total = $('#total_jobs_'+this.params.id); // get total
 		total.text(length);
 	}
 	updateCountsLogic(result, jQ, initial_results, active_search, disable_cats, disable_cities, disable_jobtypes, disable_companies) {
 	
-		var total = $('#total_jobs'); // get total
+		var total = $('#total_jobs_'+this.params.id); // get total
 		var checkboxes = $("#category_criteria :input"); // get checkboxes
 		var theJobtypes = $('#jobtype_filter option'); // check jobtypes
 		var theCompanies = $('#company_filter option'); // check companies
