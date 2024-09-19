@@ -3,6 +3,7 @@
 // requires
 //
 //
+// var _ = require('lodash'); // Load the full build.
 const fns = require('./_fns.cjs'); // general functions
 
 //

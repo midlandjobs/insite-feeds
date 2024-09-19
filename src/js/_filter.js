@@ -1,5 +1,18 @@
 // import $ from 'jquery'; 
 // import jQuery from 'jquery'; 
+
+// currently, the latest jquery is packaged into bundle via webpack.config.js > ProvidePlugin
+// the package doesnt currently leak into DOM, which should allow other versions
+// to use jquery but not actually package it, you need to add it as an external via webpack.config like so
+// externals: {
+//   jquery: 'jQuery'
+// },
+
+// then for the script to work on front, we need to load in jquery, before we load feed.js. but the jquery we load in must be like so
+// <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+
+// if we wanted to bundle jQuery but also expsose it to the window, we  could use something like expose-loaders
+
  
  /*
  * JsonQuery
@@ -804,6 +817,9 @@
  *
  * Dependency:
  *  jQuery(v1.9 >=)
+ *
+ * * edit - line:900 (template_html added as FJS option)
+ * * edit - custom templating for perpage & pagination parts have been added, wih defaults set
 */
 
 const perpage_template = require('components/perpage.html').default;
@@ -863,7 +879,6 @@ const pagination_template = require('components/pagination.html').default;
       callback.call(context, objs[i], i);
     }
   }
-  
 
   var FJS = function(records, container, options) {
     var self = this;

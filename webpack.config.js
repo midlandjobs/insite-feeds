@@ -33,18 +33,6 @@ module.exports = [
               loader: 'html-loader'
             }
           ]
-        },
-        {
-          test: /\.twig/,
-          type: 'asset/source',
-        },
-        {
-          test: /\.templates\/twig/,
-          type: 'asset/source',
-        },
-        {
-          test: /\.templates\/parts\/twig/,
-          type: 'asset/source',
         }
       ]
     },
@@ -63,9 +51,9 @@ module.exports = [
       })
     ],
 
-    externals: {
-      jquery: 'jQuery'
-    },
+    // externals: {
+    //   jquery: 'jQuery'
+    // },
 
     entry: {
       feed: './src/js/api.js',
@@ -107,18 +95,6 @@ module.exports = [
               loader: 'html-loader'
             }
           ]
-        },
-        {
-          test: /\.twig/,
-          type: 'asset/source',
-        },
-        {
-          test: /\.templates\/twig/,
-          type: 'asset/source',
-        },
-        {
-          test: /\.templates\/parts\/twig/,
-          type: 'asset/source',
         }
       ]
     },
@@ -127,14 +103,7 @@ module.exports = [
       fallback: {
         "stream": require.resolve("stream-browserify"),
         "timers": require.resolve("timers-browserify"),
-        "includes": require.resolve("string.prototype.includes"),
-        // "https": require.resolve("https-browserify"),
-        // "http": require.resolve("stream-http"),
-        // "buffer": require.resolve("buffer/"),
-        // "crypto": require.resolve("crypto-browserify"),
-        // "util": require.resolve("util/"),
-        // "path": require.resolve("path-browserify"),
-        // "url": require.resolve("url/")
+        "includes": require.resolve("string.prototype.includes")
       },
       alias: {
         components: path.resolve(__dirname, 'src', 'js', 'components')
@@ -143,22 +112,15 @@ module.exports = [
     },
 
     plugins: [
-      // Work around for Buffer is undefined: https://github.com/webpack/changelog-v5/issues/10
-      // new webpack.ProvidePlugin({
-      //   Buffer: ['buffer', 'Buffer'],
-      // }),
-      // new webpack.ProvidePlugin({
-      //   process: 'process/browser',
-      // }),
       new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery",
       })
     ],
 
-    externals: {
-      jquery: 'jQuery'
-    },
+    // externals: {
+    //   jquery: 'jQuery'
+    // },
       
     entry: {
       feed: './src/js/local.js',
