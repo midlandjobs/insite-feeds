@@ -323,7 +323,7 @@ const JobBoardFilteredFeed = class {
 				if (this.params.disable_cities != true) FJS.addCriteria({ field: 'city', ele: '#city_filter', all: 'all' });
 				if (this.params.disable_jobtypes != true) FJS.addCriteria({ field: 'jobtypes', ele: '#jobtype_filter', all: 'all' });
 				if (this.params.disable_companies != true) FJS.addCriteria({ field: 'company', ele: '#company_filter', all: 'all' });
-				if (this.params.disable_cats != true) FJS.addCriteria({ field: 'categories', ele: '#categories_criteria input:checkbox', all: 'all' });
+				if (this.params.disable_cats != true) FJS.addCriteria({ field: 'categories', ele: '#cat_filter input:checkbox'});
 			}
 
 			//
@@ -551,8 +551,8 @@ const JobBoardFilteredFeed = class {
 				}
 	
 				// render the new data now into the filters
-				// if (this.params.active_filters) this.renderCheckboxesTemplate(unique_categories, '#categories_criteria');
-				if (this.params.active_filters) this.renderDynamicComponent(unique_categories, this.#checkbox_template_static, 'checkbox-template', '#categories_criteria', sel);
+				// if (this.params.active_filters) this.renderCheckboxesTemplate(unique_categories, '#cat_filter');
+				if (this.params.active_filters) this.renderDynamicComponent(unique_categories, this.#checkbox_template_static, 'checkbox-template', '#cat_filter', sel);
 
 			}
 			
@@ -780,126 +780,116 @@ const JobBoardFilteredFeed = class {
 	// continue from here..... remove jquery....  tidy up....
 	updateCounts(result, jQ, initial_results) {
 	
+		// cast this as self
 		var self = this;
-		var total = $('#total_jobs_'+this.params.id); // get total
-		var checkboxes = $("#category_criteria :input"); // get checkboxes
-		var theJobtypes = $('#jobtype_filter option'); // check jobtypes
-		// var theCompanies = $('#company_filter option'); // check companies
-		var theCompanies = document.querySelectorAll('#company_filter option'); // check companies
-		var theCities = $('#city_filter option'); // check cities
-		var jobtypeSelected = $('#jobtype_filter option:selected').val(); // check jobtype select box for selections
-		var companySelected = $('#company_filter option:selected').val(); // check company select box for selections
-		var citySelected = $('#city_filter option:selected').val(); // check city select box for selections
+
+		// total filters vars
+		var total = $('#total_jobs_'+this.params.id); // get total JQUERYYYYY
+		total.text(result.length); // add jobs count to total
+
+		// search filters vars
 		var searchBox = [];
 		searchBox.length = 0; // default to empty array so .length = 0; allows disable of the searching properly
 		if(self.params.active_search) var searchBox = $('#searchbox').val();
-	
-		// add jobs count to total
-		total.text(result.length);
-	
+
+		// jobtypes filters vars
+		var jobtypesFilterEle = document.getElementById('jobtype_filter');
+		var jobtypesFilterOptions = document.querySelectorAll('#jobtype_filter option');
+		var jobtypesSelectedFilterOption = jobtypesFilterEle.selectedOptions[0].value;
+
+		// companies filters vars
+		var companiesFilterEle = document.getElementById('company_filter');
+		var companiesFilterOptions = document.querySelectorAll('#company_filter option');
+		var companiesSelectedFilterOption = companiesFilterEle.selectedOptions[0].value;
+
+		// cities filters vars
+		var citiesFilterEle = document.getElementById('city_filter');
+		var citiesFilterOptions = document.querySelectorAll('#city_filter option');
+		var citiesSelectedFilterOption = citiesFilterEle.selectedOptions[0].value;
+
+		// // var companiesFilterOptions = $('#company_filter option'); // check companies
+		// var companiesFilterOptions = document.querySelectorAll('#company_filter option'); // check companies
+		// // var citiesFilterOptions = $('#city_filter option'); // check cities
+		// var citiesFilterOptions = document.querySelectorAll('#city_filter option'); // check companies
+		// var companiesSelectedFilterOption = $('#company_filter option:selected').val(); // check company select box for selections
+		// // var companiesSelectedFilterOption = document.querySelector('#company_filter option:selected').value; // check jobtype select box for selections
+		// var citiesSelectedFilterOption = $('#city_filter option:selected').val(); // check city select box for selections
+		// // var citiesSelectedFilterOption = document.querySelector('#city_filter option:selected').value; // check jobtype select box for selections
+
+		// categories filters vars
+		// var checkboxes = $("#category_criteria :input");
+		var catsFilterEle = document.getElementById('cat_filter');
+		var catsFilterCheckboxes = document.querySelectorAll("#cat_filter input");
+		var catsSelectedFilterCheckboxes = document.querySelectorAll('#cat_filter input:checked');
+
+		var catFilterSelected = (catsSelectedFilterCheckboxes.length > 0);
+		var jobtypesFilterSelected = (jobtypesSelectedFilterOption != 'all');
+		var companiesFilterSelected = (companiesSelectedFilterOption != 'all');
+		var citiesFilterSelected = (citiesSelectedFilterOption != 'all');
+		var searchFilterSelected = (searchBox.length >= 2);
+
+		var catFilterUnselected = (catsSelectedFilterCheckboxes.length <= 0);
+		var jobtypesFilterUnselected = (jobtypesSelectedFilterOption === 'all');
+		var companiesFilterUnselected = (companiesSelectedFilterOption === 'all');
+		var citiesFilterUnselected = (citiesSelectedFilterOption === 'all');
+		var searchFilterUnselected = (searchBox.length < 2);
+
 		//
-		// updating theCompanies counts...
+		// updating companiesFilterOptions counts...
 		//
 	
 		if (self.params.disable_companies != true) {
-	
-			// only if theCompanies dont have any currently selected (we leave them alone if them get selected)
-			// conditions upon which the companies counts will change
-			if (checkboxes.is(":checked") || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
-	
-				// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-				// theCompanies.each(function () {
-				// 	var c = $(this), count = 0;
-				// 	self.updateOptions(c, count, result, jQ, 'company');
-				// });
 
-				console.log(theCompanies);
-				theCompanies.forEach(function(item, index, arr) {
-					// arr[index] = item * 10;
-					var c = item,  count = 0;
-					self.updateOptions(c, count, result, jQ, 'company');
+			if (catFilterUnselected && jobtypesFilterUnselected && citiesFilterUnselected && searchFilterUnselected) {
+				companiesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, initial_results, jQ, 'company'); // we update the count based on INITIAL results
 				})
-
-
 			}
 	
-			// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-			if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
-	
-				// we update the count based on INITIAL results instead
-				// theCompanies.each(function () {
-				// 	var c = $(this), count = 0;
-				// 	self.updateOptions(c, count, initial_results, jQ, 'company');
-				// });
-
-				theCompanies.forEach(function(item, index, arr) {
-					// arr[index] = item * 10;
-					var c = item,  count = 0;
-					self.updateOptions(c, count, initial_results, jQ, 'company');
+			else {
+				companiesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, result, jQ, 'company'); // we update the count based on LATEST results instead
 				})
-	
 			}
 	
 		}
 	
 		//
-		// updating theJobtypes counts...
+		// updating jobtypesFilterOptions counts...
 		//
 	
 		if (self.params.disable_jobtypes != true) {
-	
-			// only if theJobtypes dont have any currently selected (we leave them alone if them get selected)
-			// conditions upon which the jobtypes counts will change
-			if (checkboxes.is(":checked") || companySelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
-	
-				// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-				theJobtypes.each(function () {
-					var c = $(this), count = 0;
-					self.updateOptions(c, count, result, jQ, 'jobtypes');
-				});
-	
+			
+			if (catFilterUnselected && companiesFilterUnselected && citiesFilterUnselected && searchFilterUnselected) {
+				jobtypesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, initial_results, jQ, 'jobtypes'); // we update the count based on INITIAL results
+				})
 			}
 	
-			// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-			if (!checkboxes.is(":checked") && companySelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
-	
-				// we update the count based on INITIAL results instead
-				theJobtypes.each(function () {
-					var c = $(this), count = 0;
-					self.updateOptions(c, count, initial_results, jQ, 'jobtypes');
-				});
-	
+			else {
+				jobtypesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, result, jQ, 'jobtypes'); // we update the count based on LATEST results instead
+				})
 			}
 	
 		}
 	
 		//
-		// updating theCities counts...
+		// updating citiesFilterOptions counts...
 		//
 	
 		if (self.params.disable_cities != true) {
-	
-			// only if theCities dont have any currently selected (we leave them alone if them get selected)
-			// conditions upon which the companies counts will change
-			if (checkboxes.is(":checked") || jobtypeSelected != 'all' || companySelected != 'all' || searchBox.length >= 2) {
-	
-				// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-				theCities.each(function () {
-					var c = $(this), count = 0;
-					self.updateOptions(c, count, result, jQ, 'city');
-				});
-	
+
+			if (catFilterUnselected && jobtypesFilterUnselected && companiesFilterUnselected && searchFilterUnselected) {
+				citiesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, initial_results, jQ, 'city'); // we update the count based on INITIAL results
+				})
 			}
 	
-			// if all cats checkboxes not checked & all company selected & search box not filled, update the jobtype counts from on INITIAL results
-			if (!checkboxes.is(":checked") && jobtypeSelected === 'all' && companySelected === 'all' && searchBox.length < 2) {
-	
-				// we update the count based on INITIAL results instead
-				theCities.each(function () {
-					var c = $(this), count = 0;
-					self.updateOptions(c, count, initial_results, jQ, 'city');
-				});
-	
+			else {
+				citiesFilterOptions.forEach(function(item) {
+					self.updateOptions(item, 0, result, jQ, 'city'); // we update the count based on LATEST results instead
+				})
 			}
 	
 		}
@@ -908,36 +898,22 @@ const JobBoardFilteredFeed = class {
 		// updating the cats counts...
 		//
 		if (self.params.disable_cats != true) {
+
+			catsFilterCheckboxes.forEach(function(item) {
+				self.updateCheckboxes(item, 0, result, jQ, 'categories'); // we update the count based on LATEST results instead
+			})
+
+			// if (jobtypesFilterUnselected && companiesFilterUnselected && citiesFilterUnselected && searchFilterUnselected) {
+			// 	catsFilterCheckboxes.forEach(function(item) {
+			// 		self.updateCheckboxes(item, 0, initial_results, jQ, 'categories'); // we update the count based on INITIAL results
+			// 	})
+			// }
 	
-			// only if the cats dont have any currently checked (we leave them alone if them get checked)
-			// conditions upon which the cats counts will change
-			if (!checkboxes.is(":checked")) {
-	
-				// if company or jobtype or searchbox selected
-				if (companySelected != 'all' || jobtypeSelected != 'all' || citySelected != 'all' || searchBox.length >= 2) {
-	
-					// update the cat counts on each cat checkbox from the NEW/LIVE/LATEST results
-					checkboxes.each(function () {
-						var c = $(this), count = 0;
-						self.updateCheckboxes(c, count, result, jQ, 'categories');
-					});
-	
-				}
-	
-			}
-	
-			// if all companySelected & all jobtype selected, update the cat counts from on INITIAL results
-			if (companySelected === 'all' && jobtypeSelected === 'all' && citySelected === 'all' && searchBox.length < 2) {
-	
-				// we update the count based on INITIAL results instead
-				checkboxes.each(function () {
-	
-					var c = $(this), count = 0;
-					self.updateCheckboxes(c, count, initial_results, jQ, 'categories');
-	
-				});
-	
-			}
+			// else if (jobtypesFilterSelected || companiesFilterSelected || citiesFilterSelected || searchFilterSelected) {
+			// 	catsFilterCheckboxes.forEach(function(item) {
+			// 		self.updateCheckboxes(item, 0, result, jQ, 'categories'); // we update the count based on LATEST results instead
+			// 	})
+			// }
 	
 		}
 		
@@ -949,13 +925,16 @@ const JobBoardFilteredFeed = class {
 
 		if (result.length > 0) {
 			jQ.records = result; // set querying from live jobs
-			count = jQ.where({ [key]: c.val() }).count;
+			count = jQ.where({ [key]: c.value }).count;
 		}
 	
-		c.next().text(c.val() + '(' + count + ')');
+		//c.next().text(c.val() + '(' + count + ')');
+		c.nextElementSibling.innerHTML = c.value + '(' + count + ')';
 	
-		if (count == 0) c.parent('label').parent('.checkbox').hide();
-		if (count > 0) c.parent('label').parent('.checkbox').show();
+		// if (count == 0) c.parent('label').parent('.checkbox').hide();
+		// if (count > 0) c.parent('label').parent('.checkbox').show();
+		if (count == 0) c.closest('.checkbox').style.display = 'none';
+		if (count > 0) c.closest('.checkbox').style.display = 'block';
 	
 	}
 
@@ -971,11 +950,8 @@ const JobBoardFilteredFeed = class {
 	
 			c.innerHTML = c.value + '(' + count + ')';
 	
-			if(count == 0 && typeof c !== "undefined"){
-				console.log(c.value);
-				c.style.display = 'none';
-			}
-			if (count > 0) c.style.display = 'block';
+			if(count == 0) c.style.display = 'none';
+			if(count > 0) c.style.display = 'block';
 	
 		}
 	

@@ -26,6 +26,10 @@
  * * edit - line:792 ('this' changed to 'window')
  *
 */
+
+//
+// added from lib/json_query.js
+//
  
 (function(window) {
 
@@ -822,14 +826,14 @@
  * * edit - custom templating for perpage & pagination parts have been added, wih defaults set
 */
 
-const perpage_template = require('components/perpage.html').default;
-const pagination_template = require('components/pagination.html').default;
-
 (function($, window, document) {
 
   "use strict";
 
-  
+  //
+  // added from template.js
+  //
+
   //View Template
   // Ref: Underscopre.js
   //JavaScript micro-templating, similar to John Resig's implementation.
@@ -873,12 +877,19 @@ const pagination_template = require('components/pagination.html').default;
     return data ? func(data) : function(data) { return func(data) };
   };
   
+  //
+  // added from utils.js
+  //
 
   function each (objs, callback, context){
     for (var i = 0, l = objs.length; i < l; i++) {
       callback.call(context, objs[i], i);
     }
   }
+
+  //
+  // original filter.js
+  //
 
   var FJS = function(records, container, options) {
     var self = this;
@@ -896,6 +907,9 @@ const pagination_template = require('components/pagination.html').default;
   
     this.setTemplate(this.opts.template)
     
+    //
+    // added custom 'template_html' option to filterJs
+    //
     if(this.opts.template_html) {
       this.setTemplatePre(this.opts.template_html)
     }
@@ -1437,11 +1451,14 @@ const pagination_template = require('components/pagination.html').default;
     var self = this,
     opts = this.opts.pagination;
 
-    var original_opts_per_page = true;
-    if(!opts.perPage) var original_opts_per_page = false;
-  
+    //
+    // custom code here
+    //
     if(!opts.perPage){
+      this.opts.pagination.perpage_original = false;
       opts.perPage = {}
+    } else {
+      this.opts.pagination.perpage_original = true;
     }
   
     if(!opts.perPage.values){
@@ -1458,7 +1475,7 @@ const pagination_template = require('components/pagination.html').default;
       }else{
         self.show(self.lastResult())
       }
-    }, original_opts_per_page)
+    })
   
     this.filter();
   };
@@ -1492,6 +1509,10 @@ const pagination_template = require('components/pagination.html').default;
       }
     }
   };
+
+  //
+  // added custom function
+  //
   
   F.setTemplatePre = function(template, rebuild) {
     if(template){
@@ -1505,15 +1526,19 @@ const pagination_template = require('components/pagination.html').default;
     }
   };
 
-  var Paginator = function(recordsCount, opts, onPagination, original_opts_per_page) {
+  //
+  // added from paginator.js
+  //
+
+  var Paginator = function(recordsCount, opts, onPagination) {
     var paginationView;
   
     this.recordsCount = recordsCount;;
     this.opts = opts;
     this.$container = $(this.opts.container);
   
-    if(opts.paginationView){
-      paginationView = $(opts.paginationView).html();
+    if(this.opts.paginationView){
+      paginationView = $(this.opts.paginationView).html();
     } else {
       paginationView = views.pagination;
     }
@@ -1522,7 +1547,7 @@ const pagination_template = require('components/pagination.html').default;
   
     this.currentPage = 1;
     this.onPagination = onPagination;
-    this.initPerPage(original_opts_per_page);
+    this.initPerPage(); // custom code
     this.render();
     this.bindEvents();
   };
@@ -1636,7 +1661,8 @@ const pagination_template = require('components/pagination.html').default;
     return { currentPage: this.currentPage, totalPages: total, pages: makePageArray(start, end), self: this };
   },
   
-  P.initPerPage = function(original_opts_per_page){
+  P.initPerPage = function(){
+    var perpage_original = this.opts.pagination.perpage_original;
     var opts = this.opts.perPage,
     template,
     html,
@@ -1644,7 +1670,7 @@ const pagination_template = require('components/pagination.html').default;
     event_type,
     self = this;
 
-    if(!original_opts_per_page){
+    if(!perpage_original){
       
       self.setPerPage(12);
 
@@ -1674,6 +1700,9 @@ const pagination_template = require('components/pagination.html').default;
     this.setCurrentPage(this.currentPage);
   }
   
+  //
+  // added from jquery_fn.js
+  //
 
   $.fn.filterjs = function(records, options) {
     var $this = $(this);
@@ -1684,7 +1713,9 @@ const pagination_template = require('components/pagination.html').default;
   };
   
   
-
+  //
+  // added from main.js
+  //
 
   var list = [];
   var views = [];
@@ -1700,8 +1731,12 @@ const pagination_template = require('components/pagination.html').default;
 
   window.FilterJS = FilterJS;
 
-  views['pagination'] = pagination_template; 
-  views['per_page'] = perpage_template; 
+  views['pagination'] = require('components/perpage.html').default; // changed from main.js
+  views['per_page'] = require('components/pagination.html').default; // changed from main.js
+
+  //
+  // added from auto.js
+  //
 
   /*
    * Find html tag and parse options for filter
@@ -1771,8 +1806,68 @@ const pagination_template = require('components/pagination.html').default;
   
     return fjs
   };
-  
-  
 
+  //
+  // added from sorting.js
+  //
+
+  var Sort = function(opts, onSortEvent) {
+    this.opts = opts;
+  
+    if(!this.opts.default_sort){
+      this.opts.default_sort = 'desc';
+    }
+  
+    this.fields = {};
+    this.onSortEvent = onSortEvent;
+  };
+  
+  var S = Sort.prototype;
+  
+  S.addSorting = function(selector, field, order){
+    if(!order){
+      order = this.order.default_sort; 
+    }
+  
+    var opts = { 
+      field: field, 
+      selector: selector, 
+      order: order, 
+      toggle: false,
+      enable: true 
+    };
+  
+    this.fields[fields] = opts;
+    this.bindEvent(opts);
+  };
+  
+  S.bindEvents = function(opts){
+    var self = this, 
+        event_type,
+        $ele = $(opts.selector);
+  
+    if(!opts.event_type){
+     event_type = $ele.tagName == 'SELECT' ? 'change' : 'click';
+    }
+  
+    $ele.data('sort', opts.field);
+  
+    $ele.on(event_type, { field: opts.field }, function(e){
+      var f = self.field[e.data.field]
+  
+      if(f.toggle){
+        f.order = f.order == 'desc' ? 'asc' : 'desc';
+      }
+  
+      self.onSortEvent(f);
+      e.preventDefault();
+    });
+  };
+  
+  S.disableAll = function(){
+    $.each(this.field, function(f, opts){
+      opts.enable = false;
+    });
+  }
 
 })( jQuery, window , document );
