@@ -1451,14 +1451,10 @@
     var self = this,
     opts = this.opts.pagination;
 
-    //
-    // custom code here
-    //
+    this.opts.pagination.perPageOrigin = true;
     if(!opts.perPage){
-      this.opts.pagination.perpage_original = false;
-      opts.perPage = {}
-    } else {
-      this.opts.pagination.perpage_original = true;
+      opts.perPage = {};
+      this.opts.pagination.perPageOrigin = false; // custom code here
     }
   
     if(!opts.perPage.values){
@@ -1662,7 +1658,6 @@
   },
   
   P.initPerPage = function(){
-    var perpage_original = this.opts.pagination.perpage_original;
     var opts = this.opts.perPage,
     template,
     html,
@@ -1670,7 +1665,7 @@
     event_type,
     self = this;
 
-    if(!perpage_original){
+    if(!this.opts.perPageOrigin){
       
       self.setPerPage(12);
 

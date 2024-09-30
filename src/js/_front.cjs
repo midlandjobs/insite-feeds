@@ -23,7 +23,8 @@ if(typeof UIkit !== 'undefined') window.UIkit = UIkit; // Make uikit available i
 // requires jquery. can deconvert from jquery at a later point
 //
 //
-require('./_filter.js');
+// require('./_filter.js');
+require('./_old/_filter.js');
 
 //
 //
