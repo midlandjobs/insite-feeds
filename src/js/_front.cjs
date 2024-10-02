@@ -23,8 +23,12 @@ if(typeof UIkit !== 'undefined') window.UIkit = UIkit; // Make uikit available i
 // requires jquery. can deconvert from jquery at a later point
 //
 //
-// require('./_filter.js');
-require('./_old/_filter.js');
+
+// stuff in json_query is made available to window
+require('./filter/json_query.js');
+
+// stuff in main is made available to window
+require('./filter/main.js');
 
 //
 //
@@ -59,26 +63,33 @@ const JobBoardFilteredFeed = class {
 
 	constructor(jobs = [], params = { 
 
-		id: null, // can be null or string/int. for template overrides you need to set an ID. for multiple feeds on a page (and with template overrides), you need to set a unique ID for each feed.
-		scope: null, // for uikit scoping
+		//  for template overrides & multiple feeds on a page, you need to set a unique ID for each feed.
+		id: null, // can be null or string/int.
 
-		sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'... remove this or set to false to leave sorting as default
+		// sorting settings - remove or set to false to keep jobs order as it comes (default)
+		sorting: false, // possible settings: 'title', 'date', 'referencenumber' & 'random'
 
-		// decide whats active
-		active_filters: true, 
-		active_pagination: true, 
-		active_perpage: true, 
-		active_search: true, 
-		active_counts: true,
+		// query settings, filter the results
+		query_by: null,
 
-		// decide whats disabled
+		// pagination settings
+		active_pagination: true,
+		active_perpage: true,
+
+		// filters settings
+		active_filters: true,
 		disable_cats: false, 
 		disable_cities: false, 
 		disable_companies: false, 
 		disable_jobtypes: false,
 
-		// filter the results
-		query_by: null
+		// search settings
+		active_search: true,
+
+		// count settings
+		active_counts: true,
+
+		scope: null // for uikit scoping
 
 	}){
 
@@ -249,9 +260,10 @@ const JobBoardFilteredFeed = class {
 				if (fns.isElementValid(document.querySelector('#pagination-template'+'_'+this.params.id))) var _pagination_template = '#pagination-template'+'_'+this.params.id;
 
 				var the_pagination = {
-					container: '#pagination', // define container for pagi
-					visiblePages: 5, // set init visible pages
+					container: '#pagination', // define container for pagination
+					visiblePages: 5, // set init visible pages within the pagination
 					paginationView: _pagination_template,
+					initPerPage: 12, // set an initial per page count (in case where perPage below is false/not set)
 					perPage: false
 				};
 
@@ -309,7 +321,7 @@ const JobBoardFilteredFeed = class {
 			//
 			var FJS = FilterJS(jobs, '#jobs_'+this.params.id, {
 				template_html: _template_html, // html. define static/default html template used for each job. 
-				template: _template, // selector for job template override. set this to false to use template_html below
+				template: _template, // selector for job template override. set this to false to use static template_html instead
 				search: the_search, // define search
 				pagination: the_pagination, // define pagination & perpage
 				callbacks: filter_callbacks, // callbacks after filtering
@@ -773,8 +785,9 @@ const JobBoardFilteredFeed = class {
 
 	// remove jquery....
 	setCounts(length) {
-		if(getElementById('total_jobs_'+this.params.id)){
-			total.textContent(length);
+		if(document.getElementById('total_jobs_'+this.params.id)){
+			var total = document.getElementById('total_jobs_'+this.params.id); // get total
+			total.innerHTML = length;
 		}
 	}
 
