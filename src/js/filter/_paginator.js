@@ -1,8 +1,8 @@
 // requires
 const templateBuilder = require('./_template.js');
 const views = [];
-views['pagination'] = require('../components/pagination.html').default; 
-views['per_page'] = require('../components/perpage.html').default;
+views['pagination'] = require('../components/pagination/pagination.html').default; 
+views['per_page'] = require('../components/pagination/perpage.html').default;
 
 //
 // paginator.js
