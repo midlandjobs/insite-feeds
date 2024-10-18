@@ -13,8 +13,8 @@ const fns = require('./_fns.cjs'); // general functions
 //
 // const UIkit = require('uikit');
 // const Icons = require('uikit/dist/js/uikit-icons');
-if(typeof UIkit !== 'undefined' && typeof Icons !== 'undefined') UIkit.use(Icons); // use the Icon plugin
-if(typeof UIkit !== 'undefined') window.UIkit = UIkit; // Make uikit available in window for inline scripts
+if (typeof UIkit !== 'undefined' && typeof Icons !== 'undefined') UIkit.use(Icons); // use the Icon plugin
+if (typeof UIkit !== 'undefined') window.UIkit = UIkit; // Make uikit available in window for inline scripts
 
 //
 //
@@ -43,11 +43,11 @@ require('./filter/main.js');
 //
 const JobBoardFilteredFeed = class {
 	#jobs;
-	constructor(jobs = [], params = { 
+	constructor(jobs = [], params = {
 
 		// for template overrides & multiple feeds on a page, we need to set a unique ID for each feed
 		// null|string/int
-		id: null, 
+		id: null,
 
 		// sorting settings - remove or set to false to keep jobs order as it comes (default)
 		// possible settings: 'title', 'date', 'referencenumber' & 'random'
@@ -70,7 +70,7 @@ const JobBoardFilteredFeed = class {
 
 		scope: null // for uikit scoping
 
-	}){
+	}) {
 
 		//
 		// JsonQuery test
@@ -78,23 +78,23 @@ const JobBoardFilteredFeed = class {
 
 		var movies = [
 			{
-				"name":"Once Upon a Time in the West",
-				"rating":8.7,
-				"director":"Sergio Leone",
-				"year":1968,
+				"name": "Once Upon a Time in the West",
+				"rating": 8.7,
+				"director": "Sergio Leone",
+				"year": 1968,
 				"actor":
-				"Henry Fonda"
+					"Henry Fonda"
 			},
 			{
-				"name":"Terminator 2: Judgment Day",
-				"rating":8.6,
-				"director":"James Cameron",
-				"year":1991,
-				"actor":"Arnold Schwarzenegger"
+				"name": "Terminator 2: Judgment Day",
+				"rating": 8.6,
+				"director": "James Cameron",
+				"year": 1991,
+				"actor": "Arnold Schwarzenegger"
 			},
 		];
 		var Movie = JsonQuery(movies); //Initialize the Query Engine
-		var movieResults = Movie.where({'rating': 8.6}).exec();
+		var movieResults = Movie.where({ 'rating': 8.6 }).exec();
 		// console.log('test data');
 		// console.log(movieResults);
 		// console.log('end of test data');
@@ -140,7 +140,7 @@ const JobBoardFilteredFeed = class {
 		//
 		// all optionals or defaults can be done thru params
 		//
-    this.params = params;
+		this.params = params;
 
 		//
 		// outs (reformed jobs & filter data)
@@ -148,94 +148,94 @@ const JobBoardFilteredFeed = class {
 		// reform the jobs data according to params, before anything else happens with it. 
 		// defined after this.params!!!
 		//
-    this.jobs = this.reformTheJobs();
+		this.jobs = this.reformTheJobs();
 		this.filters = this.dataForFilters();
 
 		//
 		// scope
 		//
-		if(this.params.scope && typeof UIkit != "undefined") UIkit.container = this.params.scope;
+		if (this.params.scope && typeof UIkit != "undefined") UIkit.container = this.params.scope;
 
 	}
 
-  //
-  //
-  // setup methods
-  //
-  //
+	//
+	//
+	// setup methods
+	//
+	//
 
 	// @ constructor() - this.#jobs || this.params || this.params.filters || this.params.query_by
-  reformTheJobs(){
-		var jobs =  this.#jobs;
-    if (jobs) {
+	reformTheJobs() {
+		var jobs = this.#jobs;
+		if (jobs) {
 
-      // loop thru & manipulate the job items data here
-      for(let job of jobs) {
+			// loop thru & manipulate the job items data here
+			for (let job of jobs) {
 
 				//
 				// programmatic reformations according to filter params
 				//
 
 				// reform the job data programmatcially via the filter params
-				if(this.params.filters && this.params.filters.length > 0) job = this._reformJobDataByFilters(job);
+				if (this.params.filters && this.params.filters.length > 0) job = this._reformJobDataByFilters(job);
 
 				//
 				// additional reformations, just for neatness 
 				//
 
-        // reform company website urls to include http/s
-        if (job.companywebsite.length > 0) {
-          const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
-          const companywebsiteWithHttp = withHttp(job.companywebsite);
-          job.companywebsite = companywebsiteWithHttp;
-        }
+				// reform company website urls to include http/s
+				if (job.companywebsite.length > 0) {
+					const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
+					const companywebsiteWithHttp = withHttp(job.companywebsite);
+					job.companywebsite = companywebsiteWithHttp;
+				}
 
 				// statically/manually change up some of the text in the jobtypes
-				if(job.jobtypes){
-					job.jobtypes.forEach(function(item, index, arr) {
-						if(item == 'Full time') arr[index] = 'Full-time';
-						if(item == 'Part time') arr[index] = 'Part-time';
-						if(item == 'Live-In Employee') arr[index] = 'Live-in';
+				if (job.jobtypes) {
+					job.jobtypes.forEach(function (item, index, arr) {
+						if (item == 'Full time') arr[index] = 'Full-time';
+						if (item == 'Part time') arr[index] = 'Part-time';
+						if (item == 'Live-In Employee') arr[index] = 'Live-in';
 					});
 				}
 
 				// empty city? just set it as midlands
 				if (Object.keys(job.city).length == 0) job.city = 'Midlands';
 
-        // more...
-        // if (job.description.length > 0) {}
-  
-      }
+				// more...
+				// if (job.description.length > 0) {}
+
+			}
 
 			// filter the jobs here...
-			if(this.params.query_by){
+			if (this.params.query_by) {
 				console.log('query_by: exists');
-				if(fns.isLiteralObject(this.params.query_by)){
+				if (fns.isLiteralObject(this.params.query_by)) {
 					console.log('query_by: isLiteralObject');
 					// good to go & check the data
 				}
 			}
 
-      // sort the jobs according params
+			// sort the jobs according params
 			jobs = this._sortTheJobs(jobs);
 
-    }
-    return jobs;
-  }
+		}
+		return jobs;
+	}
 
 	// @ constructor() - this.jobs || this.params || this.params.filters
-	dataForFilters(){
+	dataForFilters() {
 		var data = [];
 		var jobs = this.jobs;
 		var filters = this.params.filters;
 
-		if(filters && filters.length > 0){
-			filters.forEach(function(item) {
+		if (filters && filters.length > 0) {
+			filters.forEach(function (item) {
 
 				const options = [];
 
 				for (let job of jobs) {
-					if(!item.setArray){
+					if (!item.setArray) {
 						options.push(job[item.key]);
 					} else {
 						for (let type of job[item.plural.toLowerCase()]) {
@@ -249,7 +249,7 @@ const JobBoardFilteredFeed = class {
 				});
 
 				var unique_options = unique_options.filter(function (value, index, array) {
-					if(!item.removeTerms.includes(value)) return value;
+					if (!item.removeTerms.includes(value)) return value;
 				}.bind(this));
 
 				var optionObj = {};
@@ -270,12 +270,12 @@ const JobBoardFilteredFeed = class {
 	}
 
 	// @ reformTheJobs() - this.params || this.params.filters
-	_reformJobDataByFilters(job){
+	_reformJobDataByFilters(job) {
 
 		// loop thru and 'setArray' from the filter criterias
-		this.params.filters.forEach(function(item) {
-			if(item.setArray){
-				if(job[item.key].length > 0) job[item.plural.toLowerCase()] = job[item.key].split(', ');
+		this.params.filters.forEach(function (item) {
+			if (item.setArray) {
+				if (job[item.key].length > 0) job[item.plural.toLowerCase()] = job[item.key].split(', ');
 			}
 		});
 
@@ -285,7 +285,7 @@ const JobBoardFilteredFeed = class {
 	}
 
 	// @ reformTheJobs() - this.params || this.params.sorting
-	_sortTheJobs(jobs){
+	_sortTheJobs(jobs) {
 		if (this.params && this.params.sorting == 'title') jobs = fns.sortDataBy(jobs, 'title');
 		if (this.params && this.params.sorting == 'date') jobs = fns.sortDataBy(jobs, 'date');
 		if (this.params && this.params.sorting == 'referencenumber') jobs = fns.sortDataBy(jobs, 'referencenumber');
@@ -293,16 +293,16 @@ const JobBoardFilteredFeed = class {
 		return jobs;
 	}
 
-  //
-  //
-  // render methods
-  //
-  //
+	//
+	//
+	// render methods
+	//
+	//
 
-  // called on frontend
+	// called on frontend
 	renderTheJobs(sel = null) {
 		// dont do anything for rendering unless sel is provided & a string
-		if(sel && typeof sel === "string"){
+		if (sel && typeof sel === "string") {
 
 			var jobs = this.jobs;
 
@@ -327,8 +327,8 @@ const JobBoardFilteredFeed = class {
 			//
 			//
 			//if(this.params.counts && !this.params.pagination) this.setCounts(jobs.length);
-			if(this.params.counts) this.setCounts(jobs);
-			if(this.params.counts && this.params.filters && this.params.filters.length > 0) this.setFilterCounts(jobs);
+			if (this.params.counts) this.setCounts(jobs);
+			if (this.params.counts && this.params.filters && this.params.filters.length > 0) this.setFilterCounts(jobs);
 
 			//
 			// STEP 4 - define our job templates (and custom template override)
@@ -338,20 +338,20 @@ const JobBoardFilteredFeed = class {
 			var _template = false;
 			var _template_html = this.job_template;
 			if (fns.isElementValid(document.querySelector('#job-template'))) var _template = '#job-template';
-			if (fns.isElementValid(document.querySelector('#job-template'+'_'+this.params.id))) var _template = '#job-template'+'_'+this.params.id;
-			if (fns.isElementValid(document.querySelector('#job-template')) || fns.isElementValid(document.querySelector('#job-template'+'_'+this.params.id))) var _template_html = false;
+			if (fns.isElementValid(document.querySelector('#job-template' + '_' + this.params.id))) var _template = '#job-template' + '_' + this.params.id;
+			if (fns.isElementValid(document.querySelector('#job-template')) || fns.isElementValid(document.querySelector('#job-template' + '_' + this.params.id))) var _template_html = false;
 
 			//
 			// STEP 5 - setup pagination/perpage configs
 			//
 			var pagination_config = false;
-			if(this.params.pagination){
+			if (this.params.pagination) {
 
 				// pagination template stuff
 				// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
 				var _pagination_template = false;
 				if (fns.isElementValid(document.querySelector('#pagination-template'))) var _pagination_template = '#pagination-template';
-				if (fns.isElementValid(document.querySelector('#pagination-template'+'_'+this.params.id))) var _pagination_template = '#pagination-template'+'_'+this.params.id;
+				if (fns.isElementValid(document.querySelector('#pagination-template' + '_' + this.params.id))) var _pagination_template = '#pagination-template' + '_' + this.params.id;
 
 				// defaults
 				var pagination_config = {
@@ -363,17 +363,17 @@ const JobBoardFilteredFeed = class {
 				};
 
 				// dynamic overwrites for pagination depending on args given
-				if(this.params.pagination.visiblePages) pagination_config.visiblePages = this.params.pagination.visiblePages;
-				if(this.params.pagination.initPerPage) pagination_config.initPerPage = this.params.pagination.initPerPage;
+				if (this.params.pagination.visiblePages) pagination_config.visiblePages = this.params.pagination.visiblePages;
+				if (this.params.pagination.initPerPage) pagination_config.initPerPage = this.params.pagination.initPerPage;
 
 				// perpage settings
-				if(this.params.pagination.perPage){
+				if (this.params.pagination.perPage) {
 
 					// pagination template stuff
 					// pagination & perpage templates to be used in FilterJS(): if element with id is in dom, set var to that id
 					var _perpage_template = false;
 					if (fns.isElementValid(document.querySelector('#perpage-template'))) var _perpage_template = '#perpage-template';
-					if (fns.isElementValid(document.querySelector('#perpage-template'+'_'+this.params.id))) var _perpage_template = '#perpage-template'+'_'+this.params.id;
+					if (fns.isElementValid(document.querySelector('#perpage-template' + '_' + this.params.id))) var _perpage_template = '#perpage-template' + '_' + this.params.id;
 
 					// defaults
 					pagination_config.perPage = {
@@ -383,7 +383,7 @@ const JobBoardFilteredFeed = class {
 					};
 
 					// dynamic overwrites for perpage depending on args given
-					if(this.params.pagination.perPage.values) pagination_config.perPage.values = this.params.pagination.perPage.values;
+					if (this.params.pagination.perPage.values) pagination_config.perPage.values = this.params.pagination.perPage.values;
 
 				}
 
@@ -393,7 +393,7 @@ const JobBoardFilteredFeed = class {
 			// STEP 6 - setup the search configs
 			//
 			var search_config = false;
-			if(this.params.search) var search_config = {ele: '#searchbox'};
+			if (this.params.search) var search_config = { ele: '#searchbox' };
 
 			//
 			// BEFORE MAIN STEP - setup the filter callbacks (fires after every filtering but wont fire unless pagination is set)
@@ -404,16 +404,16 @@ const JobBoardFilteredFeed = class {
 			var filter_callbacks = {
 				afterFilter: function (liveJobs) {
 
-					if(this.params.counts) this.setCounts(liveJobs); // updates the main counts from the live jobs after filtering
+					if (this.params.counts) this.setCounts(liveJobs); // updates the main counts from the live jobs after filtering
 
 					// we no longer update the filter counts from the live jobs after filter, we may go back to this...
 					//if(this.params.counts && this.params.filters && this.params.filters.length > 0) this.setFilterCounts(liveJobs);
-					
+
 					// hide irrelevant pagination/items after filtering
-					if(this.params.pagination) this.hidePagination();
+					if (this.params.pagination) this.hidePagination();
 
 					// hide irrelevant perpage/items after filtering
-					if(this.params.pagination.perPage) this.hidePerPageItems(liveJobs.length, pagination_config.perPage.values);
+					if (this.params.pagination.perPage) this.hidePerPageItems(liveJobs.length, pagination_config.perPage.values);
 
 				}.bind(this)
 			};
@@ -423,7 +423,7 @@ const JobBoardFilteredFeed = class {
 			//
 			// intiate the jobs listing & filters
 			//
-			var FJS = FilterJS(jobs, '#jobs_'+this.params.id, {
+			var FJS = FilterJS(jobs, '#jobs_' + this.params.id, {
 				template_html: _template_html, // html. define static/default html template used for each job. 
 				template: _template, // selector for job template override. set this to false to use static template_html instead
 				search: search_config, // define search
@@ -437,15 +437,15 @@ const JobBoardFilteredFeed = class {
 			// data to be used for filtering: city, jobtypes, company, categories
 			// now dynamic from this.params.filters config
 			//
-			if(this.params.filters && this.params.filters.length > 0){
-				this.params.filters.forEach(function(item) {
+			if (this.params.filters && this.params.filters.length > 0) {
+				this.params.filters.forEach(function (item) {
 					var criteriaFieldName = item.key;
-					if(item.setArray) criteriaFieldName = item.plural.toLowerCase();
-					if(item.type == 'checkbox'){
-						var checkSel = '#' +  item.key + '_filter input:checkbox';
-						FJS.addCriteria({ field: criteriaFieldName, ele: checkSel});
+					if (item.setArray) criteriaFieldName = item.plural.toLowerCase();
+					if (item.type == 'checkbox') {
+						var checkSel = '#' + item.key + '_filter input:checkbox';
+						FJS.addCriteria({ field: criteriaFieldName, ele: checkSel });
 					} else {
-						var optionSel = '#' +  item.key + '_filter';
+						var optionSel = '#' + item.key + '_filter';
 						FJS.addCriteria({ field: criteriaFieldName, ele: optionSel, all: 'all' });
 					}
 				}.bind(this));
@@ -492,7 +492,7 @@ const JobBoardFilteredFeed = class {
 		//
 		//
 		//if(this.params.counts) this.____renderStaticComponent(this.count_template, 'count-template', '#FiltersCount', sel);
-		if(this.params.counts) this.__renderStatic(this.count_template, 'count-template', sel + ' #FiltersCount');
+		if (this.params.counts) this.__renderStatic(this.count_template, 'count-template', sel + ' #FiltersCount');
 
 		//
 		//
@@ -504,7 +504,7 @@ const JobBoardFilteredFeed = class {
 		//
 		//
 		//if((this.params.filters && this.params.filters.length > 0 || this.params.search) && this.params.counts) this.____renderStaticComponent(this.divider_template, 'divider-template', '#FiltersDivider', sel);
-		if(((this.params.filters && this.params.filters.length > 0) || this.params.search) && this.params.counts) this.__renderStatic(this.divider_template, 'divider-template', sel + ' #FiltersDivider');
+		if (((this.params.filters && this.params.filters.length > 0) || this.params.search) && this.params.counts) this.__renderStatic(this.divider_template, 'divider-template', sel + ' #FiltersDivider');
 
 		//
 		//
@@ -516,9 +516,9 @@ const JobBoardFilteredFeed = class {
 		//
 		//
 		//if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.____renderStaticComponent(this.filters_template, 'filters-template', '#FiltersList', sel);
-		if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderStatic(this.filters_template, 'filters-template', sel + ' #FiltersList');
+		if (this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderStatic(this.filters_template, 'filters-template', sel + ' #FiltersList');
 		//if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderFiltersComponent(this.params.filters, this.filter_template, 'filter-template', '#filtersArea', sel);
-		if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderDynamic(this.filter_template, 'filter-template', sel + ' #filtersArea', this.params.filters);
+		if (this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderDynamic(this.filter_template, 'filter-template', sel + ' #filtersArea', this.params.filters);
 		//
 		//
 		// SEARCH TEMPLATE
@@ -529,7 +529,7 @@ const JobBoardFilteredFeed = class {
 		//
 		//
 		//if(this.params.search) this.____renderStaticComponent(this.search_template, 'search-template', '#searchFilters', sel);
-		if(this.params.search) this.__renderStatic(this.search_template, 'search-template', sel + ' #searchFilters');
+		if (this.params.search) this.__renderStatic(this.search_template, 'search-template', sel + ' #searchFilters');
 
 		//
 		//
@@ -539,11 +539,11 @@ const JobBoardFilteredFeed = class {
 		// static components: _company.html | _jobtype.html | _city.html | _category.html
 		//
 		//
-		if(this.params.filters && this.params.filters.length > 0){
-			this.params.filters.forEach(function(item) {
+		if (this.params.filters && this.params.filters.length > 0) {
+			this.params.filters.forEach(function (item) {
 				// var templateKey = item.key + '_template';
 				var templateKey = 'options_template';
-				if(item.type == 'checkbox') templateKey = 'checkboxes_template';
+				if (item.type == 'checkbox') templateKey = 'checkboxes_template';
 				var templateID = item.key + '-template';
 				var eleID = ' #' + item.key + 'Filters';
 				//this.__renderStatic(this[templateKey], templateID, sel + eleID);
@@ -560,7 +560,7 @@ const JobBoardFilteredFeed = class {
 		// container selectors: #Feed_123 #FiltersTopBar
 		//
 		//
-		if(this.params.pagination){
+		if (this.params.pagination) {
 
 			//this.____renderStaticComponent(this.topbar_template, 'topbar-template', '#FiltersTopBar', sel);
 			this.__renderStatic(this.topbar_template, 'topbar-template', sel + ' #FiltersTopBar');
@@ -589,7 +589,7 @@ const JobBoardFilteredFeed = class {
 			//
 
 			//if(this.params.pagination.perPage) this.____renderStaticComponent(this.perpage_wrap_template, 'perpage-wrap-template', '#filtersPerPage', sel);
-			if(this.params.pagination.perPage) this.__renderStatic(this.perpage_wrap_template, 'perpage-wrap-template', sel + ' #filtersPerPage');
+			if (this.params.pagination.perPage) this.__renderStatic(this.perpage_wrap_template, 'perpage-wrap-template', sel + ' #filtersPerPage');
 
 		}
 
@@ -609,15 +609,15 @@ const JobBoardFilteredFeed = class {
 
 	// @ renderTheJobs(): 2
 	// fill th filters wrap with data
-	_populateFilters(sel){
+	_populateFilters(sel) {
 		var filters = this.filters;
-		if(filters && filters.length > 0){
-			filters.forEach(function(item) {
+		if (filters && filters.length > 0) {
+			filters.forEach(function (item) {
 				var templateName = item.type + '_template';
 				var templateId = item.type + '-template';
 				var optionId = ' #' + item.key + '_filter';
 				var empty = true;
-				if(item.type == 'option') empty = false;
+				if (item.type == 'option') empty = false;
 				//this.__renderOptionComponent(item.data, this[templateName], templateId, optionId, sel, empty) //___renderOptionComponents
 				this.__renderOption(this[templateName], templateId, sel + optionId, item.data, empty)
 			}.bind(this))
@@ -627,67 +627,67 @@ const JobBoardFilteredFeed = class {
 	// @ _renderFeedWraps()
 	// for rendering the main wrap
 	// pass on: id
-	__renderMain(sel){
+	__renderMain(sel) {
 		var html = this.main_template;
-		if(this.params.counts || (this.params.filters && this.params.filters.length > 0) || this.params.search) html = this.main_sidebar_template;
-		if(fns.isElementValid(document.getElementById('main-template'))) html = document.getElementById('main-template').innerHTML;
-		if(this.params.id && fns.isElementValid(document.getElementById('main-template_'+this.params.id))) html = document.getElementById('main-template_'+this.params.id).innerHTML;
-		if(html) this.___renderComponent(html, sel);
+		if (this.params.counts || (this.params.filters && this.params.filters.length > 0) || this.params.search) html = this.main_sidebar_template;
+		if (fns.isElementValid(document.getElementById('main-template'))) html = document.getElementById('main-template').innerHTML;
+		if (this.params.id && fns.isElementValid(document.getElementById('main-template_' + this.params.id))) html = document.getElementById('main-template_' + this.params.id).innerHTML;
+		if (html) this.___renderComponent(html, sel);
 	}
 
 	// @ _renderFeedWraps()
 	// for rendering all other wraps
 	// pass on: id
-	__renderStatic(html, id, sel){
-		if(id){
-			if(fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
-			if(fns.isElementValid(document.getElementById(id+'_'+this.params.id))) html = document.getElementById(id+'_'+this.params.id).innerHTML;
+	__renderStatic(html, id, sel) {
+		if (id) {
+			if (fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
+			if (fns.isElementValid(document.getElementById(id + '_' + this.params.id))) html = document.getElementById(id + '_' + this.params.id).innerHTML;
 		}
-		if(html) this.___renderComponent(html, sel);
+		if (html) this.___renderComponent(html, sel);
 	}
-	__renderStaticData(html, id, sel, data){
-		if(id){
-			if(fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
-			if(fns.isElementValid(document.getElementById(id+'_'+this.params.id))) html = document.getElementById(id+'_'+this.params.id).innerHTML;
+	__renderStaticData(html, id, sel, data) {
+		if (id) {
+			if (fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
+			if (fns.isElementValid(document.getElementById(id + '_' + this.params.id))) html = document.getElementById(id + '_' + this.params.id).innerHTML;
 		}
-		if(html) this.___renderDataComponent(html, sel, data);
+		if (html) this.___renderDataComponent(html, sel, data);
 	}
 
 	// @ _renderFeedWraps()
 	// for rendering the filters wrap
 	// pass on: all filters data
-	__renderDynamic(html, id, sel, data, empty = true){
-		if(id){
-			if(fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
-			if(fns.isElementValid(document.getElementById(id+'_'+this.params.id))) html = document.getElementById(id+'_'+this.params.id).innerHTML;
+	__renderDynamic(html, id, sel, data, empty = true) {
+		if (id) {
+			if (fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
+			if (fns.isElementValid(document.getElementById(id + '_' + this.params.id))) html = document.getElementById(id + '_' + this.params.id).innerHTML;
 		}
-		if(html) this.___renderComponents(html, sel, data, empty);
+		if (html) this.___renderComponents(html, sel, data, empty);
 	}
 
 	// @ _populateFilters()
 	// for rendering individual filter terms
 	// pass on: name:item,value:item
-	__renderOption(html, id, sel, data, empty = true){
-		if(id){
-			if(fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
-			if(fns.isElementValid(document.getElementById(id+'_'+this.params.id))) html = document.getElementById(id+'_'+this.params.id).innerHTML;
+	__renderOption(html, id, sel, data, empty = true) {
+		if (id) {
+			if (fns.isElementValid(document.getElementById(id))) html = document.getElementById(id).innerHTML;
+			if (fns.isElementValid(document.getElementById(id + '_' + this.params.id))) html = document.getElementById(id + '_' + this.params.id).innerHTML;
 		}
-		if(html) this.___renderOptionComponents(html, sel, data, empty);
+		if (html) this.___renderOptionComponents(html, sel, data, empty);
 	}
 
 	// @ __renderMain() | __renderStatic()
 	// passes on the this.params.id as id
-	___renderComponent(html, sel){
+	___renderComponent(html, sel) {
 		var templateFn = FilterJS.templateBuilder(html);
-		if(document.querySelector(sel) != null){
+		if (document.querySelector(sel) != null) {
 			document.querySelector(sel).innerHTML = '';
-			let el = document.createRange().createContextualFragment(templateFn({id:this.params.id}));
+			let el = document.createRange().createContextualFragment(templateFn({ id: this.params.id }));
 			document.querySelector(sel).appendChild(el);
 		}
 	}
-	___renderDataComponent(html, sel, data){
+	___renderDataComponent(html, sel, data) {
 		var templateFn = FilterJS.templateBuilder(html);
-		if(document.querySelector(sel) != null){
+		if (document.querySelector(sel) != null) {
 			document.querySelector(sel).innerHTML = '';
 			let el = document.createRange().createContextualFragment(templateFn(data));
 			document.querySelector(sel).appendChild(el);
@@ -695,11 +695,11 @@ const JobBoardFilteredFeed = class {
 	}
 	// @ __renderDynamic()
 	// passes on the component item data
-	___renderComponents(html, sel, data, empty){
+	___renderComponents(html, sel, data, empty) {
 		var templateFn = FilterJS.templateBuilder(html);
-		if(document.querySelector(sel) != null){
-			if(empty) document.querySelector(sel).innerHTML = ''; // empty target element first
-			if(Array.isArray(data) && data.length > 0){
+		if (document.querySelector(sel) != null) {
+			if (empty) document.querySelector(sel).innerHTML = ''; // empty target element first
+			if (Array.isArray(data) && data.length > 0) {
 				data.forEach((item) => {
 					let el = document.createRange().createContextualFragment(templateFn(item));
 					document.querySelector(sel).append(el);
@@ -709,13 +709,13 @@ const JobBoardFilteredFeed = class {
 	}
 	// @ __renderOption()
 	// passes on the component item data as name/value
-	___renderOptionComponents(html, sel, data, empty){
+	___renderOptionComponents(html, sel, data, empty) {
 		var templateFn = FilterJS.templateBuilder(html);
-		if(document.querySelector(sel) != null){
-			if(empty) document.querySelector(sel).innerHTML = ''; // empty target element first
-			if(Array.isArray(data) && data.length > 0){
+		if (document.querySelector(sel) != null) {
+			if (empty) document.querySelector(sel).innerHTML = ''; // empty target element first
+			if (Array.isArray(data) && data.length > 0) {
 				data.forEach((item) => {
-					let el = document.createRange().createContextualFragment(templateFn({name:item,value:item}));
+					let el = document.createRange().createContextualFragment(templateFn({ name: item, value: item }));
 					document.querySelector(sel).append(el);
 				});
 			}
@@ -727,9 +727,9 @@ const JobBoardFilteredFeed = class {
 
 		if (fns.isElementValid(document.querySelector('#error-template'))) var html = $('#error-template').html();
 
-		if(Number.isInteger(this.params.id)){
-			var html_sel = '#error-template_'+this.params.id;
-			if(fns.isElementValid(document.querySelector(html_sel))) var html = $(html_sel).html();
+		if (Number.isInteger(this.params.id)) {
+			var html_sel = '#error-template_' + this.params.id;
+			if (fns.isElementValid(document.querySelector(html_sel))) var html = $(html_sel).html();
 		}
 
 		var templateFn = FilterJS.templateBuilder(html);
@@ -738,30 +738,30 @@ const JobBoardFilteredFeed = class {
 
 	}
 
-  //
-  //
-  // other methods: counts
-  //
-  //
+	//
+	//
+	// other methods: counts
+	//
+	//
 
 	// setting the overall counts
 	setCounts(jobs) {
-		if(document.getElementById('total_jobs_'+this.params.id)){
-			var total = document.getElementById('total_jobs_'+this.params.id);
+		if (document.getElementById('total_jobs_' + this.params.id)) {
+			var total = document.getElementById('total_jobs_' + this.params.id);
 			total.innerHTML = jobs.length;
 		}
 	}
 	// setting the filter counts as per params.filters
 	setFilterCounts(jobs) {
-		if(this.params.filters && this.params.filters.length > 0){
-			this.params.filters.forEach(function(item) {
+		if (this.params.filters && this.params.filters.length > 0) {
+			this.params.filters.forEach(function (item) {
 				var filterOptions = document.querySelectorAll('#' + item.key + '_filter option');
-				if(item.type == 'checkbox') filterOptions = document.querySelectorAll('#' + item.key + '_filter input');
+				if (item.type == 'checkbox') filterOptions = document.querySelectorAll('#' + item.key + '_filter input');
 				var filterOptionsKey = item.key;
-				if(item.setArray) filterOptionsKey = item.plural.toLowerCase();
+				if (item.setArray) filterOptionsKey = item.plural.toLowerCase();
 				var filterOptionsType = null;
-				if(item.type == 'checkbox') filterOptionsType = 'checkbox';
-				filterOptions.forEach(function(option) {
+				if (item.type == 'checkbox') filterOptionsType = 'checkbox';
+				filterOptions.forEach(function (option) {
 					this.setOptionCount(option, filterOptionsKey, jobs, filterOptionsType);
 				}.bind(this))
 			}.bind(this));
@@ -772,9 +772,9 @@ const JobBoardFilteredFeed = class {
 
 		var count = 0;
 		var jQ = JsonQuery(data);
-		if(data.length > 0) count = jQ.where({ [key]: ele.value }).count;
+		if (data.length > 0) count = jQ.where({ [key]: ele.value }).count;
 
-		if(type == 'checkbox'){
+		if (type == 'checkbox') {
 
 			ele.nextElementSibling.innerHTML = ele.value + '(' + count + ')';
 			if (count == 0) ele.closest('.checkbox').style.display = 'none';
@@ -784,19 +784,19 @@ const JobBoardFilteredFeed = class {
 
 			if (ele.value != 'all') {
 				ele.innerHTML = ele.value + '(' + count + ')';
-				if(count == 0) ele.style.display = 'none';
-				if(count > 0) ele.style.display = 'block';
+				if (count == 0) ele.style.display = 'none';
+				if (count > 0) ele.style.display = 'block';
 			}
 
 		}
-	
+
 	}
 
-  //
-  //
-  // other methods: pagination
-  //
-  //
+	//
+	//
+	// other methods: pagination
+	//
+	//
 
 	// hiding pagination when necessary
 	hidePagination() {
@@ -810,14 +810,14 @@ const JobBoardFilteredFeed = class {
 	}
 	// hiding perpage items when necessary
 	hidePerPageItems(result_count, values) {
-		if(values.length > 1){
+		if (values.length > 1) {
 			var min = Math.min.apply(null, values);
-			var perPageValuesWithoutSmallest = values.filter((e) => {return e != min});
-			perPageValuesWithoutSmallest.forEach(function(v) {
+			var perPageValuesWithoutSmallest = values.filter((e) => { return e != min });
+			perPageValuesWithoutSmallest.forEach(function (v) {
 				var perPageOptions = document.querySelectorAll('#per_page select option');
 				if (perPageOptions.length > 0) {
-					perPageOptions.forEach(function(item) {
-						if(item.value == v){
+					perPageOptions.forEach(function (item) {
+						if (item.value == v) {
 							if (result_count < item.value) {
 								item.style.display = 'none';
 							} else {
