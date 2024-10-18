@@ -1,0 +1,14 @@
+<ul class="checkbox-accordion" uk-accordion>
+  <li>
+    <% if(type == 'checkbox') { %>
+      <a class="uk-form-label uk-accordion-title" href="#"><%= plural %></a>
+    <% } else { %>
+      <a class="uk-form-label uk-accordion-title" href="#"><%= singular %></a>
+    <% } %>
+    <div class="uk-accordion-content" hidden>
+      <div class="uk-margin-small">
+        <div id="<%= key %>_filter" class="uk-margin-small-top uk-child-width-auto uk-grid-small uk-grid-xsmall uk-text-small uk-text-capitalize" uk-grid></div>
+      </div>
+    </div>
+  </li>
+</ul>
