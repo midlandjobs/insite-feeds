@@ -49,10 +49,6 @@ const JobBoardFilteredFeed = class {
 		// null|string/int
 		id: null,
 
-		// sorting settings - remove or set to false to keep jobs order as it comes (default)
-		// possible settings: 'title', 'date', 'referencenumber' & 'random'
-		sorting: false,
-
 		// pagination settings - object
 		pagination: null,
 
@@ -65,39 +61,9 @@ const JobBoardFilteredFeed = class {
 		// count settings - true|false
 		counts: true,
 
-		// query settings, filter the results
-		query_by: null,
-
 		scope: null // for uikit scoping
 
 	}) {
-
-		//
-		// JsonQuery test
-		//
-
-		var movies = [
-			{
-				"name": "Once Upon a Time in the West",
-				"rating": 8.7,
-				"director": "Sergio Leone",
-				"year": 1968,
-				"actor":
-					"Henry Fonda"
-			},
-			{
-				"name": "Terminator 2: Judgment Day",
-				"rating": 8.6,
-				"director": "James Cameron",
-				"year": 1991,
-				"actor": "Arnold Schwarzenegger"
-			},
-		];
-		var Movie = JsonQuery(movies); //Initialize the Query Engine
-		var movieResults = Movie.where({ 'rating': 8.6 }).exec();
-		// console.log('test data');
-		// console.log(movieResults);
-		// console.log('end of test data');
 
 		//
 		// jobs input (not yet refomed)
@@ -149,13 +115,21 @@ const JobBoardFilteredFeed = class {
 		// defined after this.params!!!
 		//
 		this.jobs = this.reformTheJobs();
-		this.filters = this.dataForFilters();
 
 		//
 		// scope
 		//
 		if (this.params.scope && typeof UIkit != "undefined") UIkit.container = this.params.scope;
 
+	}
+
+	sortTheJobs(jobs = null, sorting = null) {
+		if (!jobs) jobs = this.jobs
+		if (sorting == 'title') jobs = fns.sortDataBy(jobs, 'title');
+		if (sorting == 'date') jobs = fns.sortDataBy(jobs, 'date');
+		if (sorting == 'referencenumber') jobs = fns.sortDataBy(jobs, 'referencenumber');
+		if (sorting == 'random') jobs = fns.sortDataBy(jobs, 'random');
+		return jobs;
 	}
 
 	//
@@ -206,18 +180,6 @@ const JobBoardFilteredFeed = class {
 				// if (job.description.length > 0) {}
 
 			}
-
-			// filter the jobs here...
-			if (this.params.query_by) {
-				console.log('query_by: exists');
-				if (fns.isLiteralObject(this.params.query_by)) {
-					console.log('query_by: isLiteralObject');
-					// good to go & check the data
-				}
-			}
-
-			// sort the jobs according params
-			jobs = this._sortTheJobs(jobs);
 
 		}
 		return jobs;
@@ -284,15 +246,6 @@ const JobBoardFilteredFeed = class {
 		return job;
 	}
 
-	// @ reformTheJobs() - this.params || this.params.sorting
-	_sortTheJobs(jobs) {
-		if (this.params && this.params.sorting == 'title') jobs = fns.sortDataBy(jobs, 'title');
-		if (this.params && this.params.sorting == 'date') jobs = fns.sortDataBy(jobs, 'date');
-		if (this.params && this.params.sorting == 'referencenumber') jobs = fns.sortDataBy(jobs, 'referencenumber');
-		if (this.params && this.params.sorting == 'random') jobs = fns.sortDataBy(jobs, 'random');
-		return jobs;
-	}
-
 	//
 	//
 	// render methods
@@ -300,11 +253,11 @@ const JobBoardFilteredFeed = class {
 	//
 
 	// called on frontend
-	renderTheJobs(sel = null) {
+	renderTheJobs(sel = null, jobs = null) {
 		// dont do anything for rendering unless sel is provided & a string
 		if (sel && typeof sel === "string") {
 
-			var jobs = this.jobs;
+			if (!jobs) jobs = this.jobs;
 
 			//
 			// STEP 1 - render the wrappers
@@ -479,7 +432,6 @@ const JobBoardFilteredFeed = class {
 		// selectors: #main-template | #main-template_123
 		//
 		//
-		//this.____renderMainComponent(sel);
 		this.__renderMain(sel);
 
 		//
@@ -491,7 +443,6 @@ const JobBoardFilteredFeed = class {
 		// container selectors: #Feed_123 #FiltersCount
 		//
 		//
-		//if(this.params.counts) this.____renderStaticComponent(this.count_template, 'count-template', '#FiltersCount', sel);
 		if (this.params.counts) this.__renderStatic(this.count_template, 'count-template', sel + ' #FiltersCount');
 
 		//
@@ -503,7 +454,6 @@ const JobBoardFilteredFeed = class {
 		// container selectors: #Feed_123 #FiltersDivider
 		//
 		//
-		//if((this.params.filters && this.params.filters.length > 0 || this.params.search) && this.params.counts) this.____renderStaticComponent(this.divider_template, 'divider-template', '#FiltersDivider', sel);
 		if (((this.params.filters && this.params.filters.length > 0) || this.params.search) && this.params.counts) this.__renderStatic(this.divider_template, 'divider-template', sel + ' #FiltersDivider');
 
 		//
@@ -515,9 +465,7 @@ const JobBoardFilteredFeed = class {
 		// container selectors: #Feed_123 #FiltersList
 		//
 		//
-		//if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.____renderStaticComponent(this.filters_template, 'filters-template', '#FiltersList', sel);
 		if (this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderStatic(this.filters_template, 'filters-template', sel + ' #FiltersList');
-		//if(this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderFiltersComponent(this.params.filters, this.filter_template, 'filter-template', '#filtersArea', sel);
 		if (this.params.filters && this.params.filters.length > 0 || this.params.search) this.__renderDynamic(this.filter_template, 'filter-template', sel + ' #filtersArea', this.params.filters);
 		//
 		//
@@ -528,7 +476,6 @@ const JobBoardFilteredFeed = class {
 		// container selectors: #Feed_123 #searchFilters
 		//
 		//
-		//if(this.params.search) this.____renderStaticComponent(this.search_template, 'search-template', '#searchFilters', sel);
 		if (this.params.search) this.__renderStatic(this.search_template, 'search-template', sel + ' #searchFilters');
 
 		//
@@ -541,12 +488,10 @@ const JobBoardFilteredFeed = class {
 		//
 		if (this.params.filters && this.params.filters.length > 0) {
 			this.params.filters.forEach(function (item) {
-				// var templateKey = item.key + '_template';
 				var templateKey = 'options_template';
 				if (item.type == 'checkbox') templateKey = 'checkboxes_template';
 				var templateID = item.key + '-template';
 				var eleID = ' #' + item.key + 'Filters';
-				//this.__renderStatic(this[templateKey], templateID, sel + eleID);
 				this.__renderStaticData(this[templateKey], templateID, sel + eleID, item)
 			}.bind(this))
 		}
@@ -562,7 +507,6 @@ const JobBoardFilteredFeed = class {
 		//
 		if (this.params.pagination) {
 
-			//this.____renderStaticComponent(this.topbar_template, 'topbar-template', '#FiltersTopBar', sel);
 			this.__renderStatic(this.topbar_template, 'topbar-template', sel + ' #FiltersTopBar');
 
 			//
@@ -574,8 +518,6 @@ const JobBoardFilteredFeed = class {
 			// container selectors: #Feed_123 #filtersPagintion
 			//
 			//
-
-			//this.____renderStaticComponent(this.pagination_wrap_template, 'pagination-wrap-template', '#filtersPagintion', sel);
 			this.__renderStatic(this.pagination_wrap_template, 'pagination-wrap-template', sel + ' #filtersPagintion');
 
 			//
@@ -587,8 +529,6 @@ const JobBoardFilteredFeed = class {
 			// container selectors: #Feed_123 #filtersPerPage
 			//
 			//
-
-			//if(this.params.pagination.perPage) this.____renderStaticComponent(this.perpage_wrap_template, 'perpage-wrap-template', '#filtersPerPage', sel);
 			if (this.params.pagination.perPage) this.__renderStatic(this.perpage_wrap_template, 'perpage-wrap-template', sel + ' #filtersPerPage');
 
 		}
@@ -610,7 +550,7 @@ const JobBoardFilteredFeed = class {
 	// @ renderTheJobs(): 2
 	// fill th filters wrap with data
 	_populateFilters(sel) {
-		var filters = this.filters;
+		var filters = this.dataForFilters();
 		if (filters && filters.length > 0) {
 			filters.forEach(function (item) {
 				var templateName = item.type + '_template';
@@ -618,7 +558,6 @@ const JobBoardFilteredFeed = class {
 				var optionId = ' #' + item.key + '_filter';
 				var empty = true;
 				if (item.type == 'option') empty = false;
-				//this.__renderOptionComponent(item.data, this[templateName], templateId, optionId, sel, empty) //___renderOptionComponents
 				this.__renderOption(this[templateName], templateId, sel + optionId, item.data, empty)
 			}.bind(this))
 		}
@@ -629,7 +568,7 @@ const JobBoardFilteredFeed = class {
 	// pass on: id
 	__renderMain(sel) {
 		var html = this.main_template;
-		if (this.params.counts || (this.params.filters && this.params.filters.length > 0) || this.params.search) html = this.main_sidebar_template;
+		if (this.params.counts || this.params.search || (this.params.filters && this.params.filters.length > 0)) html = this.main_sidebar_template;
 		if (fns.isElementValid(document.getElementById('main-template'))) html = document.getElementById('main-template').innerHTML;
 		if (this.params.id && fns.isElementValid(document.getElementById('main-template_' + this.params.id))) html = document.getElementById('main-template_' + this.params.id).innerHTML;
 		if (html) this.___renderComponent(html, sel);
@@ -769,27 +708,20 @@ const JobBoardFilteredFeed = class {
 	}
 	// @ setFilterCounts()
 	setOptionCount(ele, key, data, type = null) {
-
 		var count = 0;
 		var jQ = JsonQuery(data);
 		if (data.length > 0) count = jQ.where({ [key]: ele.value }).count;
-
 		if (type == 'checkbox') {
-
 			ele.nextElementSibling.innerHTML = ele.value + '(' + count + ')';
 			if (count == 0) ele.closest('.checkbox').style.display = 'none';
 			if (count > 0) ele.closest('.checkbox').style.display = 'block';
-
 		} else {
-
 			if (ele.value != 'all') {
 				ele.innerHTML = ele.value + '(' + count + ')';
 				if (count == 0) ele.style.display = 'none';
 				if (count > 0) ele.style.display = 'block';
 			}
-
 		}
-
 	}
 
 	//

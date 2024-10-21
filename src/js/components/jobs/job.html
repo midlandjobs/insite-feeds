@@ -18,31 +18,33 @@
           <%= dt.toLocaleDateString('en-GB') %>
         </div>
 
-        <% if(jobtypes.length > 0) { %>
-          <% for (let type of jobtypes) { %>
-            <% if(type == 'Full time') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Part time') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Apprentice') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Permanent') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Contract') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Temporary') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Work from home') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
-            <% } %>
-            <% if(type == 'Flexible') { %>
-              <span class="listing-item__employment-type"><%= type %></span>
+        <% if(typeof jobtypes !== 'undefined' && Array.isArray(jobtypes)) { %>
+          <% if(jobtypes.length > 0) { %>
+            <% for (let type of jobtypes) { %>
+              <% if(type == 'Full time') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Part time') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Apprentice') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Permanent') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Contract') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Temporary') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Work from home') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
+              <% if(type == 'Flexible') { %>
+                <span class="listing-item__employment-type"><%= type %></span>
+              <% } %>
             <% } %>
           <% } %>
         <% } %>
